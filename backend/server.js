@@ -3,6 +3,9 @@ const app = express()
 const PORT = 3000
 const productsRouter = require("./routers/productsRouter")
 
+app.use(express.json())
+
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
