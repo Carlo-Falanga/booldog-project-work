@@ -1,6 +1,32 @@
-export default function CartPage(){
+import { useEffect, useState } from "react";
 
-    return(
-        <h1>Cart Page</h1>
-    )
+export default function CartPage() {
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("booldog_cart");
+    if (saved) {
+      setCart(JSON.parse(saved));
+    }
+  }, []);
+
+  console.log("carrello:", cart);
+
+  return (
+    <section>
+      <div className="container">
+        <h1>Cart</h1>
+        <p>Here you can view and manage your shopping cart.</p>
+
+        {cart.length === 0 ? (
+            <p>The cart is empty</p>
+        ) :(
+            <div>
+                <p>Hai: {cart.length} prodotti nel carrello</p>
+            </div>
+        )
+        }
+      </div>
+    </section>
+  );
 }
