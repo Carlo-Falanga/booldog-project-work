@@ -14,7 +14,7 @@ export default function AppHeader() {
                                 <a className="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                         </ul>
-                        <div id="nav_icons" className="d-flex gap-5 fs-4">
+                        <div id="nav_icons" className="d-flex justify-content-around gap-5 fs-4">
                             <div>
                                 <i class="bi bi-heart"></i>
                             </div>
