@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 
 export default function ProductPage() {
@@ -18,7 +18,7 @@ export default function ProductPage() {
 
 
     return (
-        <>
+        <div className="container">
             {dataProduct && (
 
                 <div>
@@ -27,9 +27,23 @@ export default function ProductPage() {
                     <p>{dataProduct.price}</p>
                     <p>{dataProduct.stock}</p>
                     <img src={dataProduct.image_url} alt={dataProduct.name} />
+
+                    <div className="py-5">
+                        <h3>Related</h3>
+                        <div className="row row-cols-4">
+                            {
+                                dataProduct.related.map(product =>
+                                    <Link to={`/product/${product.slug}`} key={product.slug}>
+                                        <h3 className="h5">{product.name}</h3>
+                                        <p>{product.price}</p>
+                                    </Link>
+                                )
+                            }
+                        </div>
+                    </div>
                 </div>
             )
             }
-        </>
+        </div>
     )
 }
