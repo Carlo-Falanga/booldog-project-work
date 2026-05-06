@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const couponController = require("../controllers/couponController")
 
 
 //show
-router.get("/",(req, res) => {
-  res.send('Hello i am coupon!')
-})
+router.get("/",couponController.index)
+
+module.exports = router
