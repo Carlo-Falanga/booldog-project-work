@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DefaultLayout from "./layouts/DefaultLayout";
 import HomePage from "./pages/HomePage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
           <Route element={<DefaultLayout />}>
             <Route index element={<HomePage />} />
             <Route />
-            <Route />
+            <Route path="/cart" element={<CartPage/>} />
             <Route />
             <Route />
             <Route />
