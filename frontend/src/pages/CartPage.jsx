@@ -23,6 +23,15 @@ export default function CartPage() {
         ) :(
             <div>
                 <p>Hai: {cart.length} prodotti nel carrello</p>
+                <ul>
+                    {cart.map((item, index) => (
+                        <li key={index}>
+                         
+                            <p>Nome: {item.slug}</p>
+                            <p>Quantità: {item.quantity}</p>
+                        </li>
+                    ))}
+                </ul>
             </div>
         )
         }
