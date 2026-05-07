@@ -26,7 +26,7 @@ export default function ProductPage() {
                     <p>{dataProduct.description}</p>
                     <p>{dataProduct.price}</p>
                     <p>{dataProduct.stock}</p>
-                    <img src={dataProduct.image_url} alt={dataProduct.name} />
+                    <img src={dataProduct.img_url} alt={dataProduct.name} />
 
                     <div className="py-5">
                         <h3>Related</h3>
