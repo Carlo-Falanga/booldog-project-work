@@ -9,8 +9,11 @@ const index = (req, res) => {
     p.name,
     p.description,
     p.price,
+    p.color,
+    p.material,
+    p.size,
     p.stock,
-    p.image_url,
+    p.img_url,
     p.category,
     p.is_featured,
     p.created_at,
@@ -46,8 +49,11 @@ const show = (req, res) => {
       p.name,
       p.description,
       p.price,
+      p.color,
+      p.material,
+      p.size,
       p.stock,
-      p.image_url,
+      p.img_url,
       p.category,
       p.is_featured,
       p.created_at,
@@ -65,33 +71,21 @@ const show = (req, res) => {
     LIMIT 1`
         ;
 
-        
+
     connection.query(productSql, [slug], (err, productResults) => {
-        
+
         if (err) return res.status(500).json({
             error: true,
-            message: "Database error"
+            message:"Database error err" 
         })
-         
+
         if (productResults.length === 0) {
             return res.status(404).json({ error: "Prodotto non trovato" });
         }
 
         const product = productResults[0];
 
-        // 2. Specifiche
-        const specsSql =
-            `SELECT spec_key, spec_value
-      FROM product_specs
-      WHERE product_id = ?`
-            ;
-
-        connection.query(specsSql, [product.id], (err, specsResults) => {
-
-            if (err) return res.status(500).json({
-                error: true,
-                message: "Database error"
-            })
+       
 
             // 3. Prodotti correlati
             const relatedSql =
@@ -99,7 +93,7 @@ const show = (req, res) => {
           p.slug,
           p.name,
           p.price,
-          p.image_url,
+                    p.img_url,
           b.name AS brand_name
         FROM products p
         JOIN brands b ON b.id = p.brand_id
@@ -109,23 +103,22 @@ const show = (req, res) => {
         LIMIT 4`
                 ;
 
-            connection.query( relatedSql, [product.id, product.brand_id, product.category], (err, relatedResults) => {
+            connection.query(relatedSql, [product.id, product.brand_id, product.category], (err, relatedResults) => {
 
-                    if (err) return res.status(500).json({
-                        error: true,
-                        message: "Database error"
-                    })
+                if (err) return res.status(500).json({
+                    error: true,
+                    message: "Database error"
+                })
 
-                    // 4. Compongo la risposta finale
-                    res.json({
-                        ...product,
-                        specs: specsResults,
-                        related: relatedResults,
-                    });
-                }
+                // 4. Compongo la risposta finale
+                res.json({
+                    ...product,
+                    related: relatedResults,
+                });
+            }
             );
         });
-    });
+    ;
 }
 
 module.exports = { index, show }
