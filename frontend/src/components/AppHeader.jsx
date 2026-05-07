@@ -1,3 +1,6 @@
+import { NavLink } from "react-router-dom"
+import CartPage from "../pages/CartPage"
+
 export default function AppHeader() {
 
     return (
@@ -18,9 +21,9 @@ export default function AppHeader() {
                             <div>
                                 <i class="bi bi-heart"></i>
                             </div>
-                            <div>
+                            <NavLink to='/cart'>
                                 <i class="bi bi-cart2"></i>
-                            </div>
+                            </NavLink>
                             <div>
                                 <i class="bi bi-search"></i>
                             </div>
