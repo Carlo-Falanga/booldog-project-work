@@ -3,7 +3,10 @@ const router = express.Router()
 const couponController = require("../controllers/couponController")
 
 
-//show
-router.get("/",couponController.index)
+
+// validate 
+router.post("/", couponController.validate)
+
+
 
 module.exports = router

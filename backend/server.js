@@ -3,6 +3,7 @@ const app = express()
 const PORT = 3000
 const productsRouter = require("./routers/productsRouter")
 const couponsRouter = require("./routers/couponsRouter")
+const ordersRouter = require("./routers/ordersRouter")
 const serverError = require("./middlewares/serverError")
 const notFound = require("./middlewares/notFound")
 const cors = require("cors")
@@ -18,7 +19,9 @@ app.get('/', (req, res) => {
 
 app.use('/products', productsRouter)
 
-app.use('/coupons', couponsRouter)
+app.use('/validate', couponsRouter)
+
+app.use("/orders", ordersRouter)
 
 app.use(notFound)
 
