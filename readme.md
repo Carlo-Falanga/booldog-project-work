@@ -52,7 +52,7 @@ Tabelle principali:
 - `products` — anagrafica prodotti (slug, nome, prezzo, stock, categoria, brand, tipo animale)
 - `brands` — marchi (Ferplast, Trixie, Hunter, Ruffwear, Kong, Julius-K9, Hurtta, Catit, Stefanplast, Flexi)
 - `animal_types` — tipo di animale (Cane, Gatto, Cane e Gatto)
-- `product_specs` — specifiche tecniche del prodotto (colore, taglia, materiale, ecc.)
+- `orders` - ordini dell'utente
 - `coupons` — codici sconto con periodo di validità e soglia minima
 
 ## Come avviare il progetto
