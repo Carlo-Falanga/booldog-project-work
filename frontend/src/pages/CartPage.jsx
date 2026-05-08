@@ -10,15 +10,30 @@ export default function CartPage() {
     }
   }, []);
 
+  // Calcolo del totale del carrello in base alla quantita'
   const total = cart.reduce(
     (acc, item) => acc + Number(item.price) * item.quantity,
     0,
   );
 
+  // Aggiorna la quantita' del prodotto
+  const updateQuantity = (slug, amount) => {
+    const updated = cart.map((item) => {
+      if (item.slug === slug) {
+        return { ...item, quantity: item.quantity + amount };
+      }
+      return item;
+    });
+
+    setCart(updated);
+    localStorage.setItem("booldog_cart", JSON.stringify(updated));
+  };
+
   return (
     <section className="py-5">
       <div className="container">
         <h1 className="mb-3">Carrello</h1>
+
 
         {cart.length === 0 ? (
           <div className="alert alert-info">Il carrello è vuoto</div>
@@ -42,10 +57,24 @@ export default function CartPage() {
                       <p className="mb-0 text-muted">Prezzo: € {item.price}</p>
                     </div>
 
-                    <div className="text-end">
+                    <div className="d-flex align-items-center gap-2">
+                      {/* Bottone decremento quantita' */}
+                      <button
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => updateQuantity(item.slug, -1)}
+                      >
+                        −
+                      </button>
                       <span className="badge bg-secondary">
-                        Qty: {item.quantity}
+                        {item.quantity}
                       </span>
+                      {/* Bottone incremento quantita' */}
+                      <button
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => updateQuantity(item.slug, +1)}
+                      >
+                        +
+                      </button>
                     </div>
                   </li>
                 ))}
@@ -74,6 +103,9 @@ export default function CartPage() {
                     <span>€ {total.toFixed(2)}</span>
                   </div>
                 </div>
+              </div>
+              <div className="text-end">
+                <button className="btn btn-primary mt-4 ">Checkout</button>
               </div>
             </div>
           </div>
