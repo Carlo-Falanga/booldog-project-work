@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import axios from "axios";
 
-export default function ProductPage() {
+export default function ProductPage({ globalCart, setGlobalCart }) {
 
     const [dataProduct, setDataProduct] = useState(null)
 
@@ -16,13 +16,28 @@ export default function ProductPage() {
 
     }, [slug])
 
-    const btnAddCart = (e) => {
 
-        setCart([...cart, dataProduct.id])
-    }
+    // funzione carrello
+    const addToCart = () => {
 
+        // verifico se il prodotto esiste nel carrello
+        const existingProduct = globalCart.find(
+            item => item.id === dataProduct.id
+        );
 
-    console.log(cart)
+        // se esiste aggiorno la quantità del prodotto esistente
+        if (existingProduct) {
+            const updatedCart = globalCart.map(
+                item => item.id === dataProduct.id ? { ...item, quantity: item.quantity + 1 } : item
+            );
+            setGlobalCart(updatedCart);
+            // se non esiste aggiungo nuovo prodotto con quantità 1
+        } else {
+            setGlobalCart([...globalCart, { id: dataProduct.id, quantity: 1, },]);
+        }
+    };
+
+    console.log(globalCart)
 
 
     return (
@@ -36,7 +51,7 @@ export default function ProductPage() {
                     <p>{dataProduct.stock}</p>
                     <img src={dataProduct.img_url} alt={dataProduct.name} />
                     <div>
-                        <button onClick={btnAddCart} className="btn btn-primary">Add cart</button>
+                        <button onClick={addToCart} className="btn btn-primary">Add cart</button>
                     </div>
 
                     <div className="py-5">
