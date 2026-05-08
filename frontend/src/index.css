@@ -7,42 +7,42 @@
 /* Variabili CSS */
 :root {
   /* Sfondi e testi */
-  --bool-bg:              #F4F6F8;
-  --bool-surface:         #FFFFFF;
-  --bool-text:            #1A2B3C;
-  --bool-text-muted:      #6B7A8C;
+  --bool-bg: #F4F6F8;
+  --bool-surface: #FFFFFF;
+  --bool-text: #1A2B3C;
+  --bool-text-muted: #6B7A8C;
 
   /* Brand colors */
-  --bool-primary:         #2B4A6F;
-  --bool-primary-hover:   #1F3A5C;
-  --bool-accent:          #D4A574;
-  --bool-accent-hover:    #BD9560;
+  --bool-primary: #2B4A6F;
+  --bool-primary-hover: #1F3A5C;
+  --bool-accent: #D4A574;
+  --bool-accent-hover: #BD9560;
 
   /* Bordi */
-  --bool-border:          #DBE0E6;
+  --bool-border: #DBE0E6;
 
   /* Stati semantici */
-  --bool-success:         #2D7A4E;
-  --bool-warning:         #B8842A;
-  --bool-error:           #B83D3D;
+  --bool-success: #2D7A4E;
+  --bool-warning: #B8842A;
+  --bool-error: #B83D3D;
 
   /* Font families */
-  --bool-font-display:    'Fraunces', Georgia, serif;
-  --bool-font-body:       'Inter', system-ui, sans-serif;
+  --bool-font-display: 'Fraunces', Georgia, serif;
+  --bool-font-body: 'Inter', system-ui, sans-serif;
 
   /* Border radius (in linea con Bootstrap) */
-  --bool-radius-sm:       4px;
-  --bool-radius-md:       6px;
-  --bool-radius-lg:       12px;
-  --bool-radius-xl:       20px;
+  --bool-radius-sm: 4px;
+  --bool-radius-md: 6px;
+  --bool-radius-lg: 12px;
+  --bool-radius-xl: 20px;
 
   /* Shadows */
-  --bool-shadow-sm:       0 2px 8px rgba(26, 43, 60, 0.06);
-  --bool-shadow-md:       0 4px 16px rgba(26, 43, 60, 0.1);
-  --bool-shadow-lg:       0 8px 32px rgba(26, 43, 60, 0.14);
+  --bool-shadow-sm: 0 2px 8px rgba(26, 43, 60, 0.06);
+  --bool-shadow-md: 0 4px 16px rgba(26, 43, 60, 0.1);
+  --bool-shadow-lg: 0 8px 32px rgba(26, 43, 60, 0.14);
 
   /* Transizioni */
-  --bool-transition:      250ms ease;
+  --bool-transition: 250ms ease;
 }
 
 
@@ -55,7 +55,8 @@ body {
 }
 
 /* Titoli con font display */
-h1, h2 {
+h1,
+h2 {
   font-family: var(--bool-font-display);
   font-weight: 500;
   letter-spacing: -0.5px;
@@ -65,7 +66,14 @@ h1 {
   letter-spacing: -1px;
 }
 
-h3, h4, h5, h6 {
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--bool-font-body);
   font-weight: 500;
+}
+
+main {
+  min-height: 100vh;
 }
