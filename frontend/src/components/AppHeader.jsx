@@ -24,9 +24,9 @@ export default function AppHeader() {
                             <NavLink to='/cart'>
                                 <i class="bi bi-cart2"></i>
                             </NavLink>
-                            <div>
+                            <NavLink to='/search'>
                                 <i class="bi bi-search"></i>
-                            </div>
+                            </NavLink>
                         </div>
 
 
