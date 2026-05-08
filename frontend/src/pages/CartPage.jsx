@@ -10,31 +10,50 @@ export default function CartPage() {
     }
   }, []);
 
-  console.log("carrello:", cart);
+  
 
   return (
-    <section>
+    <section className="py-5">
       <div className="container">
-        <h1>Cart</h1>
-        <p>Here you can view and manage your shopping cart.</p>
+        <h1 className="mb-3">Carrello</h1>
 
         {cart.length === 0 ? (
-            <p>The cart is empty</p>
-        ) :(
-            <div>
-                <p>Hai: {cart.length} prodotti nel carrello</p>
-                <ul>
-                    {cart.map((item, index) => (
-                        <li key={index}>
-                         
-                            <p>Nome: {item.slug}</p>
-                            <p>Quantità: {item.quantity}</p>
-                        </li>
-                    ))}
-                </ul>
+          <div className="alert alert-info">Il carrello è vuoto</div>
+        ) : (
+          <div className="row">
+            <div className="col">
+              <ul className="list-group">
+                {cart.map((item) => (
+                  <li
+                    key={item.slug}
+                    className="list-group-item d-flex align-items-center gap-3"
+                  >
+                    <img
+                      src={`http://localhost:3000/images/products/${item.img_url}`}
+                      alt={item.name}
+                      style={{ width: 80, height: 80, objectFit: "cover" }}
+                      className="rounded border"
+                    />
+
+                    <div className="flex-grow-1">
+                      <h5 className="mb-1">{item.name}</h5>
+                      <p className="mb-0 text-muted">Prezzo: € {item.price}</p>
+                    </div>
+
+                    <div className="text-end">
+                      <span className="badge bg-secondary">
+                        Qty: {item.quantity}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-        )
-        }
+            <div className="col">
+              <h3>Riepilogo</h3>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
