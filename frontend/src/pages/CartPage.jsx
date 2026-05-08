@@ -10,7 +10,10 @@ export default function CartPage() {
     }
   }, []);
 
-  
+  const total = cart.reduce(
+    (acc, item) => acc + Number(item.price) * item.quantity,
+    0,
+  );
 
   return (
     <section className="py-5">
@@ -20,7 +23,7 @@ export default function CartPage() {
         {cart.length === 0 ? (
           <div className="alert alert-info">Il carrello è vuoto</div>
         ) : (
-          <div className="row">
+          <div className="row row-cols-1 row-cols-md-2 g-5 ">
             <div className="col">
               <ul className="list-group">
                 {cart.map((item) => (
@@ -31,8 +34,7 @@ export default function CartPage() {
                     <img
                       src={`http://localhost:3000/images/products/${item.img_url}`}
                       alt={item.name}
-                      style={{ width: 80, height: 80, objectFit: "cover" }}
-                      className="rounded border"
+                      className="rounded border cart_images"
                     />
 
                     <div className="flex-grow-1">
@@ -50,7 +52,29 @@ export default function CartPage() {
               </ul>
             </div>
             <div className="col">
-              <h3>Riepilogo</h3>
+              <div className="card">
+                <div className="card-body">
+                  <h4>Riepilogo</h4>
+                  <div className="d-flex justify-content-between mb-2">
+                    <span>Articoli:</span>
+                    <span>{cart.length}</span>
+                  </div>
+
+                  <div className="d-flex justify-content-between mb-3">
+                    <span>Quantità totale:</span>
+                    <span>
+                      {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                    </span>
+                  </div>
+
+                  <hr />
+
+                  <div className="d-flex justify-content-between fs-5 fw-bold">
+                    <span>Totale:</span>
+                    <span>€ {total.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
