@@ -78,4 +78,9 @@ h6 {
 
 #order_section {
   background-color: var( --bool-accent-hover);
+/* Cart */
+.cart_images{
+  max-width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
