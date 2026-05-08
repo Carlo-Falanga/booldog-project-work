@@ -19,9 +19,10 @@ export default function CartPage() {
   // Aggiorna la quantita' del prodotto
   const updateQuantity = (slug, amount) => {
     const updated = cart.map((item) => {
+      const newQty = item.quantity + amount;
       if (item.slug === slug) {
-        return { ...item, quantity: item.quantity + amount };
-      }
+        return { ...item, quantity: Math.max(1, Math.min(newQty, item.stock)) };
+      };
       return item;
     });
 
