@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useGlobal } from "../context/CartContext";
 
 export default function CheckoutPage() {
     const [phone, setPhone] = useState("");
@@ -9,8 +10,9 @@ export default function CheckoutPage() {
     const [couponMessage, setCouponMessage] = useState("");
     const [discount, setDiscount] = useState(0);
     const [isLoadingCoupon, setIsLoadingCoupon] = useState(false);
+    const {cart, setCart} = useGlobal()
 
-    const subtotal = 110.00;
+    const subtotal = cart.map(item=>item.price);
     const total = Math.max(0, subtotal - discount);
 
     const handlePhone = (e) => {
@@ -118,7 +120,7 @@ export default function CheckoutPage() {
 
                     <div className="d-flex justify-content-between mb-2">
                         <span>Subtotale</span>
-                        <span>{subtotal.toFixed(2)}€</span>
+                        <span>{subtotal}€</span>
                     </div>
 
                     
