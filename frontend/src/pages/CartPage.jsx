@@ -5,7 +5,7 @@ export default function CartPage() {
   const {cart, setCart} = useGlobal()
 
   useEffect(() => {
-    const saved = localStorage.getItem("booldog_cart");
+    const saved = localStorage.getItem("cart_data");
     if (saved) {
       setCart(JSON.parse(saved));
     }
@@ -28,7 +28,7 @@ export default function CartPage() {
     });
 
     setCart(updated);
-    localStorage.setItem("booldog_cart", JSON.stringify(updated));
+    localStorage.setItem("cart_data", JSON.stringify(updated));
   };
 
   return (
