@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { useGlobal } from "../context/CartContext";
 
 export default function CartPage() {
-  const [cart, setCart] = useState([]);
+  const {cart, setCart} = useGlobal()
 
   useEffect(() => {
     const saved = localStorage.getItem("booldog_cart");
@@ -22,7 +23,7 @@ export default function CartPage() {
       const newQty = item.quantity + amount;
       if (item.slug === slug) {
         return { ...item, quantity: Math.max(1, Math.min(newQty, item.stock)) };
-      };
+      }
       return item;
     });
 
@@ -34,7 +35,6 @@ export default function CartPage() {
     <section className="py-5">
       <div className="container">
         <h1 className="mb-3">Carrello</h1>
-
 
         {cart.length === 0 ? (
           <div className="alert alert-info">Il carrello è vuoto</div>
