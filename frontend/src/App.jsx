@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route element={<DefaultLayout />}>
               <Route index element={<HomePage />} />
-              <Route path="product/:slug" element={<ProductPage globalCart={globalCart} setGlobalCart={setGlobalCart} />} />
+              <Route path="product/:slug" element={<ProductPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
               <Route />
               <Route />

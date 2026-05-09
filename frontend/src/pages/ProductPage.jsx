@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import axios from "axios";
+import { useGlobal } from "../context/CartContext"
 
 export default function ProductPage() {
+
+    const { cart, setCart } = useGlobal()
 
     const [dataProduct, setDataProduct] = useState(null)
 
@@ -19,23 +22,23 @@ export default function ProductPage() {
     const addToCart = () => {
 
         // verifico se il prodotto esiste nel carrello
-        const existingProduct = globalCart.find(
+        const existingProduct = cart.find(
             item => item.id === dataProduct.id
         );
 
         // se esiste aggiorno la quantità del prodotto esistente
         if (existingProduct) {
-            const updatedCart = globalCart.map(
+            const updatedCart = cart.map(
                 item => item.id === dataProduct.id ? { ...item, quantity: item.quantity + 1 } : item
             );
-            setGlobalCart(updatedCart);
+            setCart(updatedCart);
             // se non esiste aggiungo nuovo prodotto con quantità 1
         } else {
-            setGlobalCart([...globalCart, { id: dataProduct.id, quantity: 1, },]);
+            setCart([...cart, { id: dataProduct.id, quantity: 1, },]);
         }
     };
 
-    console.log(globalCart)
+    console.log(cart)
 
 
     return (
