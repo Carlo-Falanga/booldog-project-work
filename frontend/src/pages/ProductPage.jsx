@@ -2,11 +2,9 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import axios from "axios";
 
-export default function ProductPage({ globalCart, setGlobalCart }) {
+export default function ProductPage() {
 
     const [dataProduct, setDataProduct] = useState(null)
-
-    const [cart, setCart] = useState([])
 
     const { slug } = useParams();
 

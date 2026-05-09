@@ -10,15 +10,6 @@ import { CartContextProvider } from "./context/CartContext";
 
 function App() {
 
-  const [globalCart, setGlobalCart] = useState(
-    JSON.parse(localStorage.getItem("globalCart")) || []
-  );
-
-  useEffect(() => {
-    localStorage.setItem("globalCart", JSON.stringify(globalCart));
-  }, [globalCart]);
-
-
   return (
     <>
       <CartContextProvider>
