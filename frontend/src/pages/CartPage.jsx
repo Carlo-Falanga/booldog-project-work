@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useGlobal } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 export default function CartPage() {
-  const {cart, setCart} = useGlobal()
+  const { cart, setCart } = useGlobal();
 
   useEffect(() => {
     const saved = localStorage.getItem("cart_data");
@@ -106,7 +107,9 @@ export default function CartPage() {
                 </div>
               </div>
               <div className="text-end">
-                <button className="btn btn-primary mt-4 ">Checkout</button>
+                <Link to="/checkout">
+                  <button className="btn btn-primary">Procedi al checkout</button>
+                </Link>
               </div>
             </div>
           </div>
