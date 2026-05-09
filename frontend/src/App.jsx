@@ -5,6 +5,7 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import { useState, useEffect } from "react";
+import { CartContextProvider } from "./context/CartContext";
 
 
 function App() {
@@ -20,22 +21,25 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="product/:slug" element={<ProductPage globalCart={globalCart} setGlobalCart={setGlobalCart} />} />
-            <Route path="checkout" element={<CheckoutPage />} />
-            <Route />
-            <Route />
-            <Route path="/cart" element={<CartPage />} />
-            <Route />
-            <Route />
-            <Route />
-            <Route />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <CartContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="product/:slug" element={<ProductPage globalCart={globalCart} setGlobalCart={setGlobalCart} />} />
+              <Route path="checkout" element={<CheckoutPage />} />
+              <Route />
+              <Route />
+              <Route path="/cart" element={<CartPage />} />
+              <Route />
+              <Route />
+              <Route />
+              <Route />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </CartContextProvider>
+
     </>
   );
 }
