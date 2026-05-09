@@ -34,12 +34,11 @@ export default function ProductPage() {
             setCart(updatedCart);
             // se non esiste aggiungo nuovo prodotto con quantità 1
         } else {
-            setCart([...cart, { id: dataProduct.id, quantity: 1, },]);
+            setCart([...cart, { ...dataProduct, quantity: 1, },]);
         }
     };
 
     console.log(cart)
-
 
     return (
         <div className="container">
