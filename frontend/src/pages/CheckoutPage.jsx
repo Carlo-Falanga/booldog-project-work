@@ -12,7 +12,10 @@ export default function CheckoutPage() {
     const [isLoadingCoupon, setIsLoadingCoupon] = useState(false);
     const {cart, setCart} = useGlobal()
 
-    const subtotal = cart.map(item=>item.price);
+    const subtotal = cart.reduce(
+    (acc, item) => acc + Number(item.price) * item.quantity,
+    0,
+  );
     const total = Math.max(0, subtotal - discount);
 
     const handlePhone = (e) => {
@@ -112,15 +115,24 @@ export default function CheckoutPage() {
                     <h5 className="pb-4 fw-bold">IL TUO ORDINE</h5>
 
 
-                    <div className="d-flex justify-content-between border-bottom pb-2 mb-2">
-                        <span className="fw-bold">Prodotto</span>
-                        <span className="fw-bold">Subtotale</span>
+                    <div className="d-flex justify-content-between  border-bottom pb-2 mb-2 ">
+                        <div>
+                            <span className="fw-bold">Prodotti</span>
+                            {cart.map(item=><p>{item.name} <span className="fw-bold">X{item.quantity}</span></p>)}
+
+                        </div>
+                        
+                        <div>
+                            <span className="fw-bold">Subtotale</span>
+                            {cart.map(item=><p>{item.price}</p>)}
+
+                        </div>
                     </div>
 
 
                     <div className="d-flex justify-content-between mb-2">
                         <span>Subtotale</span>
-                        <span>{subtotal}€</span>
+                        <span>{subtotal.toFixed(2)}€</span>
                     </div>
 
                     
