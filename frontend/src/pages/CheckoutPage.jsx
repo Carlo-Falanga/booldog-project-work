@@ -10,27 +10,64 @@ export default function CheckoutPage() {
     const [couponMessage, setCouponMessage] = useState("");
     const [discount, setDiscount] = useState(0);
     const [isLoadingCoupon, setIsLoadingCoupon] = useState(false);
-    const {cart, setCart} = useGlobal()
+    const { cart, setCart } = useGlobal()
+    const [newOrder, setNewOrder] = useState({
+        "user_full_name": "",
+        "email": "",
+        "phone_number": "",
+        "address": "",
+        "zipcode": "",
+        "city": "",
+        "country": "",
+        "products": [
+            cart.map(item => {
+                return {
+                    "id": item.id,
+                    "quantity": item.quantity
+                }
+            })
+        ]
+    })
 
     const subtotal = cart.reduce(
-    (acc, item) => acc + Number(item.price) * item.quantity,
-    0,
-  );
+        (acc, item) => acc + Number(item.price) * item.quantity,
+        0,
+    );
     const total = Math.max(0, subtotal - discount);
 
-    const handlePhone = (e) => {
-        const value = e.target.value;
-        setPhone(value.replace(/[^0-9]/g, ''));
-    };
+    /*   const handlePhone = (e) => {
+          const value = e.target.value;
+          setPhone(value.replace(/[^0-9]/g, ''));
+      };
+  
+      const handleZip = (e) => {
+          const value = e.target.value;
+          setZip(value.replace(/[^0-9]/g, ''));
+      }; */
 
-    const handleZip = (e) => {
-        const value = e.target.value;
-        setZip(value.replace(/[^0-9]/g, ''));
-    };
+    function handleChange(e) {
+        const { id, value } = e.target;
+        setNewOrder(prev => ({ ...prev, [id]: value }));
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const orderToSend = {
+            ...newOrder,
+            products: cart.map(item => ({
+                id: item.id,
+                quantity: item.quantity
+            }))
+        };
+
+        console.log(orderToSend); // o axios.post(...)
+    }
 
     const handleApplyCoupon = async (e) => {
         e.preventDefault()
         if (!couponCode.trim()) return;
+
 
         setIsLoadingCoupon(true);
         setCouponStatus(null);
@@ -68,41 +105,51 @@ export default function CheckoutPage() {
         setDiscount(0);
     };
 
+
+
     return (
         <>
             <div className="row">
 
-                
                 <div className="col-sm-12 col-md-6 pt-5 px-5">
                     <h5 className="pb-4 fw-bold">DETTAGLI DI FATTURAZIONE</h5>
-                    <form className="row g-3">
+
+                    <form className="row g-3" onSubmit={handleSubmit}>
                         <div className="col-md-6">
                             <label htmlFor="inputFullName" className="form-label">Nome e Cognome</label>
-                            <input type="text" className="form-control" id="inputFullName" placeholder="Mario Rossi" />
+                            <input value={newOrder.user_full_name} id="user_full_name" onChange={handleChange} type="text" className="form-control" placeholder="Mario Rossi" />
                         </div>
                         <div className="col-md-6">
                             <label htmlFor="inputEmail4" className="form-label">Email</label>
-                            <input type="email" className="form-control" id="inputEmail4" placeholder="email@email.it" />
+                            <input value={newOrder.email} id="email" onChange={handleChange} type="email" className="form-control" placeholder="email@email.it" />
                         </div>
                         <div className="col-12">
                             <label htmlFor="inputTel" className="form-label">Numero di telefono</label>
-                            <input type="tel" className="form-control" id="inputTel" value={phone} onChange={handlePhone} placeholder="3334568752" maxLength="15" />
+                            <input value={newOrder.phone_number} id="phone_number" onChange={(e) => {
+                                e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 15);
+                                handleChange(e);
+                            }} type="text"
+                                inputMode="numeric" className="form-control" placeholder="3334568752" maxLength="15" minLength="11" />
                         </div>
                         <div className="col-12">
                             <label htmlFor="inputAddress" className="form-label">Indirizzo</label>
-                            <input type="text" className="form-control" id="inputAddress" placeholder="Via Roma 1" />
+                            <input value={newOrder.address} id="address" onChange={handleChange} type="text" className="form-control" placeholder="Via Roma 1" />
                         </div>
                         <div className="col-md-6">
                             <label htmlFor="inputCity" className="form-label">Città</label>
-                            <input type="text" className="form-control" id="inputCity" placeholder="Roma" />
+                            <input value={newOrder.city} id="city" onChange={handleChange} type="text" className="form-control" placeholder="Roma" />
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="inputState" className="form-label">Paese</label>
-                            <input type="text" className="form-control" id="inputState" placeholder="Italia" />
+                            <input value={newOrder.country} id="country" onChange={handleChange} type="text" className="form-control" placeholder="Italia" />
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="inputZip" className="form-label">Cap</label>
-                            <input type="text" className="form-control" id="inputZip" value={zip} onChange={handleZip} placeholder="00100" maxLength="5" />
+                            <input value={newOrder.zipcode} id="zipcode" onChange={(e) => {
+                                e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 15);
+                                handleChange(e);
+                            }} type="text"
+                                inputMode="numeric" className="form-control" placeholder="00100" maxLength="5" minLength="5" />
                         </div>
                         <div className="col-12 d-flex justify-content-center">
                             <button type="submit" className="btn btn-primary">Invia</button>
@@ -118,13 +165,13 @@ export default function CheckoutPage() {
                     <div className="d-flex justify-content-between  border-bottom pb-2 mb-2 ">
                         <div>
                             <span className="fw-bold">Prodotti</span>
-                            {cart.map(item=><p>{item.name} <span className="fw-bold">X{item.quantity}</span></p>)}
+                            {cart.map(item => <p key={item.id}>{item.name} <span className="fw-bold">X{item.quantity}</span></p>)}
 
                         </div>
-                        
+
                         <div>
                             <span className="fw-bold">Subtotale</span>
-                            {cart.map(item=><p>{item.price}</p>)}
+                            {cart.map(item => <p key={item.id}>{item.price}</p>)}
 
                         </div>
                     </div>
@@ -135,7 +182,7 @@ export default function CheckoutPage() {
                         <span>{subtotal.toFixed(2)}€</span>
                     </div>
 
-                    
+
                     {discount > 0 && (
                         <div className="d-flex justify-content-between mb-2 text-success">
                             <span>Sconto coupon</span>
@@ -184,7 +231,7 @@ export default function CheckoutPage() {
                                 )}
                             </div>
 
-                           
+
                             {couponMessage && (
                                 <div className={`mt-2 small ${couponStatus === "valid" ? "text-success" : "text-danger"}`}>
                                     {couponMessage}
