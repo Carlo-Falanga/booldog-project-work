@@ -9,6 +9,8 @@ export default function ProductPage() {
 
     const [dataProduct, setDataProduct] = useState(null)
 
+    const [productQuantity, setProductQuantity] = useState(1)
+
     const { slug } = useParams();
 
     useEffect(() => {
@@ -19,6 +21,25 @@ export default function ProductPage() {
 
 
     // funzione aggiungi al carrello
+    // const addToCart = () => {
+
+    //     // verifico se il prodotto esiste nel carrello
+    //     const existingProduct = cart.find(
+    //         item => item.id === dataProduct.id
+    //     );
+
+    //     // se esiste aggiorno la quantità del prodotto esistente
+    //     if (existingProduct) {
+    //         const updatedCart = cart.map(
+    //             item => item.id === dataProduct.id ? { ...item, quantity: item.quantity + 1 } : item
+    //         );
+    //         setCart(updatedCart);
+    //         // se non esiste aggiungo nuovo prodotto con quantità 1
+    //     } else {
+    //         setCart([...cart, { ...dataProduct, quantity: 1, },]);
+    //     }
+    // };
+
     const addToCart = () => {
 
         // verifico se il prodotto esiste nel carrello
@@ -29,35 +50,34 @@ export default function ProductPage() {
         // se esiste aggiorno la quantità del prodotto esistente
         if (existingProduct) {
             const updatedCart = cart.map(
-                item => item.id === dataProduct.id ? { ...item, quantity: item.quantity + 1 } : item
+                item => item.id === dataProduct.id ? { ...item, quantity: item.quantity + productQuantity } : item
             );
             setCart(updatedCart);
             // se non esiste aggiungo nuovo prodotto con quantità 1
         } else {
-            setCart([...cart, { ...dataProduct, quantity: 1, },]);
+            setCart([...cart, { ...dataProduct, quantity: productQuantity, },]);
         }
     };
 
 
-    // cerco prodotto corrente all'interno del carrello
-    const cartCurrentProduct = cart.find(
-        item => item.id === dataProduct?.id
-    );
 
-    // funzione rimuovi dal carrello
-    const removeToCart = () => {
+    // aumento quantità da aggiungere al carrello
+    const increaseQuantity = () => {
+        if (productQuantity < dataProduct?.stock) {
+            setProductQuantity(productQuantity + 1)
+        }
+    }
 
-        if (cartCurrentProduct.quantity > 0) {
-            const updatedCart = cart.map(
-                item => item.id === dataProduct.id ? { ...item, quantity: item.quantity - 1 } : item
-            );
-            setCart(updatedCart);
+    // 
+    const decreaseQuantity = () => {
+
+        if (productQuantity > 1) {
+            setProductQuantity(productQuantity - 1)
         }
 
     }
 
-
-
+    console.log(cart)
 
     return (
         <div className="container py-5">
@@ -74,9 +94,10 @@ export default function ProductPage() {
                                 <p>{dataProduct.description}</p>
                                 <p>{dataProduct.price} €</p>
                                 <div className="d-flex">
-                                    <button onClick={addToCart}>+</button>
-                                    {cartCurrentProduct ? cartCurrentProduct.quantity : 0}
-                                    <button onClick={removeToCart}>-</button>
+                                    <button onClick={decreaseQuantity}>-</button>
+                                    <div>{productQuantity}</div>
+                                    <button onClick={increaseQuantity}>+</button>
+
                                 </div>
                                 <button onClick={addToCart} className="btn btn-primary">Aggiungi al carrello</button>
                             </div>
