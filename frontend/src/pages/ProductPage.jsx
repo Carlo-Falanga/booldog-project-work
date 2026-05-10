@@ -41,18 +41,25 @@ export default function ProductPage() {
     console.log(cart)
 
     return (
-        <div className="container">
+        <div className="container py-5">
             {dataProduct && (
 
-                <div>
-                    <h1>{dataProduct.name}</h1>
-                    <p>{dataProduct.description}</p>
-                    <p>{dataProduct.price}</p>
-                    <p>{dataProduct.stock}</p>
-                    <img src={dataProduct.img_url} alt={dataProduct.name} />
-                    <div>
-                        <button onClick={addToCart} className="btn btn-primary">Add cart</button>
+                <div className="">
+                    <div className="row row-cols-2">
+                        <div className="">
+                            <img className="img-fluid" src={`http://localhost:3000/images/products/${dataProduct.img_url}`} alt={dataProduct.name} />
+                        </div>
+                        <div className="d-flex align-items-center justify-content-center">
+                            <div className="p-5 text-center">
+                                <h1>{dataProduct.name}</h1>
+                                <p>{dataProduct.description}</p>
+                                <p>{dataProduct.price} €</p>
+                                <button onClick={addToCart} className="btn btn-primary">Aggiungi al carrello</button>
+                            </div>
+                        </div>
                     </div>
+
+
 
                     <div className="py-5">
                         <h3>Related</h3>
