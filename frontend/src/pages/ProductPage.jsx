@@ -9,6 +9,8 @@ export default function ProductPage() {
 
     const [dataProduct, setDataProduct] = useState(null)
 
+    const [asideCart, setAsideCart] = useState(false)
+
     const [productQuantity, setProductQuantity] = useState(1)
 
     const { slug } = useParams();
@@ -57,11 +59,14 @@ export default function ProductPage() {
         } else {
             setCart([...cart, { ...dataProduct, quantity: productQuantity, },]);
         }
+
+        setAsideCart(true)
+
     };
 
 
     // aumento quantità da aggiungere al carrello con stock come massimale
-        // come massimale andrà inserito stock meno quantità già nel carrello
+    // come massimale andrà inserito stock meno quantità già nel carrello
     const increaseQuantity = () => {
         if (productQuantity < dataProduct?.stock) {
             setProductQuantity(productQuantity + 1)
@@ -70,14 +75,11 @@ export default function ProductPage() {
 
     // diminuisco quantità da aggiungere al carrello se maggiore di 1
     const decreaseQuantity = () => {
-
         if (productQuantity > 1) {
             setProductQuantity(productQuantity - 1)
         }
-
     }
 
-    // console.log(cart)
 
     return (
         <div className="container py-5">
@@ -97,7 +99,6 @@ export default function ProductPage() {
                                     <button onClick={decreaseQuantity}>-</button>
                                     <div>{productQuantity}</div>
                                     <button onClick={increaseQuantity}>+</button>
-
                                 </div>
                                 <button onClick={addToCart} className="btn btn-primary">Aggiungi al carrello</button>
                             </div>
@@ -125,8 +126,17 @@ export default function ProductPage() {
                         </div>
                     </div>
                 </div>
-            )
-            }
+            )}
+
+            {asideCart && (
+                <div className="position-fixed top-0 end-0 h-100 bg-white shadow">
+                    <div className="mb-5">
+                        {cart.map(item => <div key={item.slug}>{item.name} {item.quantity}</div>)}
+                        <Link to="/cart" className="btn btn-primary">Vai al carrello</Link>
+                    </div>
+                    <button onClick={() => setAsideCart(false)}>Chiudi</button>
+                </div>
+            )}
         </div>
     )
 }
