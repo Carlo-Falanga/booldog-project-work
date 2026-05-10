@@ -88,10 +88,17 @@ export default function ProductPage() {
                         <div className="row row-cols-4">
                             {
                                 dataProduct.related.map(product =>
-                                    <Link to={`/product/${product.slug}`} key={product.slug}>
-                                        <h3 className="h5">{product.name}</h3>
-                                        <p>{product.price}</p>
-                                    </Link>
+                                    <div key={product.slug}>
+                                        <Link to={`/product/${product.slug}`} className="text-decoration-none">
+                                            <div className="ratio ratio-1x1 bg-white mb-3">
+                                                <div className="d-flex align-items-center justify-content-center p-3">
+                                                    <img className="img-fluid" src={`http://localhost:3000/images/products/${product.img_url}`} alt={product.name} />
+                                                </div>
+                                            </div>
+                                            <h3 className="h5">{product.name}</h3>
+                                            <p>{product.price} €</p>
+                                        </Link>
+                                    </div>
                                 )
                             }
                         </div>
