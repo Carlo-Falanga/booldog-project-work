@@ -18,7 +18,7 @@ export default function ProductPage() {
     }, [slug])
 
 
-    // funzione carrello
+    // funzione aggiungi al carrello
     const addToCart = () => {
 
         // verifico se il prodotto esiste nel carrello
@@ -38,7 +38,26 @@ export default function ProductPage() {
         }
     };
 
-    console.log(cart)
+
+    // cerco prodotto corrente all'interno del carrello
+    const cartCurrentProduct = cart.find(
+        item => item.id === dataProduct?.id
+    );
+
+    // funzione rimuovi dal carrello
+    const removeToCart = () => {
+
+        if (cartCurrentProduct.quantity > 0) {
+            const updatedCart = cart.map(
+                item => item.id === dataProduct.id ? { ...item, quantity: item.quantity - 1 } : item
+            );
+            setCart(updatedCart);
+        }
+
+    }
+
+
+
 
     return (
         <div className="container py-5">
@@ -54,12 +73,15 @@ export default function ProductPage() {
                                 <h1>{dataProduct.name}</h1>
                                 <p>{dataProduct.description}</p>
                                 <p>{dataProduct.price} €</p>
+                                <div className="d-flex">
+                                    <button onClick={addToCart}>+</button>
+                                    {cartCurrentProduct ? cartCurrentProduct.quantity : 0}
+                                    <button onClick={removeToCart}>-</button>
+                                </div>
                                 <button onClick={addToCart} className="btn btn-primary">Aggiungi al carrello</button>
                             </div>
                         </div>
                     </div>
-
-
 
                     <div className="py-5">
                         <h3>Related</h3>
