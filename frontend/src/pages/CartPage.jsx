@@ -32,6 +32,14 @@ export default function CartPage() {
     localStorage.setItem("cart_data", JSON.stringify(updated));
   };
 
+  // Rimuove il prodotto dal carrello
+  const removeFromCart = (slug) => {
+   const updated = cart.filter(item => item.slug !== slug);
+     setCart(updated);
+     localStorage.setItem("cart_data", JSON.stringify(updated));
+ };
+ 
+
   return (
     <section className="py-5">
       <div className="container">
@@ -77,6 +85,9 @@ export default function CartPage() {
                       >
                         +
                       </button>
+                      <button className="btn"  onClick={() => removeFromCart(item.slug)}>
+                        <i class="bi bi-trash"></i>
+                      </button>
                     </div>
                   </li>
                 ))}
@@ -108,7 +119,9 @@ export default function CartPage() {
               </div>
               <div className="text-end">
                 <Link to="/checkout">
-                  <button className="btn btn-primary">Procedi al checkout</button>
+                  <button className="btn btn-primary">
+                    Procedi al checkout
+                  </button>
                 </Link>
               </div>
             </div>
