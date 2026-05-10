@@ -3,8 +3,7 @@ import axios from "axios";
 import { useGlobal } from "../context/CartContext";
 
 export default function CheckoutPage() {
-    const [phone, setPhone] = useState("");
-    const [zip, setZip] = useState("");
+
     const [couponCode, setCouponCode] = useState("");
     const [couponStatus, setCouponStatus] = useState(null); // null | "valid" | "invalid"
     const [couponMessage, setCouponMessage] = useState("");
@@ -50,7 +49,7 @@ export default function CheckoutPage() {
         setNewOrder(prev => ({ ...prev, [id]: value }));
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         const orderToSend = {
@@ -61,11 +60,17 @@ export default function CheckoutPage() {
             }))
         };
 
-        console.log(orderToSend); // o axios.post(...)
+        try {
+            const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
+            console.log(data);
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     const handleApplyCoupon = async (e) => {
         e.preventDefault()
+        console.log(couponCode)
         if (!couponCode.trim()) return;
 
 
