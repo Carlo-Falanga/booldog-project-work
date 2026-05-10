@@ -60,15 +60,15 @@ export default function ProductPage() {
     };
 
 
-
-    // aumento quantità da aggiungere al carrello
+    // aumento quantità da aggiungere al carrello con stock come massimale
+        // come massimale andrà inserito stock meno quantità già nel carrello
     const increaseQuantity = () => {
         if (productQuantity < dataProduct?.stock) {
             setProductQuantity(productQuantity + 1)
         }
     }
 
-    // 
+    // diminuisco quantità da aggiungere al carrello se maggiore di 1
     const decreaseQuantity = () => {
 
         if (productQuantity > 1) {
@@ -77,7 +77,7 @@ export default function ProductPage() {
 
     }
 
-    console.log(cart)
+    // console.log(cart)
 
     return (
         <div className="container py-5">
