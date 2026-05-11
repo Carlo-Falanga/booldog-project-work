@@ -8,6 +8,7 @@ export default function CheckoutPage() {
     const [couponStatus, setCouponStatus] = useState(null); // null | "valid" | "invalid"
     const [couponMessage, setCouponMessage] = useState("");
     const [discount, setDiscount] = useState(0);
+    const [appliedCouponId, setAppliedCouponId] = useState(null);
     const [isLoadingCoupon, setIsLoadingCoupon] = useState(false);
     const { cart, setCart } = useGlobal()
     const [newOrder, setNewOrder] = useState({
@@ -58,6 +59,8 @@ export default function CheckoutPage() {
                 id: item.id,
                 quantity: item.quantity
             }))
+            ,
+            coupon_code: couponStatus === "valid" ? couponCode.trim() : undefined
         };
 
         try {
@@ -87,6 +90,7 @@ export default function CheckoutPage() {
 
             if (data.valid) {
                 setDiscount(data.discount);
+                setAppliedCouponId(data.coupon?.id ?? null);
                 setCouponStatus("valid");
                 setCouponMessage(`Coupon applicato! Sconto di ${data.discount}€`);
             } else {
@@ -108,6 +112,7 @@ export default function CheckoutPage() {
         setCouponStatus(null);
         setCouponMessage("");
         setDiscount(0);
+        setAppliedCouponId(null);
     };
 
 
