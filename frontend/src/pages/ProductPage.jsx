@@ -61,6 +61,7 @@ export default function ProductPage() {
         }
 
         setAsideCart(true)
+        setProductQuantity(1)
 
     };
 
