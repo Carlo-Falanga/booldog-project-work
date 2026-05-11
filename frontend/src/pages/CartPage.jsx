@@ -5,7 +5,7 @@ import CartProductsList from "../components/CartProductsList";
 import CartTotal from "../components/CartTotal";
 
 export default function CartPage() {
-  const { cart, setCart, total, updateQuantity, removeFromCart  } = useGlobal();
+  const { cart, setCart, total, updateQuantity, removeFromCart } = useGlobal();
 
   useEffect(() => {
     const saved = localStorage.getItem("cart_data");
@@ -17,14 +17,22 @@ export default function CartPage() {
   return (
     <section className="py-5">
       <div className="container">
-        <h1 className="mb-3">Carrello</h1>
+        {/* Titolo carrello*/}
+        <h1 className="cart-hero mt-3 mb-5">
+          <span className="d-block">Il tuo</span>
+          <em className="d-block">carrello.</em>
+        </h1>
 
         {cart.length === 0 ? (
           <div className="alert alert-info">Il carrello è vuoto</div>
         ) : (
           <div className="row row-cols-1 row-cols-md-2 g-5 ">
             <div className="col">
-              <CartProductsList total={total} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />
+              <CartProductsList
+                total={total}
+                updateQuantity={updateQuantity}
+                removeFromCart={removeFromCart}
+              />
             </div>
             <div className="col">
               <div className="card">
@@ -44,8 +52,7 @@ export default function CartPage() {
 
                   <hr />
 
-                  <CartTotal/>
-
+                  <CartTotal />
                 </div>
               </div>
               <div className="text-end">

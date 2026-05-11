@@ -1,5 +1,6 @@
 @import "bootstrap";
-@import url("bootstrap-icons");@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("bootstrap-icons");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 /* ═══════════════════════════════════════════════════════════
    VARIABILI — Bold Modernist Palette (dal file HTML)
@@ -17,10 +18,10 @@
   --bool-muted: #767676; /* grigio medio */
 
   /* Brand colors — Rosso accent */
-  --bool-forest: #d63b2f; 
+  --bool-forest: #d63b2f;
   --bool-forest-deep: #b0291f;
-  --bool-clay: #0a0a0a; 
-  --bool-clay-deep: #000000; 
+  --bool-clay: #0a0a0a;
+  --bool-clay-deep: #000000;
 
   /* Alias per compatibilità */
   --bool-primary: var(--bool-forest);
@@ -43,7 +44,6 @@
   --bool-font-body:
     "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --bool-font-mono: "JetBrains Mono", ui-monospace, monospace;
-
 }
 
 /* GLOBAL */
@@ -95,6 +95,12 @@ h6 {
 #order_section {
   background-color: var(--bool-accent-hover);
   height: 100vh;
+}
+
+/* CART TITLE */
+.cart-hero {
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  line-height: 0.9;
 }
 
 /* CART ITEMS  */
@@ -153,4 +159,3 @@ h6 {
     mix-blend-mode: multiply;
   }
 }
-
