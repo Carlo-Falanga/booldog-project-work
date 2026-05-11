@@ -2,11 +2,16 @@ import { createContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import axios from "axios";
 import { useGlobal } from "../context/CartContext"
+import { useWishlist } from "../context/WishListContext"
+
 import SideCart from "../components/SideCart";
 
 export default function ProductPage() {
 
     const { cart, setCart } = useGlobal()
+    const { wishlist, setWishlist } = useWishlist()
+
+    console.log(wishlist)
 
     const [dataProduct, setDataProduct] = useState(null)
 
@@ -24,25 +29,6 @@ export default function ProductPage() {
 
 
     // funzione aggiungi al carrello
-    // const addToCart = () => {
-
-    //     // verifico se il prodotto esiste nel carrello
-    //     const existingProduct = cart.find(
-    //         item => item.id === dataProduct.id
-    //     );
-
-    //     // se esiste aggiorno la quantità del prodotto esistente
-    //     if (existingProduct) {
-    //         const updatedCart = cart.map(
-    //             item => item.id === dataProduct.id ? { ...item, quantity: item.quantity + 1 } : item
-    //         );
-    //         setCart(updatedCart);
-    //         // se non esiste aggiungo nuovo prodotto con quantità 1
-    //     } else {
-    //         setCart([...cart, { ...dataProduct, quantity: 1, },]);
-    //     }
-    // };
-
     const addToCart = () => {
 
         // verifico se il prodotto esiste nel carrello
@@ -82,6 +68,27 @@ export default function ProductPage() {
         }
     }
 
+    // verifico se il prodotto esiste nel carrello
+    const existingProductWL = wishlist.find(
+        item => item.slug === slug
+    );
+
+    // funzione aggiungi wishlist
+    const addToWishList = () => {
+
+        // se esiste al click lo rimuovo
+        if (existingProductWL) {
+            const updatedWishList = wishlist.filter((item) => item.slug !== slug);
+            setWishlist(updatedWishList);
+        } else {
+            // altrimenti lo aggiungo
+            setWishlist([...wishlist, { ...dataProduct },]);
+        }
+
+        console.log(existingProductWL)
+
+    };
+
 
     return (
         <div className="container py-5">
@@ -90,6 +97,9 @@ export default function ProductPage() {
                 <div className="">
                     <div className="row row-cols-2">
                         <div className="">
+                            <button onClick={addToWishList} className="btn">
+                                <i className={`bi ${existingProductWL ? 'bi-heart-fill' : 'bi-heart'}`} ></i>
+                            </button>
                             <img className="img-fluid" src={`http://localhost:3000/images/products/${dataProduct.img_url}`} alt={dataProduct.name} />
                         </div>
                         <div className="d-flex align-items-center justify-content-center">

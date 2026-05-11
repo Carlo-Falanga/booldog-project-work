@@ -6,8 +6,6 @@ export function WishListContextProvider({ children }) {
 
   const wishlistArr = [];
 
-  const test = 'ciao'
-
   const [wishlist, setWishlist] = useState(() => {
     const saved = localStorage.getItem("wish_data");
     return saved ? JSON.parse(saved) : wishlistArr;
@@ -26,8 +24,9 @@ export function WishListContextProvider({ children }) {
     localStorage.setItem("wish_data", JSON.stringify(updated));
   };
 
+
   return (
-    <WishListContext.Provider value={{ test }}>
+    <WishListContext.Provider value={{ wishlist, setWishlist }}>
       {children}
     </WishListContext.Provider>
   );

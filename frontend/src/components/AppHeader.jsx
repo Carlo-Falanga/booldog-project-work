@@ -43,7 +43,7 @@ export default function AppHeader() {
               <i className="bi bi-cart"></i>
             </Link>
             {/* Wish list button */}
-            <Link to="/" className="btn text-white">
+            <Link to="/wishlist" className="btn text-white">
               <i className="bi bi-heart"></i>
             </Link>
             <Link to="/search" className="btn text-white">
