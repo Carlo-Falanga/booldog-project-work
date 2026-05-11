@@ -61,7 +61,7 @@ export default function CartProductsList() {
                   <div className="btn-group" role="group" aria-label="Quantità">
                     <button
                       type="button"
-                      className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0"
+                      className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"
                       onClick={() => updateQuantity(item.slug, -1)}
                     >
                       −
@@ -71,7 +71,7 @@ export default function CartProductsList() {
                     </span>
                     <button
                       type="button"
-                      className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0"
+                      className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"
                       onClick={() => updateQuantity(item.slug, +1)}
                     >
                       +

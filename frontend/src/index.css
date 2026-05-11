@@ -159,3 +159,39 @@ h6 {
     mix-blend-mode: multiply;
   }
 }
+
+/* CARD SUMMARY */
+.bg-paper {
+  background-color: var(--bool-paper);
+}
+
+.bg-bone-deep {
+  background-color: var(--bool-bone-deep);
+}
+
+.cart_total{
+    font-family: var(--bool-font-display);
+    font-size: 44px;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    color: var(--ink);
+
+}
+
+.cart_cents{
+      font-style: italic;
+    color: var( --bool-forest);
+    font-weight: 300;
+    font-size: 22px;
+    margin-left: 4px;
+}
+
+.btn_checkout{
+  transition: background .15s, transform .15s;
+}
+
+.btn_checkout:hover{
+  background-color: var( --bool-forest);
+  transform: translateY(-1px);
+}
