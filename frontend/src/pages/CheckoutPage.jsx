@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useGlobal } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 export default function CheckoutPage() {
 
@@ -170,7 +171,7 @@ export default function CheckoutPage() {
 
                 <div id="order_section" className="col-sm-12 col-md-6 pt-5 px-5 text-white">
                     <h5 className="pb-4 fw-bold">IL TUO ORDINE</h5>
-
+                    <Link to="/cart" className="btn btn-primary">Modifica ordine</Link >
 
                     <div className="d-flex justify-content-between  border-bottom pb-2 mb-2 ">
                         <div>
