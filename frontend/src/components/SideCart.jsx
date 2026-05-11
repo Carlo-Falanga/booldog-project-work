@@ -5,7 +5,7 @@ import CartTotal from "./CartTotal";
 
 export default function SideCart({ setAsideCart }) {
   return (
-    <div className="position-fixed top-0 end-0 h-100 bg-white shadow-lg p-3 z-100" style={{ width: '100%', maxWidth: '576px' }}>
+    <div className="position-fixed top-0 end-0 h-100 bg-white shadow-lg p-3 z-100 sidebar_width">
       <div className="mb-5">
         {/* X button for closing the cart */}
         <button

@@ -195,3 +195,9 @@ h6 {
   background-color: var( --bool-forest);
   transform: translateY(-1px);
 }
+
+.sidebar_width{
+
+   width: 100%;
+   max-width: 576px;
+}

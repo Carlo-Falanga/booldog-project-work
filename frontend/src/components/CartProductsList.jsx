@@ -29,7 +29,7 @@ export default function CartProductsList() {
                 <img
                   src={`http://localhost:3000/images/products/${item.img_url}`}
                   alt={item.name}
-                  className="w-100 h-100 object-fit-cover rounded-1"
+                  className="w-100 h-100 object-fit-cover rounded-1"           
                 />
               </div>
 
