@@ -116,7 +116,7 @@ export default function ProductPage() {
                                         <Link to={`/product/${product.slug}`} className="text-decoration-none">
                                             <div className="ratio ratio-1x1 bg-white mb-3">
                                                 <div className="d-flex align-items-center justify-content-center p-3">
-                                                    <img className="img-fluid" src={`http://localhost:3000/images/products/${product.img_url}`} alt={product.name} />
+                                                    <img className="object-fit-contain h-100 w-100" src={`http://localhost:3000/images/products/${product.img_url}`} alt={product.name} />
                                                 </div>
                                             </div>
                                             <h3 className="h5">{product.name}</h3>
