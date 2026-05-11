@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 export default function SearchPage() {
 
-    const [allProducts, setAllProducts] = useState([]);
-    const [productList, setProductList] = useState([]);
+    const [initialProducts, setInitialProducts] = useState([]);
+
     const [search, setSearch] = useState("");
 
     const url = `http://localhost:3000/products`
@@ -13,17 +13,13 @@ export default function SearchPage() {
     useEffect(() => {
         axios.get(url)
             .then(res => {
-                setAllProducts(res.data);
-                setProductList(res.data);
+                setInitialProducts(res.data);
+                setFinalProducts(res.data);
             })
     }, [])
 
-    //filtro i prodotti secondo quelli digitati nella barra di ricerca
-    function handleSearch(query) {
-        setSearch(query);
-        const newList = allProducts.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
-        setProductList(newList);
-    }
+
+
 
 
 
@@ -34,12 +30,18 @@ export default function SearchPage() {
                 {/* searchbar */}
                 <input type="text" className='form-control d-inline w-25' placeholder='Ricerca un prodotto...  ' value={search} onChange={(e) => handleSearch(e.target.value)} />
                 {/* filters */}
-                <select name="" id="">Ordina i contenuti</select>
+                <select name="product-order" id="" className='form-select w-25' onChange={(e) => handleSelect(e.target.value)}>
+                    <option defaultValue="">Ordina i prodotti per</option>
+                    <option value="price-up">Prezzo crescente</option>
+                    <option value="price-down">Prezzo decrescente</option>
+                    <option value="name">Nome</option>
+                    <option value="recent">Recenti</option>
+                </select>
             </div>
             <div className="container">
-                {productList.length > 0 ?
+                {finalProducts.length > 0 ?
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-                        {productList.map(product => (
+                        {finalProducts.map(product => (
                             <div className="col" key={product.id}>
                                 <div className="card p-3 h-100">
                                     <div className="card-img card-header p-3">
@@ -82,5 +84,7 @@ export default function SearchPage() {
 
 // Missioni future:
 // implementare i filtri per categoria e per tipo di animale (o decidere di farle come pagine separate)
+// aggiungere link sul prodotto per la pagina prodotto (sentirsi con odon)
+// aggiungere nella home page i link alle pagine per tipo di animale e per categoria (sentirsi con nabil)
 // fittare il design della pagina con quello del progetto
 // aggiungere hover e altri effetti
