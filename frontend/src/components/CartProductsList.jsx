@@ -1,56 +1,110 @@
 import { useGlobal } from "../context/CartContext";
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 export default function CartProductsList() {
   const { cart, setCart, total, updateQuantity, removeFromCart } = useGlobal();
-    
-
 
   return (
-    
-      <ul className="list-group">
-        {cart.map((item) => (
-          <li
-            key={item.slug}
-            className="list-group-item d-flex align-items-center gap-3"
-          >
-            <img
-              src={`http://localhost:3000/images/products/${item.img_url}`}
-              alt={item.name}
-              className="rounded border cart_images"
-            />
+    <>
+      <section className="cart-items">
+        {/* Header */}
+        <div className="d-flex align-items-baseline justify-content-between pb-3 border-bottom mb-4">
+          <div className="d-flex align-items-baseline gap-3">
+            <h2 className="mb-0">Articoli</h2>
+          </div>
+          <span className="cart-meta">
+            {cart.reduce((sum, i) => sum + i.quantity, 0)} · PEZZI
+          </span>
+        </div>
 
-            <div className="flex-grow-1">
-              <Link to={`/product/${item.slug}`}>
-                <h5 className="mb-1">{item.name}</h5>
-              </Link>
-              <p className="mb-0 text-muted">Prezzo: € {item.price}</p>
-            </div>
+        {/* Lista */}
+        <ul className="list-unstyled m-0">
+          {cart.map((item) => (
+            <li
+              key={item.slug}
+              className="d-flex gap-4 py-4 border-bottom cart-item"
+            >
+              {/* Immagine */}
+              <div className="cart-thumb position-relative flex-shrink-0">
+                <img
+                  src={`http://localhost:3000/images/products/${item.img_url}`}
+                  alt={item.name}
+                  className="w-100 h-100 object-fit-cover rounded-1"
+                />
+              </div>
 
-            <div className="d-flex align-items-center gap-2">
-              {/* Bottone decremento quantita' */}
-              <button
-                className="btn btn-sm btn-outline-secondary"
-                onClick={() => updateQuantity(item.slug, -1)}
+              {/* Info */}
+              <div className="flex-grow-1 d-flex flex-column gap-2 min-w-0">
+                {item.brand && (
+                  <span className="cart-meta">
+                    {item.brand} · {item.country_code}
+                  </span>
+                )}
+
+                <Link
+                  to={`/product/${item.slug}`}
+                  className="text-decoration-none text-reset"
+                >
+                  <h3 className="cart-name fs-4 mb-0">{item.name}</h3>
+                </Link>
+
+                <p className="text-muted small mb-0">
+                  {item.size && (
+                    <>
+                      Taglia <strong className="text-dark">{item.size} </strong>
+                    </>
+                  )}
+                  {item.color && (
+                    <>
+                      · Colore{" "}
+                      <strong className="text-dark">{item.color}</strong>
+                    </>
+                  )}
+                </p>
+
+                {/* Controlli */}
+                <div className="d-flex align-items-center gap-3 mt-2 flex-wrap">
+                  <div className="btn-group" role="group" aria-label="Quantità">
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0"
+                      onClick={() => updateQuantity(item.slug, -1)}
+                    >
+                      −
+                    </button>
+                    <span className="btn btn-outline-secondary btn-sm disabled px-3 border-start-0 border-end-0">
+                      {item.quantity}
+                    </span>
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0"
+                      onClick={() => updateQuantity(item.slug, +1)}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="btn btn-link btn-sm text-muted p-0 text-decoration-none"
+                    onClick={() => removeFromCart(item.slug)}
+                  >
+                    Rimuovi
+                  </button>
+                </div>
+              </div>
+
+              {/* Prezzo */}
+              <div
+                className="d-flex flex-column align-items-end text-end"
+                style={{ minWidth: "110px" }}
               >
-                −
-              </button>
-              <span className="badge bg-secondary">{item.quantity}</span>
-              {/* Bottone incremento quantita' */}
-              <button
-                className="btn btn-sm btn-outline-secondary"
-                onClick={() => updateQuantity(item.slug, +1)}
-              >
-                +
-              </button>
-              <button className="btn" onClick={() => removeFromCart(item.slug)}>
-                <i class="bi bi-trash"></i>
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    
+                <span className="cart-name fs-4">€ {item.price}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
   );
 }
