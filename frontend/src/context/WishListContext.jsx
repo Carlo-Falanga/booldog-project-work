@@ -2,9 +2,11 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const WishListContext = createContext();
 
-export function CartContextProvider({ children }) {
+export function WishListContextProvider({ children }) {
 
   const wishlistArr = [];
+
+  const test = 'ciao'
 
   const [wishlist, setWishlist] = useState(() => {
     const saved = localStorage.getItem("wish_data");
@@ -20,19 +22,19 @@ export function CartContextProvider({ children }) {
   // Rimuove il prodotto dal carrello
   const removeFromWishlist = (slug) => {
     const updated = wishlist.filter((item) => item.slug !== slug);
-    setCart(updated);
+    setWishlist(updated);
     localStorage.setItem("wish_data", JSON.stringify(updated));
   };
 
   return (
-    <WishListContext.Provider value={{}}>
+    <WishListContext.Provider value={{ test }}>
       {children}
     </WishListContext.Provider>
   );
 
 }
 
-export function useGlobal() {
+export function useWishlist() {
 
   const context = useContext(WishListContext);
 

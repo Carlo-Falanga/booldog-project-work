@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CartContextProvider } from "./context/CartContext";
+import { WishListContextProvider } from "./context/WishListContext";
 import DefaultLayout from "./layouts/DefaultLayout";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
@@ -13,8 +14,8 @@ import WishListPage from "./pages/WishListPage";
 function App() {
 
   return (
-    <>
-      <CartContextProvider>
+    <CartContextProvider>
+      <WishListContextProvider>
 
         <BrowserRouter>
           <Routes>
@@ -32,8 +33,8 @@ function App() {
           </Routes>
         </BrowserRouter>
 
-      </CartContextProvider>
-    </>
+      </WishListContextProvider>
+    </CartContextProvider>
   );
 }
 
