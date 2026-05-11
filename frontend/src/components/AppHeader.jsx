@@ -4,9 +4,9 @@ import axios from "axios"
 
 export default function AppHeader() {
 
-    return (
-        <>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+  return (
+    <>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
         <a className="navbar-brand fw-bold fs-4" href="#">
           🐾 BoolDog
         </a>
@@ -49,9 +49,8 @@ export default function AppHeader() {
         </div>
       </nav>
 
-        </>
-    )
+    </>
+  )
 }
 
 
-   

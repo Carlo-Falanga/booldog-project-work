@@ -7,30 +7,27 @@ import CheckoutPage from "./pages/CheckoutPage";
 import { useState, useEffect } from "react";
 import { CartContextProvider } from "./context/CartContext";
 
+import SearchPage from "./pages/SearchPage";
 
 function App() {
 
   return (
     <>
-      <CartContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<DefaultLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="product/:slug" element={<ProductPage />} />
-              <Route path="checkout" element={<CheckoutPage />} />
-              <Route />
-              <Route />
-              <Route path="/cart" element={<CartPage />} />
-              <Route />
-              <Route />
-              <Route />
-              <Route />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </CartContextProvider>
-
+      <BrowserRouter>
+        <Routes>
+          <Route element={<DefaultLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="product/:slug" element={<ProductPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route />
+            <Route />
+            <Route />
+            <Route />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
