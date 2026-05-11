@@ -14,7 +14,6 @@ export default function SearchPage() {
         axios.get(url)
             .then(res => {
                 setInitialProducts(res.data);
-                setFinalProducts(res.data);
             })
     }, [])
 
@@ -39,9 +38,9 @@ export default function SearchPage() {
                 </select>
             </div>
             <div className="container">
-                {finalProducts.length > 0 ?
+                {initialProducts.length > 0 ?
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-                        {finalProducts.map(product => (
+                        {initialProducts.map(product => (
                             <div className="col" key={product.id}>
                                 <div className="card p-3 h-100">
                                     <div className="card-img card-header p-3">

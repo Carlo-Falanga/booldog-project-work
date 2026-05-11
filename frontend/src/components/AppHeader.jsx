@@ -46,7 +46,7 @@ export default function AppHeader() {
             <Link to="/" className="btn text-white">
               <i className="bi bi-heart"></i>
             </Link>
-            <Link to="/" className="btn text-white">
+            <Link to="/search" className="btn text-white">
               <i className="bi bi-search"></i>
             </Link>
           </div>
