@@ -78,6 +78,7 @@ h6 {
 
 #order_section {
   background-color: var(--bool-accent-hover);
+  height: 100vh;
 }
 
 /* Cart */
