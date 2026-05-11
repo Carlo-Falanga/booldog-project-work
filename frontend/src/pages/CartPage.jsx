@@ -86,7 +86,7 @@ export default function CartPage() {
                 {/* Bottone checkout */}
                 <Link
                   to="/checkout"
-                  className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_checkout"
+                  className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart"
                 >
                   <span className="fs-6">Vai al checkout</span>
                   <i className="bi bi-arrow-right"></i>

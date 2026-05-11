@@ -7,23 +7,28 @@ export default function SideCart({setAsideCart}) {
   return (
     <div className="position-fixed top-0 end-0 h-100 bg-white shadow-lg p-3 w-50">
       <div className="mb-5">
-        <h3 className="h5">Aggiunto al carrello</h3>
+       {/* X button for closing the cart */}
+        <button
+          className="btn-close d-flex ms-auto mb-3"
+          aria-label="Close"
+          onClick={() => setAsideCart(false)}
+        ></button>
         <CartProductsList />
 
-        <div>
-          <button
-            className="btn btn-primary"
-            onClick={() => setAsideCart(false)}
-          >
-            Chiudi
-          </button>
 
-          <Link to="/cart" className="btn btn-primary">
-            Vai al carrello
-          </Link>
-        </div>
 
         <CartTotal />
+
+        <Link
+          to="/cart"
+          className="d-flex justify-content-end text-decoration-none"
+        >
+          <button  className="btn btn-dark btn-sm rounded-pill w-50 py-3 mt-4 border-0 btn_cart">
+          Vai al carrello
+
+          </button>
+        </Link>
+
       </div>
     </div>
   );
