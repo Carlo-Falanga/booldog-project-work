@@ -25,11 +25,11 @@ export default function CartProductsList() {
               className="d-flex gap-4 py-4 border-bottom cart-item"
             >
               {/* Immagine */}
-              <div className="cart-thumb position-relative flex-shrink-0">
+              <div className="cart-thumb position-relative flex-shrink-0 bg-white">
                 <img
                   src={`http://localhost:3000/images/products/${item.img_url}`}
                   alt={item.name}
-                  className="w-100 h-100 object-fit-cover rounded-1"           
+                  className="w-100 h-100 object-fit-contain rounded-1"           
                 />
               </div>
 
