@@ -13,6 +13,8 @@ function App() {
 
   return (
     <>
+     <CartContextProvider>
+
       <BrowserRouter>
         <Routes>
           <Route element={<DefaultLayout />}>
@@ -28,6 +30,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+
+     </CartContextProvider>
     </>
   );
 }
