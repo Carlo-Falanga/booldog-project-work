@@ -127,11 +127,11 @@ export default function CheckoutPage() {
                     <form className="row g-3" onSubmit={handleSubmit}>
                         <div className="col-md-6">
                             <label htmlFor="inputFullName" className="form-label">Nome e Cognome</label>
-                            <input value={newOrder.user_full_name} id="user_full_name" onChange={handleChange} type="text" className="form-control" placeholder="Mario Rossi" />
+                            <input value={newOrder.user_full_name} id="user_full_name" onChange={handleChange} type="text" className="form-control" placeholder="Mario Rossi" required />
                         </div>
                         <div className="col-md-6">
                             <label htmlFor="inputEmail4" className="form-label">Email</label>
-                            <input value={newOrder.email} id="email" onChange={handleChange} type="email" className="form-control" placeholder="email@email.it" />
+                            <input value={newOrder.email} id="email" onChange={handleChange} type="email" className="form-control" placeholder="email@email.it" required />
                         </div>
                         <div className="col-12">
                             <label htmlFor="inputTel" className="form-label">Numero di telefono</label>
@@ -139,19 +139,19 @@ export default function CheckoutPage() {
                                 e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 15);
                                 handleChange(e);
                             }} type="text"
-                                inputMode="numeric" className="form-control" placeholder="3334568752" maxLength="15" minLength="11" />
+                                inputMode="numeric" className="form-control" placeholder="3334568752" maxLength="15" minLength="11" required />
                         </div>
                         <div className="col-12">
                             <label htmlFor="inputAddress" className="form-label">Indirizzo</label>
-                            <input value={newOrder.address} id="address" onChange={handleChange} type="text" className="form-control" placeholder="Via Roma 1" />
+                            <input value={newOrder.address} id="address" onChange={handleChange} type="text" className="form-control" placeholder="Via Roma 1" required />
                         </div>
                         <div className="col-md-6">
                             <label htmlFor="inputCity" className="form-label">Città</label>
-                            <input value={newOrder.city} id="city" onChange={handleChange} type="text" className="form-control" placeholder="Roma" />
+                            <input value={newOrder.city} id="city" onChange={handleChange} type="text" className="form-control" placeholder="Roma" required />
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="inputState" className="form-label">Paese</label>
-                            <input value={newOrder.country} id="country" onChange={handleChange} type="text" className="form-control" placeholder="Italia" />
+                            <input value={newOrder.country} id="country" onChange={handleChange} type="text" className="form-control" placeholder="Italia" required />
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="inputZip" className="form-label">Cap</label>
@@ -159,7 +159,7 @@ export default function CheckoutPage() {
                                 e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 15);
                                 handleChange(e);
                             }} type="text"
-                                inputMode="numeric" className="form-control" placeholder="00100" maxLength="5" minLength="5" />
+                                inputMode="numeric" className="form-control" placeholder="00100" maxLength="5" minLength="5" required />
                         </div>
                         <div className="col-12 d-flex justify-content-center">
                             <button type="submit" className="btn btn-primary">Invia</button>
