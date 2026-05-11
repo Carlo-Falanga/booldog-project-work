@@ -175,13 +175,13 @@ export default function CheckoutPage() {
                     <div className="d-flex justify-content-between  border-bottom pb-2 mb-2 ">
                         <div>
                             <span className="fw-bold">Prodotti</span>
-                            {cart.map(item => <p key={item.id}>{item.name} <span className="fw-bold">X{item.quantity}</span></p>)}
+                            {cart.map(item => <p key={item.id}>{item.name} <i class="bi bi-x"><span className="fw-bold">{item.quantity}</span></i></p>)}
 
                         </div>
 
                         <div>
                             <span className="fw-bold">Subtotale</span>
-                            {cart.map(item => <p key={item.id}>{item.price}</p>)}
+                            {cart.map(item => <p key={item.id} className="d-flex justify-content-center">{item.price}</p>)}
 
                         </div>
                     </div>
