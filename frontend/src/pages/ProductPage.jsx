@@ -115,7 +115,7 @@ export default function ProductPage() {
                                         <Link to={`/product/${product.slug}`} className="text-decoration-none">
                                             <div className="ratio ratio-1x1 bg-white mb-3">
                                                 <div className="d-flex align-items-center justify-content-center p-3">
-                                                    <img className="img-fluid" src={`http://localhost:3000/images/products/${product.img_url}`} alt={product.name} />
+                                                    <img className="object-fit-contain h-100 w-100" src={`http://localhost:3000/images/products/${product.img_url}`} alt={product.name} />
                                                 </div>
                                             </div>
                                             <h3 className="h5">{product.name}</h3>
@@ -134,11 +134,11 @@ export default function ProductPage() {
                     <div className="mb-5">
                         <h3 className="h5">Aggiunto al carrello</h3>
                         {cart.map(item =>
-                            <div key={item.slug} className="row">
-                                <div className="col-3">
+                            <div key={item.slug} className="row g-0 border-top">
+                                <div className="col-3 p-1">
                                     <img className="img-fluid" src={`http://localhost:3000/images/products/${item.img_url}`} alt={item.name} />
                                 </div>
-                                <div className="col-9">
+                                <div className="col-9 p-3">
                                     {item.name}{item.quantity > 1 && ` X ${item.quantity}`}
                                 </div>
                             </div>
