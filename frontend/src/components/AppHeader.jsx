@@ -1,8 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import CartPage from "../pages/CartPage";
-import axios from "axios";
+import { useGlobal } from "../context/CartContext";
+
 
 export default function AppHeader() {
+
+  const { cart } = useGlobal();
+
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
@@ -40,6 +45,7 @@ export default function AppHeader() {
 
           <div className="d-flex gap-2 align-items-center justify-content-around">
             <Link to="/cart" className="btn text-white">
+              <span>{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
               <i className="bi bi-cart"></i>
             </Link>
             {/* Wish list button */}
