@@ -1,4 +1,5 @@
 const connection = require("../data/db");
+const { validationResult } = require("express-validator");
 
 // show - mostra un ordine con i suoi prodotti
 const show = (req, res) => {
@@ -44,6 +45,12 @@ const show = (req, res) => {
 
 // store - crea un nuovo ordine partendo dal carrello (localStorage)
 const store = (req, res) => {
+  // controlla se la validazione ha trovato errori
+  const result = validationResult(req);
+  if (!result.isEmpty()) {
+    return res.status(400).json({ error: true, errors: result.array() });
+  }
+
   const {
     user_full_name,
     email,
@@ -55,15 +62,6 @@ const store = (req, res) => {
     products,
     coupon_code,
   } = req.body;
-
-  // controlli base
-  if (!user_full_name || !email || !address || !zipcode || !city || !country) {
-    return res.status(400).json({ error: "Dati mancanti" });
-  }
-
-  if (!products || products.length === 0) {
-    return res.status(400).json({ error: "Carrello vuoto" });
-  }
 
   // prendo i prodotti dal db
   const productIds = products.map((p) => p.id);
