@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGlobal } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import CartProductsList from "../components/CartProductsList";
+import CartTotal from "../components/CartTotal";
 
 export default function CartPage() {
   const { cart, setCart, total, updateQuantity, removeFromCart  } = useGlobal();
@@ -43,10 +44,8 @@ export default function CartPage() {
 
                   <hr />
 
-                  <div className="d-flex justify-content-between fs-5 fw-bold">
-                    <span>Totale:</span>
-                    <span>€ {total.toFixed(2)}</span>
-                  </div>
+                  <CartTotal/>
+
                 </div>
               </div>
               <div className="text-end">
