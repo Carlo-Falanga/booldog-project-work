@@ -129,9 +129,19 @@ export default function ProductPage() {
             )}
 
             {asideCart && (
-                <div className="position-fixed top-0 end-0 h-100 bg-white shadow">
+                <div className="position-fixed top-0 end-0 h-100 bg-white shadow-lg p-3 w-25">
                     <div className="mb-5">
-                        {cart.map(item => <div key={item.slug}>{item.name} {item.quantity}</div>)}
+                        <h3 className="h5">Aggiunto al carrello</h3>
+                        {cart.map(item =>
+                            <div key={item.slug} className="row">
+                                <div className="col-3">
+                                    <img className="img-fluid" src={`http://localhost:3000/images/products/${item.img_url}`} alt={item.name} />
+                                </div>
+                                <div className="col-9">
+                                    {item.name}{item.quantity > 1 && ` X ${item.quantity}`}
+                                </div>
+                            </div>
+                        )}
                         <Link to="/cart" className="btn btn-primary">Vai al carrello</Link>
                     </div>
                     <button onClick={() => setAsideCart(false)}>Chiudi</button>
