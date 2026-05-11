@@ -1,0 +1,60 @@
+/* jumbotron */
+.hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+
+.hero__subtitle {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* card categorie */
+.category-card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.category-card:hover {
+  transform: scale(1.03);
+}
+
+.category-card--dog {
+  background: linear-gradient(135deg, #f6a723, #e67e22);
+}
+
+.category-card--cat {
+  background: linear-gradient(135deg, #6c63ff, #4834d4);
+}
+
+.category-card__text {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* immagine card prodotto */
+.product-card__image {
+  height: 180px;
+  overflow: hidden;
+}
+
+.product-card__image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.product-card__emoji {
+  font-size: 4rem;
+}
+
+.product-card__badge {
+  width: fit-content;
+}
+
+/* icona schermata prodotto non trovato */
+.empty-state__icon {
+  font-size: 3rem;
+}
+
+  
