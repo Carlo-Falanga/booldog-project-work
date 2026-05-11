@@ -10,7 +10,7 @@ export default function CartProductsList() {
         {/* Header */}
         <div className="d-flex align-items-baseline justify-content-between pb-3 border-bottom mb-4">
           <div className="d-flex align-items-baseline gap-3">
-            <h2 className="mb-0">Articoli</h2>
+            <h3 className="mb-0">Articoli</h3>
           </div>
           <span className="cart-meta">
             {cart.reduce((sum, i) => sum + i.quantity, 0)} · PEZZI
@@ -35,12 +35,6 @@ export default function CartProductsList() {
 
               {/* Info */}
               <div className="flex-grow-1 d-flex flex-column gap-2 min-w-0">
-                {item.brand && (
-                  <span className="cart-meta">
-                    {item.brand} · {item.country_code}
-                  </span>
-                )}
-
                 <Link
                   to={`/product/${item.slug}`}
                   className="text-decoration-none text-reset"
