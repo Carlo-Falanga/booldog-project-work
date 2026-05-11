@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useGlobal } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import CartProductsList from "../components/CartProductsList";
 
 export default function CartPage() {
-  const { cart, setCart } = useGlobal();
+  const { cart, setCart, total, updateQuantity, removeFromCart  } = useGlobal();
 
   useEffect(() => {
     const saved = localStorage.getItem("cart_data");
@@ -11,34 +12,6 @@ export default function CartPage() {
       setCart(JSON.parse(saved));
     }
   }, []);
-
-  // Calcolo del totale del carrello in base alla quantita'
-  const total = cart.reduce(
-    (acc, item) => acc + Number(item.price) * item.quantity,
-    0,
-  );
-
-  // Aggiorna la quantita' del prodotto
-  const updateQuantity = (slug, amount) => {
-    const updated = cart.map((item) => {
-      const newQty = item.quantity + amount;
-      if (item.slug === slug) {
-        return { ...item, quantity: Math.max(1, Math.min(newQty, item.stock)) };
-      }
-      return item;
-    });
-
-    setCart(updated);
-    localStorage.setItem("cart_data", JSON.stringify(updated));
-  };
-
-  // Rimuove il prodotto dal carrello
-  const removeFromCart = (slug) => {
-   const updated = cart.filter(item => item.slug !== slug);
-     setCart(updated);
-     localStorage.setItem("cart_data", JSON.stringify(updated));
- };
- 
 
   return (
     <section className="py-5">
@@ -50,51 +23,7 @@ export default function CartPage() {
         ) : (
           <div className="row row-cols-1 row-cols-md-2 g-5 ">
             <div className="col">
-              <ul className="list-group">
-                {cart.map((item) => (
-                  <li
-                    key={item.slug}
-                    className="list-group-item d-flex align-items-center gap-3"
-                  >
-                    <img
-                      src={`http://localhost:3000/images/products/${item.img_url}`}
-                      alt={item.name}
-                      className="rounded border cart_images"
-                    />
-
-                    <div className="flex-grow-1">
-                      <Link to={`/product/${item.slug}`}>
-                      <h5 className="mb-1">{item.name}</h5>
-
-                      </Link>
-                      <p className="mb-0 text-muted">Prezzo: € {item.price}</p>
-                    </div>
-
-                    <div className="d-flex align-items-center gap-2">
-                      {/* Bottone decremento quantita' */}
-                      <button
-                        className="btn btn-sm btn-outline-secondary"
-                        onClick={() => updateQuantity(item.slug, -1)}
-                      >
-                        −
-                      </button>
-                      <span className="badge bg-secondary">
-                        {item.quantity}
-                      </span>
-                      {/* Bottone incremento quantita' */}
-                      <button
-                        className="btn btn-sm btn-outline-secondary"
-                        onClick={() => updateQuantity(item.slug, +1)}
-                      >
-                        +
-                      </button>
-                      <button className="btn"  onClick={() => removeFromCart(item.slug)}>
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <CartProductsList total={total} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />
             </div>
             <div className="col">
               <div className="card">
