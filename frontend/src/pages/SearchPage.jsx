@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function SearchPage() {
 
@@ -69,26 +70,28 @@ export default function SearchPage() {
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-3">
                         {finalProducts.map(product => (
                             <div className="col" key={product.id}>
-                                <div className="card p-3 h-100">
-                                    <div className="card-img card-header p-3">
-                                        <img src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
-                                    </div>
-                                    <div className=' d-flex align-items-center justify-content-between opacity-75 px-3 pt-3' >
-                                        <div>
-                                            {product.category}
+                                <Link to={`/product/${product.slug}`} className=' text-decoration-none'>
+                                    <div className="card p-3 h-100">
+                                        <div className="card-img card-header p-3">
+                                            <img src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
                                         </div>
-                                        <div>
-                                            {product.animal_name}
+                                        <div className=' d-flex align-items-center justify-content-between opacity-75 px-3 pt-3' >
+                                            <div>
+                                                {product.category}
+                                            </div>
+                                            <div>
+                                                {product.animal_name}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='card-body'>
-                                        <h3 className='card-title'>
-                                            {product.name}
-                                        </h3>
-                                        <div className=' fs-4'> &euro; {product.price}</div>
-                                    </div>
+                                        <div className='card-body'>
+                                            <h3 className='card-title'>
+                                                {product.name}
+                                            </h3>
+                                            <div className=' fs-4'> &euro; {product.price}</div>
+                                        </div>
 
-                                </div>
+                                    </div>
+                                </Link>
                             </div>
                         ))}
 
@@ -105,12 +108,10 @@ export default function SearchPage() {
 
 
 // Missione attuale: 
-// implementeare le diverse opzioni di ordinamento
 
 
 // Missioni future:
 // implementare i filtri per categoria e per tipo di animale (o decidere di farle come pagine separate)
-// aggiungere link sul prodotto per la pagina prodotto (sentirsi con odon)
 // aggiungere nella home page i link alle pagine per tipo di animale e per categoria (sentirsi con nabil)
 // fittare il design della pagina con quello del progetto
-// aggiungere hover e altri effetti
+// aggiungere hover e altri effetti (design finale della pagina alla fine -giustamente-)

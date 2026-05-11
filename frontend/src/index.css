@@ -102,3 +102,7 @@ main {
     mix-blend-mode: multiply;
   }
 }
+
+.card:hover {
+  cursor: pointer;
+}
