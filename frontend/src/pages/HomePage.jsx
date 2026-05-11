@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './HomePage.css'
+import {Link, NavLink} from "react-router-dom"
 
 const API_URL = 'http://localhost:3000'
 
@@ -186,7 +187,7 @@ function HomePage() {
                     {/* Immagine prodotto */}
                     <div className="product-card__image d-flex align-items-center justify-content-center bg-light">
                       {product.img_url ? (
-                        <img src={`/images/${product.img_url}`} alt={product.name}/>
+                        <img className=" object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} />
 
                 //if/else immagine
                     ) : (
@@ -196,7 +197,7 @@ function HomePage() {
                       )}
                     </div>
 
-                    <div className="card-body d-flex flex-column">
+                    <Link to={`/product/${product.slug}`}  className="card-body d-flex flex-column text-decoration-none">
                       {/* Badge animale */}
                       <span className={`badge mb-2 product-card__badge ${getAnimalBadgeClass(product.animal_type_id)}`}>
                         {getAnimalEmoji(product.animal_type_id)} {getAnimalName(product.animal_type_id)}
@@ -216,13 +217,8 @@ function HomePage() {
 
                       <div className="d-flex justify-content-between align-items-center mt-3">
                         <span className="fs-5 fw-bold">€{Number(product.price).toFixed(2)}</span>
-                        <button
-                          className="btn btn-dark btn-sm px-3"
-                          disabled={product.stock === 0}>
-                          {product.stock === 0 ? 'Esaurito' : 'Aggiungi 🛒'}
-                        </button>
                       </div>
-                    </div>
+                    </Link>
 
                   </div>
                 </div>

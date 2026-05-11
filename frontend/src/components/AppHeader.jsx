@@ -1,15 +1,14 @@
-import { NavLink } from "react-router-dom"
-import CartPage from "../pages/CartPage"
-import axios from "axios"
+import { Link, NavLink } from "react-router-dom";
+import CartPage from "../pages/CartPage";
+import axios from "axios";
 
 export default function AppHeader() {
-
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-        <a className="navbar-brand fw-bold fs-4" href="#">
+        <Link to="/" className="navbar-brand fw-bold fs-4" href="#">
           🐾 BoolDog
-        </a>
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -23,34 +22,36 @@ export default function AppHeader() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" href="#">Home</a>
+              <NavLink to="/" className="nav-link active" href="#">
+                Home
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Cani</a>
+              <a className="nav-link disabled" href="#">
+                Cani
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Gatti</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Offerte</a>
+              <a className="nav-link disabled" href="#">
+                Gatti
+              </a>
             </li>
           </ul>
 
-          <div className="d-flex gap-2 align-items-center">
-            <span className="text-white position-relative" style={{ cursor: 'pointer', fontSize: '1.3rem' }}>
-              🛒
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: '0.6rem' }}>
-                0
-              </span>
-            </span>
-            <button className="btn btn-outline-light btn-sm">Accedi</button>
-            <button className="btn btn-warning btn-sm fw-semibold">Registrati</button>
+          <div className="d-flex gap-2 align-items-center justify-content-around">
+            <Link to="/cart" className="btn text-white">
+              <i className="bi bi-cart"></i>
+            </Link>
+            {/* Wish list button */}
+            <Link to="/" className="btn text-white">
+              <i className="bi bi-heart"></i>
+            </Link>
+            <Link to="/" className="btn text-white">
+              <i className="bi bi-search"></i>
+            </Link>
           </div>
         </div>
       </nav>
-
     </>
-  )
+  );
 }
-
-
