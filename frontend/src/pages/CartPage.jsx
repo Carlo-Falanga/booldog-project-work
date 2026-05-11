@@ -24,7 +24,12 @@ export default function CartPage() {
         </h1>
 
         {cart.length === 0 ? (
-          <div className="alert alert-info">Il carrello è vuoto</div>
+          <div className="text-center py-5">
+            <h2 className="mb-4">Il tuo carrello è vuoto</h2>
+            <p className="text-muted mb-4">
+              Sembra che tu non abbia ancora aggiunto articoli al tuo carrello.
+            </p>
+          </div>
         ) : (
           <div className="row row-cols-1 row-cols-lg-2 g-5 ">
             <div className="col">
