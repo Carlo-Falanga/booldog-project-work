@@ -63,7 +63,10 @@ export default function CartPage() {
                     />
 
                     <div className="flex-grow-1">
+                      <Link to={`/product/${item.slug}`}>
                       <h5 className="mb-1">{item.name}</h5>
+
+                      </Link>
                       <p className="mb-0 text-muted">Prezzo: € {item.price}</p>
                     </div>
 
