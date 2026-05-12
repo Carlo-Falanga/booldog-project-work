@@ -15,21 +15,36 @@ export default function SearchPage() {
 
     //chiamata api per index dei prodotti
     useEffect(() => {
-        axios.get(`${url}?sort=${order}`)
+        axios.get(`${url}?sort=${order}&search=${search}`)
             .then(res => {
                 setProducts(res.data);
             })
-    }, [order])
+    }, [order, search])
 
-    //calcolo l'array di prodotti finali, filtrando per ricerca ed ordinando i risultati
-    const finalProducts = useMemo(() => {
-        return products
-            .filter(product => product.name.toLowerCase().includes(search.toLowerCase()))
-    }, [products, search])
 
-    function handleOrderSelect(option) {
-        setOrder(option);
-        setSearchParams({ sort: option });
+    function handleFilterChange(key, value) {
+        //copio i parametri attuali dell'url
+        const newParams = new URLSearchParams(searchParams);
+
+        // modifico le variabili reattive 
+        switch (key) {
+            case 'sort':
+                setOrder(value);
+                break;
+            case 'search':
+                setSearch(value);
+                break;
+        }
+
+        //modifico i parametri dell'url
+        if (value) {
+            newParams.set(key, value);
+        } else {
+            newParams.delete(key);
+        }
+
+        setSearchParams(newParams);
+
     }
 
 
@@ -42,11 +57,11 @@ export default function SearchPage() {
 
                 <div className='d-flex align-items-center justify-content-between mb-3'>
                     {/* searchbar */}
-                    <input type="text" className='form-control d-inline w-25' placeholder='Ricerca un prodotto...  ' value={search} onChange={(e) => setSearch(e.target.value)} />
+                    <input type="text" className='form-control d-inline w-25' placeholder='Ricerca un prodotto...  ' value={search} onChange={(e) => handleFilterChange('search', e.target.value)} />
                     {/* filters */}
                     <div className='d-flex gap-3 align-items-baseline'>
                         <label htmlFor="product-order" className=' form-label flex-shrink-0'>Ordina i prodotti per</label>
-                        <select name="product-order" id="product-order" className='form-select w-100' onChange={(e) => handleOrderSelect(e.target.value)}>
+                        <select name="product-order" id="product-order" className='form-select w-100' onChange={(e) => handleFilterChange('sort', e.target.value)}>
                             <option value="">Recenti</option>
                             <option value="name">Nome</option>
                             <option value="price-up">Prezzo crescente</option>
@@ -56,9 +71,9 @@ export default function SearchPage() {
                 </div>
             </div>
             <div className="container">
-                {finalProducts.length > 0 ?
+                {products.length > 0 ?
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-3">
-                        {finalProducts.map(product => (
+                        {products.map(product => (
                             <div className="col" key={product.id}>
                                 <Link to={`/product/${product.slug}`} className=' text-decoration-none'>
                                     <ProductCard product={product} />
@@ -79,7 +94,6 @@ export default function SearchPage() {
 
 
 // Missione attuale: 
-// spostare anche la search lato backend
 
 
 // Missioni future:
