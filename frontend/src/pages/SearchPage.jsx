@@ -74,10 +74,10 @@ export default function SearchPage() {
                 {products.length > 0 ?
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-3">
                         {products.map(product => (
-                            <div className="col" key={product.id}>
-                                <Link to={`/product/${product.slug}`} className=' text-decoration-none'>
+                            <div className="col" key={product.slug}>
+                                
                                     <ProductCard product={product} />
-                                </Link>
+                                
                             </div>
                         ))}
 
