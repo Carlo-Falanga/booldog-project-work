@@ -2,6 +2,27 @@ const connection = require("../data/db")
 
 const index = (req, res) => {
 
+    //salvo l'ordine passato nell'url 
+    const { sort, search } = req.query;
+
+    let orderQuery = `p.created_at DESC`;
+
+    switch (sort) {
+        //modifico la query string sulla base dell'ordine selezionato
+        case "price-up":
+            orderQuery = `p.price`;
+            break;
+        case "price-down":
+            orderQuery = `p.price DESC`;
+            break;
+        case "name":
+            orderQuery = `p.name`;
+            break;
+        default:
+            //nel caso default, che è anche quello iniziale, il sortaggio è per latest
+            orderQuery = `p.created_at DESC`;
+    }
+
     const sql = `
     SELECT 
     p.id,
@@ -24,7 +45,7 @@ const index = (req, res) => {
     FROM products p
     JOIN brands b ON b.id = p.brand_id
     JOIN animal_types a ON a.id = p.animal_type_id
-    ORDER BY p.created_at DESC`;
+    ORDER BY ${orderQuery}`;
 
     connection.query(sql, (err, results) => {
 
@@ -76,7 +97,7 @@ const show = (req, res) => {
 
         if (err) return res.status(500).json({
             error: true,
-            message:"Database error err" 
+            message: "Database error err"
         })
 
         if (productResults.length === 0) {
@@ -85,11 +106,11 @@ const show = (req, res) => {
 
         const product = productResults[0];
 
-       
 
-            // 3. Prodotti correlati
-            const relatedSql =
-                ` SELECT 
+
+        // 3. Prodotti correlati
+        const relatedSql =
+            ` SELECT 
           p.slug,
           p.name,
           p.price,
@@ -101,23 +122,23 @@ const show = (req, res) => {
           AND (p.brand_id = ? OR p.category = ?)
         ORDER BY RAND()
         LIMIT 4`
-                ;
+            ;
 
-            connection.query(relatedSql, [product.id, product.brand_id, product.category], (err, relatedResults) => {
+        connection.query(relatedSql, [product.id, product.brand_id, product.category], (err, relatedResults) => {
 
-                if (err) return res.status(500).json({
-                    error: true,
-                    message: "Database error"
-                })
+            if (err) return res.status(500).json({
+                error: true,
+                message: "Database error"
+            })
 
-                // 4. Compongo la risposta finale
-                res.json({
-                    ...product,
-                    related: relatedResults,
-                });
-            }
-            );
-        });
+            // 4. Compongo la risposta finale
+            res.json({
+                ...product,
+                related: relatedResults,
+            });
+        }
+        );
+    });
     ;
 }
 
