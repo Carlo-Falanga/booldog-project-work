@@ -201,3 +201,11 @@ h6 {
    width: 100%;
    max-width: 576px;
 }
+
+.order_product_font{
+  font-family: var(--bool-font-display);
+}
+
+.checkout_subtotal_font{
+  font-family: var (--bool-font-body);
+}
