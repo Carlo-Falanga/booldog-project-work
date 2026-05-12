@@ -35,21 +35,21 @@ export default function ProductPage() {
   }, [slug]);
 
   // funzione aggiungi al carrello
-  const addToCart = () => {
+  const addToCart = (item, quantity = 1) => {
     // verifico se il prodotto esiste nel carrello
-    const existingProduct = cart.find((item) => item.id === dataProduct.id);
+    const existingProduct = cart.find((product) => product.id === item.id);
 
     // se esiste aggiorno la quantità del prodotto esistente
     if (existingProduct) {
-      const updatedCart = cart.map((item) =>
-        item.id === dataProduct.id
-          ? { ...item, quantity: item.quantity + productQuantity }
-          : item,
+      const updatedCart = cart.map((product) =>
+        product.id === item.id
+          ? { ...product, quantity: product.quantity + quantity }
+          : product,
       );
       setCart(updatedCart);
       // se non esiste aggiungo nuovo prodotto con quantità 1
     } else {
-      setCart([...cart, { ...dataProduct, quantity: productQuantity }]);
+      setCart([...cart, { ...item, quantity: quantity }]);
     }
 
     setAsideCart(true);
@@ -116,7 +116,7 @@ export default function ProductPage() {
                   <button onClick={increaseQuantity} type="button" className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn">+</button>
                 </div>
 
-                <button onClick={addToCart} className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart">
+                <button onClick={() => addToCart(dataProduct, productQuantity)} className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart">
                   Aggiungi al carrello
                 </button>
               </div>
@@ -128,7 +128,7 @@ export default function ProductPage() {
             <div className="row row-cols-4">
               {dataProduct.related.map((product) => (
                 <div key={product.slug}>
-                  <ProductCard product={product} />
+                  <ProductCard product={product} addToCart={() => addToCart(product)} />
                 </div>
               ))}
             </div>
