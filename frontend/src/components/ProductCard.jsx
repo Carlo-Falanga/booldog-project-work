@@ -3,23 +3,20 @@ import { Link, useParams } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   const { wishlist, setWishlist } = useWishlist();
-  const { slug } = useParams();
 
   // verifico se il prodotto esiste nel carrello
-  const existingProductWL = wishlist.find((item) => item.slug === slug);
+  const existingProductWL = wishlist.find((item) => item.slug === product.slug);
 
   // funzione aggiungi wishlist
   const addToWishList = () => {
     // se esiste al click lo rimuovo
     if (existingProductWL) {
-      const updatedWishList = wishlist.filter((item) => item.slug !== slug);
+      const updatedWishList = wishlist.filter((item) => item.slug !== product.slug);
       setWishlist(updatedWishList);
     } else {
       // altrimenti lo aggiungo
-      setWishlist([...wishlist, { ...dataProduct }]);
+      setWishlist([...wishlist, { ...product }]);
     }
-
-    console.log(existingProductWL);
   };
 
   return (

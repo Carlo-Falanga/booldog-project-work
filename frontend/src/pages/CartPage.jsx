@@ -20,7 +20,7 @@ export default function CartPage() {
         {/* Titolo carrello*/}
         <h1 className="cart-hero mt-3 mb-5">
           <span className="d-block">Il tuo</span>
-          <em className="d-block">carrello.</em>
+          <em className="d-block">Carrello.</em>
         </h1>
 
         {cart.length === 0 ? (
