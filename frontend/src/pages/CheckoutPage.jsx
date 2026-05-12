@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useGlobal } from "../context/CartContext";
 import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ export default function CheckoutPage() {
     const [isLoadingCoupon, setIsLoadingCoupon] = useState(false);
     const [couponName, setCouponName] = useState(null)
     const { cart, setCart } = useGlobal()
+    const [orderMessage, setOrderMessage] = useState(false)
     const [newOrder, setNewOrder] = useState({
         "user_full_name": "",
         "email": "",
@@ -55,7 +56,15 @@ export default function CheckoutPage() {
             }))
             ,
             coupon_code: couponStatus === "valid" ? couponCode.trim() : undefined
+
         };
+
+        setOrderMessage(true)
+
+        setTimeout(() => {
+            setOrderMessage(false)
+        }, 3000);
+        
 
         try {
             const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
@@ -64,6 +73,8 @@ export default function CheckoutPage() {
             console.error(err);
         }
     }
+
+
 
     const handleApplyCoupon = async (e) => {
         e.preventDefault()
@@ -112,6 +123,9 @@ export default function CheckoutPage() {
         setAppliedCouponId(null);
         setCouponName(null)
     };
+
+
+
 
 
 
@@ -300,6 +314,11 @@ export default function CheckoutPage() {
                                         <i className="bi bi-arrow-right"></i>
                                     </button>
                                 </div>
+
+                                {orderMessage &&
+                                    <div>ordine effettuato</div>
+                                }
+
 
                                 <hr />
 
