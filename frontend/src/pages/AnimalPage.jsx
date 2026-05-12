@@ -21,7 +21,7 @@ export default function AnimalPage() {
             .then(res => {
                 setProducts(res.data);
             })
-    }, [order, search])
+    }, [order, search, animalSlug])
 
 
     function handleFilterChange(key, value) {
