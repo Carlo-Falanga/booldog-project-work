@@ -59,38 +59,38 @@ function HomePage() {
     <>
       {/* jumbo */}
       <section className="hero">
-        <div className="hero__tag">
-          <span className="hero__tag-num">01</span>
-          <span className="hero__tag-rule" />
-          <span className="hero__tag-label">Selezione SS&apos;26</span>
-        </div>
-
-        <h1 className="hero__headline">
-          Il meglio per<br />
-          cani e gatti,<br />
-          <em>ogni giorno.</em>
-        </h1>
 
         <div className="hero__grid">
-          <div className="hero__blurb">
-            <p>
-              Cibo, accessori e tanto amore. Scopri i nostri prodotti
-              selezionati per il benessere del tuo animale.
-            </p>
-            <div className="hero__cta">
-              <a href="#prodotti" className="btn btn--primary">
-                Scopri i prodotti
-                <svg className="btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </a>
-              <a href="#categorie" className="btn btn--ghost">
-                Sfoglia categorie
-              </a>
+          <div className="hero__left">
+            <div className="hero__tag">
+              <span className="hero__tag-num">01</span>
+              <span className="hero__tag-rule" />
+              <span className="hero__tag-label">Selezione SS&apos;26</span>
+            </div>
+            <h1 className="hero__headline">
+              Il meglio per<br />
+              cani e gatti,<br />
+              <em>ogni giorno.</em>
+            </h1>
+            <div className="hero__blurb">
+              <p>
+                Cibo, accessori e tanto amore. Scopri i nostri prodotti
+                selezionati per il benessere del tuo animale.
+              </p>
+              <div className="hero__cta">
+                <a href="#prodotti" className="btn btn--primary">
+                  Scopri i prodotti
+                  <svg className="btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a href="#categorie" className="btn btn--ghost">
+                  Sfoglia categorie
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* pannello immagine destra — sostituisci src con la tua immagine */}
           <aside className="hero__feature">
             <img
               src="/public/pets/canegatto.jpg"
@@ -210,7 +210,7 @@ function HomePage() {
         <div className="products__filters">
           {[
             { key: 'tutti', label: '🐾 Tutti' },
-            { key: 'cane',  label: '🐶 Cane' },
+            { key: 'cane', label: '🐶 Cane' },
             { key: 'gatto', label: '🐱 Gatto' },
           ].map(({ key, label }) => (
             <button

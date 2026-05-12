@@ -36,9 +36,10 @@ body {
     clamp(48px, 5vw, 72px);
   max-width: 1680px;
   margin: 0 auto;
-  min-height: clamp(680px, 86vh, 920px);
+  /* rimuovi min-height */
   display: flex;
   flex-direction: column;
+  gap: clamp(32px, 4vw, 56px); /* aggiungi gap invece di margin-top sulla grid */
 }
 
 /* tag top */
@@ -72,7 +73,7 @@ body {
 /* headline */
 .hero__headline {
   font-family: var(--display);
-  font-size: clamp(68px, 10.5vw, 184px);
+  font-size: clamp(48px, 7vw, 120px);
   font-weight: 400;
   letter-spacing: -0.025em;
   line-height: 0.92;
@@ -90,10 +91,15 @@ body {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: clamp(24px, 4vw, 64px);
-  margin-top: auto;
-  padding-top: clamp(48px, 6vw, 88px);
-  align-items: end;
+  margin-top: clamp(32px, 4vw, 56px);
+  align-items: stretch;
 }
+.hero__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 @media (max-width: 880px) {
   .hero__grid { grid-template-columns: 1fr }
 }
@@ -119,9 +125,8 @@ body {
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 30px 60px -30px rgba(28, 26, 23, 0.22);
-  align-self: stretch;
   background: var(--bone-deep);
-  min-height: 360px;
+  min-height: 400px;
 }
 .hero__feature-img {
   width: 100%;
