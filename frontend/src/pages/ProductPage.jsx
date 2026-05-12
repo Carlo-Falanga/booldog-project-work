@@ -100,12 +100,14 @@ export default function ProductPage() {
                 <h1>{dataProduct.name}</h1>
                 <p>{dataProduct.description}</p>
                 <p>{dataProduct.price} €</p>
-                <div className="d-flex">
-                  <button onClick={decreaseQuantity}>-</button>
-                  <div>{productQuantity}</div>
-                  <button onClick={increaseQuantity}>+</button>
+
+                <div className="btn-group mb-3">
+                  <button onClick={decreaseQuantity} type="button" className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn">-</button>
+                  <div className="btn btn-outline-secondary btn-sm px-3 border-start-0 border-end-0">{productQuantity}</div>
+                  <button onClick={increaseQuantity} type="button" className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn">+</button>
                 </div>
-                <button onClick={addToCart} className="btn btn-primary">
+
+                <button onClick={addToCart} className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart">
                   Aggiungi al carrello
                 </button>
               </div>
