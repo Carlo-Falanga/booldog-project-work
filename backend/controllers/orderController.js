@@ -1,5 +1,6 @@
 const connection = require("../data/db");
 const { validationResult } = require("express-validator");
+const { sendOrderConfirmation } = require("./mailController");
 
 // show - mostra un ordine con i suoi prodotti
 const show = (req, res) => {
@@ -189,6 +190,23 @@ const store = (req, res) => {
             connection.query(updateStockSql, [p.quantity, p.id], (err) => {
               if (err) console.error("Errore aggiornamento stock:", err);
             });
+          });
+
+          // preparo la lista prodotti da mettere nella mail
+          const itemsList = products.map((p) => {
+            const dbProduct = productResults.find((dp) => dp.id === p.id);
+            return { name: dbProduct.name, quantity: p.quantity };
+          });
+
+          // invio la mail di conferma (non blocco la risposta se fallisce)
+          sendOrderConfirmation({
+            email,
+            user_full_name,
+            order_code,
+            total: finalTotal,
+            items: itemsList,
+          }).catch((err) => {
+            console.error("Errore invio mail conferma:", err);
           });
 
           res.status(201).json({
