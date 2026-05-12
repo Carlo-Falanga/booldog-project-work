@@ -1,20 +1,19 @@
 import axios from 'axios';
 import { useEffect, useState, useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-import ProductCardList from '../components/ProductCardList';
 
-export default function SearchPage() {
+export default function AnimalPage() {
+
+    const { animalSlug } = useParams();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState("");
     const [order, setOrder] = useState("");
-    const [listView, setListView] = useState(true);
 
-
-    const url = `http://localhost:3000/products`
+    const url = `http://localhost:3000/products/animal/${animalSlug}`
 
     //chiamata api per index dei prodotti
     useEffect(() => {
@@ -47,21 +46,21 @@ export default function SearchPage() {
         }
 
         setSearchParams(newParams);
-
     }
-
-
 
 
     return (
         <>
             <div className="container">
-                <h1 className='text-center mt-5 mb-3'>Ricerca prodotti</h1>
-
-                <div className="d-flex">
-                    <button onClick={() => setListView(false)}>List</button>
-                    <button onClick={() => setListView(true)}>grid</button>
-                </div>
+                {animalSlug === "cat" ?
+                    <h1 className='text-center mt-5 mb-3'>
+                        Prodotti per gatti
+                    </h1>
+                    :
+                    <h1 className='text-center mt-5 mb-3'>
+                        Prodotti per cani
+                    </h1>
+                }
 
                 <div className='d-flex align-items-center justify-content-between mb-3'>
                     {/* searchbar */}
@@ -80,22 +79,15 @@ export default function SearchPage() {
             </div>
             <div className="container">
                 {products.length > 0 ?
-                    <div className="row g-4 g-lg-3">
+                    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-3">
+                        {products.map(product => (
+                            <div className="col" key={product.id}>
 
-                        {products.map((product) => (
-                            listView ?
-                                (
-                                    <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <ProductCard product={product} />
-                                    </div>
-                                )
-                                :
-                                (
-                                    <div key={product.slug} className="col-12">
-                                        <ProductCardList product={product} />
-                                    </div>
-                                )
+                                <ProductCard product={product} />
+
+                            </div>
                         ))}
+
                     </div>
                     :
                     <h2 className=' position-absolute top-50 start-50 translate-middle'>Nessun prodotto trovato</h2>
@@ -106,15 +98,5 @@ export default function SearchPage() {
 }
 
 
-
-
-// Missione attuale: 
-
-
-// Missioni future:
-// implementare la doppia visualizzazione (lista e griglia)
-// creare pagina gatto e pagina cane
-// implementare i filtri per categoria e per tipo di animale, magari anche brand (EXTRA)
-// aggiungere nella home page i link alle pagine per tipo di animale e per categoria (sentirsi con nabil)
-// fittare il design della pagina con quello del progetto
-// aggiungere hover e altri effetti (design finale della pagina alla fine -giustamente-)
+// missione attuale:
+// filtrare lato backend i risultati 
