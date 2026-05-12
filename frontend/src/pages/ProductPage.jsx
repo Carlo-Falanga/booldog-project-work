@@ -35,7 +35,7 @@ export default function ProductPage() {
   }, [slug]);
 
   // funzione aggiungi al carrello
-  const addToCart = (item, quantity = 1) => {
+  const addToCart = (item, quantity) => {
     // verifico se il prodotto esiste nel carrello
     const existingProduct = cart.find((product) => product.id === item.id);
 
@@ -128,7 +128,7 @@ export default function ProductPage() {
             <div className="row row-cols-4">
               {dataProduct.related.map((product) => (
                 <div key={product.slug}>
-                  <ProductCard product={product} addToCart={() => addToCart(product)} />
+                  <ProductCard product={product} addToCart={() => addToCart(product, 1)} />
                 </div>
               ))}
             </div>
