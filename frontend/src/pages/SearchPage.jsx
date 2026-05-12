@@ -57,9 +57,9 @@ export default function SearchPage() {
             </div>
             <div className="container">
                 {finalProducts.length > 0 ?
-                    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-3">
+                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 g-lg-3">
                         {finalProducts.map(product => (
-                            <div className="col" key={product.id}>
+                            <div className="col" key={product.slug}>
                                 
                                     <ProductCard product={product} />
                                 

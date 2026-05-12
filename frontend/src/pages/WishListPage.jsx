@@ -12,9 +12,9 @@ export default function WishListPage() {
           <span className="d-block">La tua</span>
           <em className="d-block">Wishlist.</em>
         </h1>
-      <div className="row row-cols-4">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 g-lg-3">
         {wishlist.map((product) => (
-          <div key={product.slug}>
+          <div className="col" key={product.slug}>
             <ProductCard product={product} />
           </div>
         ))}

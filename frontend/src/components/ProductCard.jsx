@@ -20,6 +20,7 @@ export default function ProductCard({ product }) {
   };
 
   return (
+    
     <div className="card p-3 h-100 position-relative">
       <button onClick={addToWishList} className="btn position-absolute end-0 pe-4 z-1">
         <i
@@ -42,6 +43,8 @@ export default function ProductCard({ product }) {
         <div className=" fs-4"> &euro; {product.price}</div>
       </div>
       </Link>
+    
+
     </div>
   );
 }
