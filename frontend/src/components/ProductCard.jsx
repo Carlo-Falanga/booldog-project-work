@@ -22,12 +22,12 @@ export default function ProductCard({ product }) {
   return (
     
     <div className="card p-3 h-100 position-relative">
-      <button onClick={addToWishList} className="btn position-absolute end-0 pe-4 z-1">
+      <button onClick={addToWishList} className="btn position-absolute end-0 pe-4 z-1 border-0">
         <i
           className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}
         ></i>
       </button>
-      <Link to={`/product/${product.slug}`} className=' text-decoration-none'>
+      <Link to={`/product/${product.slug}`} className=' text-decoration-none text-reset'>
       <div className="card-img card-header p-3">
         <img
           src={`http://localhost:3000/images/products/${product.img_url}`}

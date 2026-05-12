@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
+import ProductCardList from '../components/ProductCardList';
 
 export default function SearchPage() {
 
@@ -10,6 +11,8 @@ export default function SearchPage() {
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState("");
     const [order, setOrder] = useState("");
+    const [listView, setListView] = useState(true);
+
 
     const url = `http://localhost:3000/products`
 
@@ -55,6 +58,11 @@ export default function SearchPage() {
             <div className="container">
                 <h1 className='text-center mt-5 mb-3'>Ricerca prodotti</h1>
 
+                <div className="d-flex">
+                    <button onClick={() => setListView(false)}>List</button>
+                    <button onClick={() => setListView(true)}>grid</button>
+                </div>
+
                 <div className='d-flex align-items-center justify-content-between mb-3'>
                     {/* searchbar */}
                     <input type="text" className='form-control d-inline w-25' placeholder='Ricerca un prodotto...  ' value={search} onChange={(e) => handleFilterChange('search', e.target.value)} />
@@ -72,15 +80,32 @@ export default function SearchPage() {
             </div>
             <div className="container">
                 {products.length > 0 ?
-                    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-3">
-                        {products.map(product => (
-                            <div className="col" key={product.id}>
-                                <Link to={`/product/${product.slug}`} className=' text-decoration-none'>
-                                    <ProductCard product={product} />
-                                </Link>
-                            </div>
-                        ))}
+                    <div className="row g-4 g-lg-3">
+                        {/* {products.map(product => (
+                            <div className="col" key={product.slug}>
 
+                                <ProductCard product={product} />
+
+                            </div>
+
+
+                        ))} */}
+
+
+                        {products.map((product) => (
+                            listView ?
+                                (
+                                    <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                                        <ProductCard product={product} />
+                                    </div>
+                                )
+                                :
+                                (
+                                    <div key={product.slug} className="col-12">
+                                        <ProductCardList product={product} />
+                                    </div>
+                                )
+                        ))}
                     </div>
                     :
                     <h2 className=' position-absolute top-50 start-50 translate-middle'>Nessun prodotto trovato</h2>
