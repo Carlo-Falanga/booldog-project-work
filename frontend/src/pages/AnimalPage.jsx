@@ -52,7 +52,7 @@ export default function AnimalPage() {
     return (
         <>
             <div className="container">
-                {animalSlug === "cat" ?
+                {animalSlug === "gatto" ?
                     <h1 className='text-center mt-5 mb-3'>
                         Prodotti per gatti
                     </h1>

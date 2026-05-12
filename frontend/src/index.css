@@ -8,14 +8,20 @@
 
 :root {
   /* Sfondi */
-  --bool-bone: #ffffff; /* bianco puro */
-  --bool-bone-deep: #f2f2f0; /* grigio chiarissimo */
-  --bool-paper: #fafaf8; /* off-white */
+  --bool-bone: #ffffff;
+  /* bianco puro */
+  --bool-bone-deep: #f2f2f0;
+  /* grigio chiarissimo */
+  --bool-paper: #fafaf8;
+  /* off-white */
 
   /* Testi */
-  --bool-ink: #0a0a0a; /* nero principale */
-  --bool-ink-2: #2c2c2c; /* grigio scuro */
-  --bool-muted: #767676; /* grigio medio */
+  --bool-ink: #0a0a0a;
+  /* nero principale */
+  --bool-ink-2: #2c2c2c;
+  /* grigio scuro */
+  --bool-muted: #767676;
+  /* grigio medio */
 
   /* Brand colors — Rosso accent */
   --bool-forest: #d63b2f;
@@ -90,6 +96,10 @@ h6 {
   line-height: 1.3;
   letter-spacing: -0.01em;
   color: var(--bool-ink);
+}
+
+main {
+  min-height: 100vh;
 }
 
 #order_section {
@@ -169,43 +179,43 @@ h6 {
   background-color: var(--bool-bone-deep);
 }
 
-.cart_total{
-    font-family: var(--bool-font-display);
-    font-size: 44px;
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1;
-    color: var(--ink);
+.cart_total {
+  font-family: var(--bool-font-display);
+  font-size: 44px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--ink);
 
 }
 
-.cart_cents{
-      font-style: italic;
-    color: var( --bool-forest);
-    font-weight: 300;
-    font-size: 22px;
-    margin-left: 4px;
+.cart_cents {
+  font-style: italic;
+  color: var(--bool-forest);
+  font-weight: 300;
+  font-size: 22px;
+  margin-left: 4px;
 }
 
-.btn_cart{
+.btn_cart {
   transition: background .15s, transform .15s;
 }
 
-.btn_cart:hover{
-  background-color: var( --bool-forest);
+.btn_cart:hover {
+  background-color: var(--bool-forest);
   transform: translateY(-1px);
 }
 
-.sidebar_width{
+.sidebar_width {
 
-   width: 100%;
-   max-width: 576px;
+  width: 100%;
+  max-width: 576px;
 }
 
-.order_product_font{
+.order_product_font {
   font-family: var(--bool-font-display);
 }
 
-.checkout_subtotal_font{
+.checkout_subtotal_font {
   font-family: var (--bool-font-body);
 }
