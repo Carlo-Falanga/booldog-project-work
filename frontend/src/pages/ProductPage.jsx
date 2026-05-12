@@ -15,6 +15,15 @@ export default function ProductPage() {
 
   const [asideCart, setAsideCart] = useState(false);
 
+  useEffect(() => {
+    if (asideCart) {
+      document.body.classList.add("overflow-hidden");
+    }
+    else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [asideCart]);
+
   const [productQuantity, setProductQuantity] = useState(1);
 
   const { slug } = useParams();
