@@ -110,7 +110,7 @@ function HomePage() {
                     <p className="card-text category-card__text">
                       Cibo, guinzagli, giochi e tanto altro per il tuo cane
                     </p>
-                    <a href="#" className="btn btn-light fw-semibold mt-2">Esplora →</a>
+                    <button href="#" className="btn btn-light fw-semibold mt-2">Esplora →</button>
                   </div>
                 </div>
               </Link>
@@ -126,7 +126,7 @@ function HomePage() {
                     <p className="card-text category-card__text">
                       Lettiere, crocchette, giocattoli e accessori per il tuo gatto
                     </p>
-                    <a href="#" className="btn btn-light fw-semibold mt-2">Esplora →</a>
+                    <button href="#" className="btn btn-light fw-semibold mt-2">Esplora →</button>
                   </div>
                 </div>
               </Link>
