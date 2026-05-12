@@ -64,12 +64,12 @@ function HomePage() {
           <div className="hero__left">
             <div className="hero__tag">
               <span className="hero__tag-num">01</span>
-              <span className="hero__tag-rule" />
+              <span className="hero__tag-rule"/>
               <span className="hero__tag-label">Selezione SS&apos;26</span>
             </div>
             <h1 className="hero__headline">
-              Il meglio per<br />
-              cani e gatti,<br />
+              Il meglio per<br/>
+              cani e gatti,<br/>
               <em>ogni giorno.</em>
             </h1>
             <div className="hero__blurb">
@@ -93,7 +93,7 @@ function HomePage() {
 
           <aside className="hero__feature">
             <img
-              src="/public/pets/canegatto.jpg"
+              src="/pets/canegatto.jpg"
               alt=""
               className="hero__feature-img"
             />
@@ -160,7 +160,7 @@ function HomePage() {
               </div>
             </div>
             <div className="cat-row__image cat-row__image--dog">
-              <img src="/public/pets/cane.jpg" alt="Cane" className="cat-row__image-img" />
+              <img src="/pets/cane.jpg" alt="Cane" className="cat-row__image-img" />
             </div>
           </article>
 
@@ -191,7 +191,7 @@ function HomePage() {
               </div>
             </div>
             <div className="cat-row__image cat-row__image--cat">
-              <img src="/public/pets/gatto.jpg" alt="Gatto" className="cat-row__image-img" />
+              <img src="/pets/gatto.jpg" alt="Gatto" className="cat-row__image-img" />
             </div>
           </article>
         </div>
@@ -216,8 +216,7 @@ function HomePage() {
             <button
               key={key}
               className={`filter-btn ${activeFilter === key ? 'filter-btn--active' : ''}`}
-              onClick={() => setActiveFilter(key)}
-            >
+              onClick={() => setActiveFilter(key)}>
               {label}
             </button>
           ))}
