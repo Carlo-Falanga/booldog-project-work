@@ -3,7 +3,7 @@ const connection = require("../data/db")
 const index = (req, res) => {
 
     //salvo l'ordine passato nell'url 
-    const { sort } = req.query;
+    const { sort, search } = req.query;
 
     let orderQuery = `p.created_at DESC`;
 

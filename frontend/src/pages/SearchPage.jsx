@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import ProductCard from '../components/ProductCard';
 
 export default function SearchPage() {
 
@@ -60,26 +61,7 @@ export default function SearchPage() {
                         {finalProducts.map(product => (
                             <div className="col" key={product.id}>
                                 <Link to={`/product/${product.slug}`} className=' text-decoration-none'>
-                                    <div className="card p-3 h-100">
-                                        <div className="card-img card-header p-3">
-                                            <img src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
-                                        </div>
-                                        <div className=' d-flex align-items-center justify-content-between opacity-75 px-3 pt-3' >
-                                            <div>
-                                                {product.category}
-                                            </div>
-                                            <div>
-                                                {product.animal_name}
-                                            </div>
-                                        </div>
-                                        <div className='card-body'>
-                                            <h3 className='card-title'>
-                                                {product.name}
-                                            </h3>
-                                            <div className=' fs-4'> &euro; {product.price}</div>
-                                        </div>
-
-                                    </div>
+                                    <ProductCard product={product} />
                                 </Link>
                             </div>
                         ))}
@@ -97,12 +79,13 @@ export default function SearchPage() {
 
 
 // Missione attuale: 
-// spostare gli ordinamenti (e forse anche la search?) lato backend
+// spostare anche la search lato backend
 
 
 // Missioni future:
 // implementare la doppia visualizzazione (lista e griglia)
-// implementare i filtri per categoria e per tipo di animale (o decidere di farle come pagine separate)
+// creare pagina gatto e pagina cane
+// implementare i filtri per categoria e per tipo di animale, magari anche brand (EXTRA)
 // aggiungere nella home page i link alle pagine per tipo di animale e per categoria (sentirsi con nabil)
 // fittare il design della pagina con quello del progetto
 // aggiungere hover e altri effetti (design finale della pagina alla fine -giustamente-)
