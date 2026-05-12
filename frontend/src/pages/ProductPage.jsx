@@ -11,8 +11,6 @@ export default function ProductPage() {
   const { cart, setCart } = useGlobal();
   const { wishlist, setWishlist } = useWishlist();
 
-  console.log(wishlist);
-
   const [dataProduct, setDataProduct] = useState(null);
 
   const [asideCart, setAsideCart] = useState(false);
@@ -78,26 +76,25 @@ export default function ProductPage() {
       setWishlist([...wishlist, { ...dataProduct }]);
     }
 
-    console.log(existingProductWL);
   };
 
   return (
     <div className="container py-5">
       {dataProduct && (
-        <div className="">
+        <div>
           <div className="row row-cols-2">
-            <div className="">
-              <button onClick={addToWishList} className="btn">
-                <i
-                  className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}
-                ></i>
-              </button>
-              <img
-                className="img-fluid"
-                src={`http://localhost:3000/images/products/${dataProduct.img_url}`}
-                alt={dataProduct.name}
-              />
+
+            <div>
+              <div className="ratio ratio-1x1">
+                <div className="d-flex align-items-center justify-content-center">
+                  <button onClick={addToWishList} className="btn position-absolute end-0 top-0">
+                    <i className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}></i>
+                  </button>
+                  <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${dataProduct.img_url}`} alt={dataProduct.name} />
+                </div>
+              </div>
             </div>
+
             <div className="d-flex align-items-center justify-content-center">
               <div className="p-5 text-center">
                 <h1>{dataProduct.name}</h1>
