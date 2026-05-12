@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, } from "react";
 import axios from "axios";
 import { useGlobal } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function CheckoutPage() {
 
@@ -45,6 +45,8 @@ export default function CheckoutPage() {
         setNewOrder(prev => ({ ...prev, [id]: value }));
     }
 
+    const navigate = useNavigate()
+
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -61,14 +63,14 @@ export default function CheckoutPage() {
 
         setOrderMessage(true)
 
-        setTimeout(() => {
-            setOrderMessage(false)
-        }, 3000);
-        
-
         try {
             const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
-            console.log(data);
+
+
+            setTimeout(() => {
+                navigate("/order-confirmed")
+            }, 3000);
+
         } catch (err) {
             console.error(err);
         }
@@ -166,7 +168,7 @@ export default function CheckoutPage() {
                             {/* SPEDIZIONE */}
                             <div className="mt-5">
                                 <div className="d-flex gap-2 align-items-end ">
-                                    <p className="">02</p>
+                                    <p className="cart-meta">02</p>
                                     <h3>Indirizzo di spedizione</h3>
                                 </div>
 
@@ -227,7 +229,7 @@ export default function CheckoutPage() {
                                         <div key={item.slug} className="d-flex justify-content-between align-items-center">
                                             <div className="d-flex flex-column">
                                                 <span className="cart-meta">{item.brand_name}</span>
-                                                <span className="order_product_font fw-medium">{item.name} <i className="bi bi-x"></i>{item.quantity}</span>
+                                                <span className="order_product_font fw-medium pe-1">{item.name} <i className="bi bi-x"></i>{item.quantity}</span>
                                             </div>
                                             <span className="order_product_font fw-medium">€{item.price}</span>
                                         </div>
@@ -235,44 +237,44 @@ export default function CheckoutPage() {
                                 </div>
                                 {/* COUPON */}
                                 <div className="d-flex flex-column justify-content-center mt-4 mb-4">
-                                    
-                                        <div className="input-group">
-                                            <input
-                                                type="text"
-                                                className={`form-control ${couponStatus === "valid" ? "is-valid" : couponStatus === "invalid" ? "is-invalid" : ""} rounded-start-pill p-3`}
-                                                id="inputCoupon"
-                                                maxLength="20"
-                                                value={couponCode}
-                                                onChange={(e) => setCouponCode(e.target.value)}
-                                                
-                                                disabled={couponStatus === "valid"}
-                                                placeholder="Codice coupon"
-                                            />
-                                            {couponStatus === "valid" ? (
-                                                <button className="btn btn-outline-danger rounded-end-pill" onClick={handleRemoveCoupon} type="button">
-                                                    Rimuovi
-                                                </button>
-                                            ) : (
-                                                <button
-                                                    className="btn rounded-end-pill btn-dark "
-                                                    onClick={handleApplyCoupon}
-                                                    type="button"
-                                                    disabled={isLoadingCoupon || !couponCode.trim()}
-                                                >
-                                                    {isLoadingCoupon ? (
-                                                        <span className="spinner-border spinner-border-sm" />
-                                                    ) : "Applica"}
-                                                </button>
-                                            )}
-                                        </div>
 
+                                    <div className="input-group">
+                                        <input
+                                            type="text"
+                                            className={`form-control ${couponStatus === "valid" ? "is-valid" : couponStatus === "invalid" ? "is-invalid" : ""} rounded-start-pill p-3`}
+                                            id="inputCoupon"
+                                            maxLength="20"
+                                            value={couponCode}
+                                            onChange={(e) => setCouponCode(e.target.value)}
 
-                                        {couponMessage && (
-                                            <div className={`mt-2 small ${couponStatus === "valid" ? "text-success" : "text-danger"} d-flex justify-content-center`}>
-                                                {couponMessage}
-                                            </div>
+                                            disabled={couponStatus === "valid"}
+                                            placeholder="Codice coupon"
+                                        />
+                                        {couponStatus === "valid" ? (
+                                            <button className="btn btn-outline-danger rounded-end-pill" onClick={handleRemoveCoupon} type="button">
+                                                Rimuovi
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="btn rounded-end-pill btn-dark "
+                                                onClick={handleApplyCoupon}
+                                                type="button"
+                                                disabled={isLoadingCoupon || !couponCode.trim()}
+                                            >
+                                                {isLoadingCoupon ? (
+                                                    <span className="spinner-border spinner-border-sm" />
+                                                ) : "Applica"}
+                                            </button>
                                         )}
-                                    
+                                    </div>
+
+
+                                    {couponMessage && (
+                                        <div className={`mt-2 small ${couponStatus === "valid" ? "text-success" : "text-danger"} d-flex justify-content-center`}>
+                                            {couponMessage}
+                                        </div>
+                                    )}
+
                                 </div>
 
                                 <hr />
@@ -317,7 +319,7 @@ export default function CheckoutPage() {
                                 </div>
 
                                 {orderMessage &&
-                                    <div>ordine effettuato</div>
+                                    <div>ordine effettuato a breve verrai reindirizzato nella pagina di conferma</div>
                                 }
 
 

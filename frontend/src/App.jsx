@@ -10,6 +10,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import SearchPage from "./pages/SearchPage";
 import WishListPage from "./pages/WishListPage";
 import AnimalPage from "./pages/AnimalPage";
+import OrderConfirmedPage from "./pages/OrderConfirmedPage";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
               <Route path="/cart" element={<CartPage />} />
               <Route path="/wishlist" element={<WishListPage />} />
               <Route path="/animal-products/:animalSlug" element={<AnimalPage />} />
-              <Route />
+              <Route path="/order-confirmed" element={<OrderConfirmedPage />} />
               <Route />
             </Route>
           </Routes>
