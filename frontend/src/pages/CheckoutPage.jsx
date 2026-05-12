@@ -224,18 +224,18 @@ export default function CheckoutPage() {
 
                                 <div className="d-flex flex-column gap-3">
                                     {cart.map(item => (
-                                        <div className="d-flex justify-content-between align-items-center">
+                                        <div key={item.slug} className="d-flex justify-content-between align-items-center">
                                             <div className="d-flex flex-column">
                                                 <span className="cart-meta">{item.brand_name}</span>
-                                                <span className="order_product_font fw-medium">{item.name} <i class="bi bi-x"></i>{item.quantity}</span>
+                                                <span className="order_product_font fw-medium">{item.name} <i className="bi bi-x"></i>{item.quantity}</span>
                                             </div>
                                             <span className="order_product_font fw-medium">€{item.price}</span>
                                         </div>
                                     ))}
                                 </div>
                                 {/* COUPON */}
-                                <div className="d-flex justify-content-center mt-4 mb-4">
-                                    <form className="w-100" onSubmit={handleApplyCoupon}>
+                                <div className="d-flex flex-column justify-content-center mt-4 mb-4">
+                                    
                                         <div className="input-group">
                                             <input
                                                 type="text"
@@ -244,6 +244,7 @@ export default function CheckoutPage() {
                                                 maxLength="20"
                                                 value={couponCode}
                                                 onChange={(e) => setCouponCode(e.target.value)}
+                                                
                                                 disabled={couponStatus === "valid"}
                                                 placeholder="Codice coupon"
                                             />
@@ -267,11 +268,11 @@ export default function CheckoutPage() {
 
 
                                         {couponMessage && (
-                                            <div className={`mt-2 small ${couponStatus === "valid" ? "text-success" : "text-danger"}`}>
+                                            <div className={`mt-2 small ${couponStatus === "valid" ? "text-success" : "text-danger"} d-flex justify-content-center`}>
                                                 {couponMessage}
                                             </div>
                                         )}
-                                    </form>
+                                    
                                 </div>
 
                                 <hr />
@@ -324,7 +325,7 @@ export default function CheckoutPage() {
 
                                 <ul className="list-unstyled mb-0">
                                     <li className="d-flex gap-3 mb-3">
-                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <i className="bi bi-hand-thumbs-up"></i>
                                         <div>
                                             <div className="fw-medium">Pagamento protetto</div>
                                             <div className="small text-muted">
