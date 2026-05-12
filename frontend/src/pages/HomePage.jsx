@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './HomePage.css'
-import {Link, NavLink} from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 const API_URL = 'http://localhost:3000'
 
@@ -102,30 +102,34 @@ function HomePage() {
           <div className="row g-4 justify-content-center">
             {/* card cane */}
             <div className="col-sm-6 col-md-5">
-              <div className="card category-card category-card--dog border-0 shadow-sm text-white text-center h-100">
-                <div className="card-body py-5">
-                  <div style={{ fontSize: '4rem' }}>🐶</div>
-                  <h3 className="card-title fw-bold mt-3">Cane</h3>
-                  <p className="card-text category-card__text">
-                    Cibo, guinzagli, giochi e tanto altro per il tuo cane
-                  </p>
-                  <a href="#" className="btn btn-light fw-semibold mt-2">Esplora →</a>
+              <Link to="/animal-products/cane" className='text-decoration-none'>
+                <div className="card category-card category-card--dog border-0 shadow-sm text-white text-center h-100">
+                  <div className="card-body py-5">
+                    <div style={{ fontSize: '4rem' }}>🐶</div>
+                    <h3 className="card-title fw-bold mt-3">Cane</h3>
+                    <p className="card-text category-card__text">
+                      Cibo, guinzagli, giochi e tanto altro per il tuo cane
+                    </p>
+                    <a href="#" className="btn btn-light fw-semibold mt-2">Esplora →</a>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* card gatto */}
             <div className="col-sm-6 col-md-5">
-              <div className="card category-card category-card--cat border-0 shadow-sm text-white text-center h-100">
-                <div className="card-body py-5">
-                  <div style={{ fontSize: '4rem' }}>🐱</div>
-                  <h3 className="card-title fw-bold mt-3">Gatto</h3>
-                  <p className="card-text category-card__text">
-                    Lettiere, crocchette, giocattoli e accessori per il tuo gatto
-                  </p>
-                  <a href="#" className="btn btn-light fw-semibold mt-2">Esplora →</a>
+              <Link to="/animal-products/gatto" className=' text-decoration-none'>
+                <div className="card category-card category-card--cat border-0 shadow-sm text-white text-center h-100">
+                  <div className="card-body py-5">
+                    <div style={{ fontSize: '4rem' }}>🐱</div>
+                    <h3 className="card-title fw-bold mt-3">Gatto</h3>
+                    <p className="card-text category-card__text">
+                      Lettiere, crocchette, giocattoli e accessori per il tuo gatto
+                    </p>
+                    <a href="#" className="btn btn-light fw-semibold mt-2">Esplora →</a>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -141,15 +145,15 @@ function HomePage() {
           <div className="d-flex justify-content-center gap-2 mb-5">
             {[
               { key: 'tutti', label: '🐾 Tutti' },
-              { key: 'cane',  label: '🐶 Cane' },
+              { key: 'cane', label: '🐶 Cane' },
               { key: 'gatto', label: '🐱 Gatto' },].map(({ key, label }) => (
-              <button
-                key={key}
-                className={`btn btn-sm px-4 ${activeFilter === key ? 'btn-dark' : 'btn-outline-dark'}`}
-                onClick={() => setActiveFilter(key)}>
-                {label}
-              </button>
-            ))}
+                <button
+                  key={key}
+                  className={`btn btn-sm px-4 ${activeFilter === key ? 'btn-dark' : 'btn-outline-dark'}`}
+                  onClick={() => setActiveFilter(key)}>
+                  {label}
+                </button>
+              ))}
           </div>
 
           {/* Stato caricamento */}
@@ -189,15 +193,15 @@ function HomePage() {
                       {product.img_url ? (
                         <img className=" object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} />
 
-                //if/else immagine
-                    ) : (
+                        //if/else immagine
+                      ) : (
                         <span className="product-card__emoji">
                           {getAnimalEmoji(product.animal_type_id)}
                         </span>
                       )}
                     </div>
 
-                    <Link to={`/product/${product.slug}`}  className="card-body d-flex flex-column text-decoration-none">
+                    <Link to={`/product/${product.slug}`} className="card-body d-flex flex-column text-decoration-none">
                       {/* Badge animale */}
                       <span className={`badge mb-2 product-card__badge ${getAnimalBadgeClass(product.animal_type_id)}`}>
                         {getAnimalEmoji(product.animal_type_id)} {getAnimalName(product.animal_type_id)}
@@ -233,4 +237,4 @@ function HomePage() {
 
 export default HomePage
 
-   
+

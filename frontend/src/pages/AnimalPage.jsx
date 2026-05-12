@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState, useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 
-export default function SearchPage() {
+export default function AnimalPage() {
+
+    const { animalSlug } = useParams();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -11,7 +13,7 @@ export default function SearchPage() {
     const [search, setSearch] = useState("");
     const [order, setOrder] = useState("");
 
-    const url = `http://localhost:3000/products`
+    const url = `http://localhost:3000/products/animal/${animalSlug}`
 
     //chiamata api per index dei prodotti
     useEffect(() => {
@@ -44,16 +46,21 @@ export default function SearchPage() {
         }
 
         setSearchParams(newParams);
-
     }
-
-
 
 
     return (
         <>
             <div className="container">
-                <h1 className='text-center mt-5 mb-3'>Ricerca prodotti</h1>
+                {animalSlug === "cat" ?
+                    <h1 className='text-center mt-5 mb-3'>
+                        Prodotti per gatti
+                    </h1>
+                    :
+                    <h1 className='text-center mt-5 mb-3'>
+                        Prodotti per cani
+                    </h1>
+                }
 
                 <div className='d-flex align-items-center justify-content-between mb-3'>
                     {/* searchbar */}
@@ -91,15 +98,5 @@ export default function SearchPage() {
 }
 
 
-
-
-// Missione attuale: 
-
-
-// Missioni future:
-// implementare la doppia visualizzazione (lista e griglia)
-// creare pagina gatto e pagina cane
-// implementare i filtri per categoria e per tipo di animale, magari anche brand (EXTRA)
-// aggiungere nella home page i link alle pagine per tipo di animale e per categoria (sentirsi con nabil)
-// fittare il design della pagina con quello del progetto
-// aggiungere hover e altri effetti (design finale della pagina alla fine -giustamente-)
+// missione attuale:
+// filtrare lato backend i risultati 
