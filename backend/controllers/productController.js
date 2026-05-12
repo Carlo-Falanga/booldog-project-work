@@ -2,7 +2,7 @@ const connection = require("../data/db")
 
 const index = (req, res) => {
 
-    //salvo l'ordine passato nell'url 
+    //salvo l'ordine passato nell'url e il search
     const { sort, search } = req.query;
 
     let orderQuery = `p.created_at DESC`;
@@ -23,7 +23,9 @@ const index = (req, res) => {
             orderQuery = `p.created_at DESC`;
     }
 
-    const sql = `
+    const queryParams = [];
+
+    let sql = `
     SELECT 
     p.id,
     p.slug,
@@ -44,10 +46,16 @@ const index = (req, res) => {
     a.slug AS animal_slug
     FROM products p
     JOIN brands b ON b.id = p.brand_id
-    JOIN animal_types a ON a.id = p.animal_type_id
-    ORDER BY ${orderQuery}`;
+    JOIN animal_types a ON a.id = p.animal_type_id`;
 
-    connection.query(sql, (err, results) => {
+    if (search && search.trim() !== "") {
+        sql += ` WHERE p.name LIKE ?`;
+        queryParams.push(`%${search}%`);
+    }
+
+    sql += ` ORDER BY ${orderQuery}`;
+
+    connection.query(sql, queryParams, (err, results) => {
 
         if (err) return res.status(500).json({
             error: true,
