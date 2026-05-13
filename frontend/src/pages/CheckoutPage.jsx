@@ -69,6 +69,7 @@ export default function CheckoutPage() {
             const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
             console.log(data)
             setOrderMessage(true)
+            setCart([])
 
             setTimeout(() => {
                 navigate(`/order-confirmed/${data.order_id}`)
