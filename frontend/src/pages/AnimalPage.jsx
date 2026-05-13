@@ -1,52 +1,18 @@
-import axios from 'axios';
-import { useEffect, useState, useMemo } from 'react';
-import { Link, useSearchParams, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useSearchFilters } from '../hooks/useSearchFilters';
 import ProductCard from '../components/ProductCard';
+import ProductCardList from '../components/ProductCardList';
+import SearchBar from '../components/SearchBar';
+import OrderSelect from '../components/OrderSelect';
+import VisualizationButton from '../components/VisualizationButton';
 
 export default function AnimalPage() {
 
     const { animalSlug } = useParams();
 
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    const [products, setProducts] = useState([]);
-    const [search, setSearch] = useState("");
-    const [order, setOrder] = useState("");
-
-    const url = `http://localhost:3000/products/animal/${animalSlug}`
-
-    //chiamata api per index dei prodotti
-    useEffect(() => {
-        axios.get(`${url}?sort=${order}&search=${search}`)
-            .then(res => {
-                setProducts(res.data);
-            })
-    }, [order, search, animalSlug])
+    const { products, search, order, handleFilterChange, listView, setListView } = useSearchFilters(`animal/${animalSlug}`);
 
 
-    function handleFilterChange(key, value) {
-        //copio i parametri attuali dell'url
-        const newParams = new URLSearchParams(searchParams);
-
-        // modifico le variabili reattive 
-        switch (key) {
-            case 'sort':
-                setOrder(value);
-                break;
-            case 'search':
-                setSearch(value);
-                break;
-        }
-
-        //modifico i parametri dell'url
-        if (value) {
-            newParams.set(key, value);
-        } else {
-            newParams.delete(key);
-        }
-
-        setSearchParams(newParams);
-    }
 
 
     return (
@@ -62,32 +28,33 @@ export default function AnimalPage() {
                     </h1>
                 }
 
+                <VisualizationButton setListView={setListView} />
+
                 <div className='d-flex align-items-center justify-content-between mb-3'>
                     {/* searchbar */}
-                    <input type="text" className='form-control d-inline w-25' placeholder='Ricerca un prodotto...  ' value={search} onChange={(e) => handleFilterChange('search', e.target.value)} />
+                    <SearchBar search={search} handleFilterChange={handleFilterChange} />
                     {/* filters */}
-                    <div className='d-flex gap-3 align-items-baseline'>
-                        <label htmlFor="product-order" className=' form-label flex-shrink-0'>Ordina i prodotti per</label>
-                        <select name="product-order" id="product-order" className='form-select w-100' onChange={(e) => handleFilterChange('sort', e.target.value)}>
-                            <option value="">Recenti</option>
-                            <option value="name">Nome</option>
-                            <option value="price-up">Prezzo crescente</option>
-                            <option value="price-down">Prezzo decrescente</option>
-                        </select>
-                    </div>
+                    <OrderSelect handleFilterChange={handleFilterChange} />
                 </div>
             </div>
             <div className="container">
                 {products.length > 0 ?
-                    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-3">
-                        {products.map(product => (
-                            <div className="col" key={product.id}>
+                    <div className="row g-4 g-lg-3">
 
-                                <ProductCard product={product} />
-
-                            </div>
+                        {products.map((product) => (
+                            listView ?
+                                (
+                                    <div key={product.slug} className="col-12">
+                                        <ProductCardList product={product} />
+                                    </div>
+                                )
+                                :
+                                (
+                                    <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                                        <ProductCard product={product} />
+                                    </div>
+                                )
                         ))}
-
                     </div>
                     :
                     <h2 className=' position-absolute top-50 start-50 translate-middle'>Nessun prodotto trovato</h2>
@@ -96,6 +63,7 @@ export default function AnimalPage() {
         </>
     )
 }
+
 
 
 // missione attuale:
