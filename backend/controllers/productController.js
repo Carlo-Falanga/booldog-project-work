@@ -191,6 +191,7 @@ const show = (req, res) => {
         const relatedSql =
             ` SELECT 
           p.slug,
+          p.id,
           p.name,
           p.price,
                     p.img_url,
