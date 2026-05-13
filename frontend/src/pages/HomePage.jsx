@@ -10,6 +10,7 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeFilter, setActiveFilter] = useState("tutti");
+  const [marchi, setMarchi] = useState([]);
 
   useEffect(() => {
     axios
@@ -29,6 +30,13 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
+    axios
+      .get(`${API_URL}/brands`)
+      .then((res) => setMarchi(res.data))
+      .catch((err) => console.error("Errore caricamento brand:", err));
+  }, []);
+
+  useEffect(() => {
     if (activeFilter === "tutti") {
       setFilteredProducts(products);
     } else if (activeFilter === "cane") {
@@ -45,31 +53,6 @@ function HomePage() {
       );
     }
   }, [activeFilter, products]);
-
-  const marchi = [
-    { name: "Catit", img: "http://localhost:3000/images/brands/catit.png" },
-    {
-      name: "Ferplast",
-      img: "http://localhost:3000/images/brands/ferplast.png",
-    },
-    { name: "Flexi", img: "http://localhost:3000/images/brands/flexi.png" },
-    { name: "Hunter", img: "http://localhost:3000/images/brands/hunter.svg" },
-    { name: "Hurtta", img: "http://localhost:3000/images/brands/hurtta.png" },
-    {
-      name: "Julius",
-      img: "http://localhost:3000/images/brands/julius-k9.png",
-    },
-    { name: "Kong", img: "http://localhost:3000/images/brands/kong.png" },
-    {
-      name: "Ruffwear",
-      img: "http://localhost:3000/images/brands/ruffwear.png",
-    },
-    {
-      name: "Stefanplast",
-      img: "http://localhost:3000/images/brands/stefanplast.png",
-    },
-    { name: "Trixie", img: "http://localhost:3000/images/brands/trixie.png" },
-  ];
 
   return (
     <>
@@ -240,7 +223,7 @@ function HomePage() {
                   <img
                     src={`http://localhost:3000/images/products/${product.img_url}`}
                     alt={product.name}
-                    className="object-fit-cover product-card-img"
+                    className="object-fit-contain product-card-img"
                   />
                 </div>
 
@@ -309,12 +292,16 @@ function HomePage() {
             className="row row-cols-2 row-cols-md-5 g-0"
             aria-label="Marchi partner"
           >
-            {marchi.map((m) => (
+            {marchi.map((marchio) => (
               <div
                 className="col d-flex align-items-center justify-content-center p-4"
-                key={m.name}
+                key={marchio.id}
               >
-                <img src={m.img} alt={m.name} className="brand-img p-2" />
+                <img
+                  src={`${API_URL}/images/brands/${marchio.logo_url}`}
+                  alt={marchio.name}
+                  className="brand-img p-2"
+                />
               </div>
             ))}
           </div>
