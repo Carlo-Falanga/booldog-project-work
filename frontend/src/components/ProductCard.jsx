@@ -26,7 +26,6 @@ export default function ProductCard({ product, addToCart }) {
         <div className="px-3 pt-3 pb-4">
           <div className="cart-meta mb-3">{product.category}</div>
           <h3 className="cart-name h5">{product.name}</h3>
-          {product.id}
 
           <div className="border-top pt-3 d-flex align-items-center justify-content-between">
             <div className="cart-name fs-4">{product.price} €</div>
