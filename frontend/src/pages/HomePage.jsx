@@ -70,7 +70,8 @@ function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="container py-5 my-5">
+      <section className="custom_hero_bg_color">
+        <div className="container-fluid px-4 px-md-5 py-5 mb-5">
         <div className="row g-4 g-lg-5 align-items-stretch">
           <div className="col-lg-7 d-flex flex-column justify-content-between">
             <div className="d-flex align-items-center gap-3 mb-4 mb-md-5">
@@ -104,6 +105,8 @@ function HomePage() {
               <img src="/pets/canegatto.jpg" alt="" className="w-100 h-100 object-fit-cover d-block" />
             </div>
           </aside>
+        </div>
+
         </div>
       </section>
 
@@ -254,7 +257,7 @@ function HomePage() {
       </section>
 
       {/* ── MARCHI ── */}
-      <section id="marchi" className="container-fluid custom_brand_bg text-light overflow-hidden">
+      <section id="marchi" className="custom_brand_bg text-light overflow-hidden">
         <div className="container-fluid px-4 px-md-5 py-5 my-md-5">
           <header className="pb-3 mb-5 partners-head">
             <h2 className="section-title mb-0 text-light">
