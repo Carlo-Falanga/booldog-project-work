@@ -27,10 +27,11 @@ export default function ProductCardList({ product }) {
       </button>
       <Link to={`/product/${product.slug}`} className='text-decoration-none text-reset row'>
         <div className="col-2 p-3">
-          <img className="img-fluid"
-            src={`http://localhost:3000/images/products/${product.img_url}`}
-            alt={`${product.name}'s picture`}
-          />
+          <div className="ratio ratio-1x1">
+            <div className="d-flex align-items-center justify-content-center">
+              <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+            </div>
+          </div>
         </div>
         <div className="col-5 opacity-75">
           <div>{product.category}</div>
@@ -39,6 +40,13 @@ export default function ProductCardList({ product }) {
         <div className="col-5">
           <h3 className="card-title">{product.name}</h3>
           <div className=" fs-4">&euro; {product.price}</div>
+        </div>
+        <div>
+          <button
+            onClick={addToCart}
+            className="btn btn-dark btn-sm px-3 rounded-pill">
+            Aggiungi al carrello
+          </button>
         </div>
       </Link>
     </div >
