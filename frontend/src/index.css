@@ -252,9 +252,15 @@ main {
 
 /* Hero feature image */
 
-.custom_hero_bg_color{
+.custom_hero {
   background-color: var(--bool-paper);
+
+  .row{
+    min-height: 70vh;
+  }
 }
+
+
 
 .hero-feature {
   background: var(--bool-bone-deep);

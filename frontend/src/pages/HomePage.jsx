@@ -70,10 +70,10 @@ function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="custom_hero_bg_color">
+      <section className="custom_hero">
         <div className="container-fluid px-4 px-md-5 py-5 mb-5">
         <div className="row g-4 g-lg-5 align-items-stretch">
-          <div className="col-lg-7 d-flex flex-column justify-content-between">
+          <div className="col-lg-6 d-flex flex-column justify-content-between">
             <div className="d-flex align-items-center gap-3 mb-4 mb-md-5">
             </div>
 
@@ -100,7 +100,7 @@ function HomePage() {
             </div>
           </div>
 
-          <aside className="col-lg-5">
+          <aside className="col-lg-6">
             <div className="rounded overflow-hidden shadow-sm h-100 hero-feature">
               <img src="/pets/canegatto.jpg" alt="" className="w-100 h-100 object-fit-cover d-block" />
             </div>
