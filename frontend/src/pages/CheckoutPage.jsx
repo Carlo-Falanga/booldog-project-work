@@ -154,24 +154,24 @@ export default function CheckoutPage() {
 
     return (
         <>
+
+            <div className="container my-4 ">
+                <div className="d-flex justify-content-start ">
+                    <Link to="/cart">
+                        <button className="btn btn-dark rounded-pill border-0 btn_cart"><i class="bi bi-arrow-left-short"></i>Modifica Carrello</button>
+                    </Link>
+                </div>
+            </div>
+
             <form onSubmit={handleSubmit}>
-
-
-
-                <div className="container d-flex justify-content-center my-5 ">
+                <div className="container ">
 
                     <div className="row row-cols-1 row-cols-md-2">
                         <div className="col">
 
-                            <div className="d-flex justify-content-start ">
-                                <Link to="/cart">
-                                    <button className="btn btn-dark rounded-pill border-0 btn_cart"><i class="bi bi-arrow-left-short"></i>Modifica Carrello</button>
-                                </Link>
-                            </div>
-
                             {/* CONTATTO */}
                             <div className="d-flex flex-column justify-content-between d-lg-flex flex-lg-row ">
-                                <div className="d-flex gap-2 align-items-end mt-4">
+                                <div className="d-flex gap-2 align-items-end ">
                                     <p className="cart-meta">01</p>
                                     <h3>Contatto</h3>
                                 </div>
