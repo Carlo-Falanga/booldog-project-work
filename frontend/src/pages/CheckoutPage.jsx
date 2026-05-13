@@ -15,7 +15,8 @@ export default function CheckoutPage() {
     const [couponName, setCouponName] = useState(null)
     const { cart, setCart } = useGlobal()
     const [orderMessage, setOrderMessage] = useState(null)
-    const [serverError, setServerError] = useState([])
+    // messaggio di errore dal server (es. stock insufficiente, validazione, ecc.)
+    const [serverError, setServerError] = useState("")
     const [newOrder, setNewOrder] = useState({
         "user_full_name": "",
         "email": "",
@@ -52,6 +53,9 @@ export default function CheckoutPage() {
     async function handleSubmit(e) {
         e.preventDefault();
 
+        // pulisco eventuali errori precedenti prima di rinviare l'ordine
+        setServerError("");
+
         const orderToSend = {
             ...newOrder,
             products: cart.map(item => ({
@@ -75,15 +79,24 @@ export default function CheckoutPage() {
                 navigate(`/order-confirmed/${data.order_id}`)
             }, 1500);
 
-            
+
 
         } catch (error) {
-            if (error.response){
-                const {errors} = error.response.data;
-                
-                errors.forEach(err=>setServerError(err.msg) )
-                ;
+            // il server può rispondere in due modi diversi:
+            // 1) errori di validazione  -> { errors: [{ msg: "..." }, ...] }
+            // 2) errore singolo          -> { error: "messaggio" }  (es. stock insufficiente)
+            const data = error.response?.data;
+
+            if (Array.isArray(data?.errors)) {
+                // unisco tutti i messaggi di validazione in una sola stringa
+                const messages = data.errors.map((err) => err.msg).join(" · ");
+                setServerError(messages);
+            } else if (data?.error) {
+                setServerError(data.error);
+            } else {
+                setServerError("Errore durante l'invio dell'ordine");
             }
+
             setOrderMessage(false)
         }
     }
