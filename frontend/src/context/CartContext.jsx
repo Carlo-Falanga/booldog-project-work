@@ -25,8 +25,8 @@ export function CartContextProvider({ children }) {
   const [productQuantity, setProductQuantity] = useState(1);
 
   // aumento quantità da aggiungere al carrello con stock come massimale
-  const increaseQuantity = () => {
-    if (productQuantity < dataProduct?.stock) {
+  const increaseQuantity = (stock) => {
+    if (productQuantity < stock) {
       setProductQuantity(productQuantity + 1);
     }
   };
