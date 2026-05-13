@@ -159,7 +159,7 @@ export default function CheckoutPage() {
             <div className="container my-4 ">
                 <div className="d-flex justify-content-start ">
                     <Link to="/cart">
-                        <button className="btn btn-dark rounded-pill border-0 btn_cart"><i className="bi bi-arrow-left-short pe-2"></i> Modifica Carrello</button>
+                        <button className="btn btn-dark rounded-pill border-0 btn_cart px-4 py-2"><i class="bi bi-arrow-left-short"></i>Modifica Carrello</button>
                     </Link>
                 </div>
             </div>

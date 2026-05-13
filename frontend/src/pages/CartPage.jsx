@@ -34,12 +34,11 @@ export default function CartPage() {
           <div className="row row-cols-1 row-cols-lg-2 g-5 ">
             <div className="col">
               {/* Freccia indietro per tornare alla visualizzazione dei prodotti */}
-              <Link
-                to="/search"
-                className="d-inline-flex align-items-center gap-2 mb-4 text-decoration-none text-dark"
-              >
-                <i className="bi bi-arrow-left"></i>
-                Continua lo shopping
+              <Link to="/search">
+                <button className="btn btn-dark rounded-pill border-0 btn_cart mb-5 px-4 py-2">
+                  <i class="bi bi-arrow-left-short pe-2"></i>
+                  Continua a comprare
+                </button>
               </Link>
 
               {/* Componente lista prodotti nel carrello */}
@@ -72,7 +71,7 @@ export default function CartPage() {
                 </ul>
 
                 {/* Componente totale carrello */}
-               <CartTotal/>
+                <CartTotal />
 
                 <p className="cart-meta mb-4 mt-1">
                   IVA inclusa ·Spedizione Gratuita
@@ -94,14 +93,17 @@ export default function CartPage() {
                     <div>
                       <div className="fw-medium">Mail di conferma</div>
                       <div className="small text-muted">
-                         Riceverai una mail di conferma con i dettagli del tuo ordine
+                        Riceverai una mail di conferma con i dettagli del tuo
+                        ordine
                       </div>
                     </div>
                   </li>
                   <li className="d-flex gap-3 mb-3">
                     <i className="bi bi-box-seam fs-5 text-dark"></i>
                     <div>
-                      <div className="fw-medium">Spedito da Boolean Best Team</div>
+                      <div className="fw-medium">
+                        Spedito da Boolean Best Team
+                      </div>
                       <div className="small text-muted">
                         Corriere espresso · consegna 24/48h
                       </div>
