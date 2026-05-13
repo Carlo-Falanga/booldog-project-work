@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useSearchFilters } from '../hooks/useSearchFilters';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { useGlobal } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import ProductCardList from '../components/ProductCardList';
@@ -10,7 +11,53 @@ import SideCart from '../components/SideCart';
 
 export default function SearchPage() {
 
-    const { products, search, order, handleFilterChange, listView, setListView } = useSearchFilters("");
+    const { animalSlug } = useParams();
+
+    const endpoint = animalSlug ? `animal/${animalSlug}` : "";
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [products, setProducts] = useState([]);
+    const [search, setSearch] = useState(searchParams.get('search') || "");
+    const [order, setOrder] = useState(searchParams.get('sort') || "");
+    const [listView, setListView] = useState(false);
+
+    const url = `http://localhost:3000/products/${endpoint}`
+
+    //chiamata api per index dei prodotti
+    useEffect(() => {
+        axios.get(`${url}?sort=${order}&search=${search}`)
+            .then(res => {
+                setProducts(res.data);
+            })
+    }, [order, search, endpoint])
+
+
+    function handleFilterChange(key, value) {
+        //copio i parametri attuali dell'url
+        const newParams = new URLSearchParams(searchParams);
+
+        // modifico le variabili reattive 
+        switch (key) {
+            case 'sort':
+                setOrder(value);
+                break;
+            case 'search':
+                setSearch(value);
+                break;
+        }
+
+        //modifico i parametri dell'url
+        if (value) {
+            newParams.set(key, value);
+        } else {
+            newParams.delete(key);
+        }
+
+        setSearchParams(newParams);
+    }
+
+
 
     const { asideCart, setAsideCart, addToCart } = useGlobal();
 

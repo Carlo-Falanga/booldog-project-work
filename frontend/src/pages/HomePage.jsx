@@ -59,10 +59,10 @@ function HomePage() {
       {/* ── HERO ── */}
       <section className="custom_hero">
         <div className="container-fluid px-4 px-md-5 py-5 mb-5">
-        <div className="row g-4 g-lg-5 align-items-stretch">
-          <div className="col-lg-6 d-flex flex-column justify-content-between">
-            <div className="d-flex align-items-center gap-3 mb-4 mb-md-5">
-            </div>
+          <div className="row g-4 g-lg-5 align-items-stretch">
+            <div className="col-lg-6 d-flex flex-column justify-content-between">
+              <div className="d-flex align-items-center gap-3 mb-4 mb-md-5">
+              </div>
 
               <h1 className="headline mb-4">
                 Il meglio per
@@ -145,7 +145,7 @@ function HomePage() {
                   </div>
                   <div className="border-top mt-4 pt-4 d-flex justify-content-end">
                     <Link
-                      to="/animal-products/cane"
+                      to="/products/cane"
                       className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle"
                       aria-label="Sfoglia cane"
                     >
@@ -194,7 +194,7 @@ function HomePage() {
                   </div>
                   <div className="border-top mt-4 pt-4 d-flex justify-content-end">
                     <Link
-                      to="/animal-products/gatto"
+                      to="/products/gatto"
                       className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle"
                       aria-label="Sfoglia gatto"
                     >

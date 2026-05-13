@@ -29,12 +29,12 @@ export default function Navbar() {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/animal-products/cane" className="nav-link " href="#">
+            <NavLink to="/products/cane" className="nav-link " href="#">
               Cani
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/animal-products/gatto" className="nav-link " href="#">
+            <NavLink to="/products/gatto" className="nav-link " href="#">
               Gatti
             </NavLink>
           </li>
@@ -49,7 +49,7 @@ export default function Navbar() {
           <Link to="/wishlist" className="btn text-white">
             <i className="bi bi-heart"></i>
           </Link>
-          <Link to="/search" className="btn text-white">
+          <Link to="/products" className="btn text-white">
             <i className="bi bi-search"></i>
           </Link>
         </div>
