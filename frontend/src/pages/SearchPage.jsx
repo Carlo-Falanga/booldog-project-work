@@ -1,10 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useGlobal } from "../context/CartContext";
 import ProductCard from '../components/ProductCard';
 import ProductCardList from '../components/ProductCardList';
+import SideCart from "../components/SideCart";
+
 
 export default function SearchPage() {
+
+    const { cart, setCart, asideCart, setAsideCart, addToCart } = useGlobal();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -86,13 +91,13 @@ export default function SearchPage() {
                             listView ?
                                 (
                                     <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <ProductCard product={product} />
+                                        <ProductCard product={product} addToCart={() => addToCart(product, 1)} />
                                     </div>
                                 )
                                 :
                                 (
                                     <div key={product.slug} className="col-12">
-                                        <ProductCardList product={product} />
+                                        <ProductCardList product={product} addToCart={() => addToCart(product, 1)} />
                                     </div>
                                 )
                         ))}
@@ -100,6 +105,9 @@ export default function SearchPage() {
                     :
                     <h2 className=' position-absolute top-50 start-50 translate-middle'>Nessun prodotto trovato</h2>
                 }
+
+                {asideCart && <SideCart setAsideCart={setAsideCart} />}
+
             </div>
         </>
     )

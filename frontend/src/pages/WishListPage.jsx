@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
+import { useGlobal } from "../context/CartContext";
 import { useWishlist } from "../context/WishListContext";
 import ProductCard from "../components/ProductCard";
 import ProductCardList from "../components/ProductCardList";
 import { useState } from "react";
+import SideCart from "../components/SideCart";
+
 
 export default function WishListPage() {
 
   const [listView, setListView] = useState(true)
 
+  const { asideCart, setAsideCart, addToCart } = useGlobal();
   const { wishlist } = useWishlist();
 
   return (
@@ -17,9 +21,9 @@ export default function WishListPage() {
           <span className="d-block">La tua</span>
           <em className="d-block">Wishlist.</em>
         </h1>
-        <div className="d-flex">
-          <button onClick={() => setListView(false)}>List</button>
-          <button onClick={() => setListView(true)}>grid</button>
+        <div className="btn-group">
+          <button onClick={() => setListView(false)} type="button" className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"><i className="bi bi-view-list"></i></button>
+          <button onClick={() => setListView(true)} className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"><i className="bi bi-grid"></i></button>
         </div>
 
         <div className="row g-4 g-lg-3">
@@ -27,20 +31,17 @@ export default function WishListPage() {
             listView ?
               (
                 <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                  <ProductCard product={product} />
+                  <ProductCard product={product} addToCart={() => addToCart(product, 1)} />
                 </div>
               )
               :
               (
                 <div key={product.slug} className="col-12">
-                  <ProductCardList product={product} />
+                  <ProductCardList product={product} addToCart={() => addToCart(product, 1)} />
                 </div>
               )
           ))}
         </div>
-
-
-
 
         {
           wishlist.length === 0 && (
@@ -53,6 +54,9 @@ export default function WishListPage() {
             </div>
           )
         }
+
+        {asideCart && <SideCart setAsideCart={setAsideCart} />}
+
       </div>
     </section >
   );
