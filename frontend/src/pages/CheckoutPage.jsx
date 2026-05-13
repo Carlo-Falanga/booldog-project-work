@@ -13,7 +13,8 @@ export default function CheckoutPage() {
     const [isLoadingCoupon, setIsLoadingCoupon] = useState(false);
     const [couponName, setCouponName] = useState(null)
     const { cart, setCart } = useGlobal()
-    const [orderMessage, setOrderMessage] = useState(false)
+    const [orderMessage, setOrderMessage] = useState(null)
+    const [serverError, setServerError] = useState([])
     const [newOrder, setNewOrder] = useState({
         "user_full_name": "",
         "email": "",
@@ -61,18 +62,25 @@ export default function CheckoutPage() {
 
         };
 
-        setOrderMessage(true)
+
 
         try {
             const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
-
+            console.log(data)
+            setOrderMessage(true)
 
             setTimeout(() => {
                 navigate("/order-confirmed")
             }, 3000);
 
-        } catch (err) {
-            console.error(err);
+        } catch (error) {
+            if (error.response){
+                const {errors} = error.response.data;
+                
+                errors.forEach(err=>setServerError(err.msg) )
+                ;
+            }
+            setOrderMessage(false)
         }
     }
 
@@ -183,7 +191,7 @@ export default function CheckoutPage() {
                                     <label htmlFor="inputAddress" className="form-label cart-meta">Indirizzo</label>
                                     <input value={newOrder.address} id="address" onChange={handleChange} type="text" className="form-control" placeholder="Via Roma 1" required />
                                 </div>
-                                <div className="d-flex gap-2 mb-3">
+                                <div className="d-flex gap-2 mb-1">
                                     <div className="">
                                         <label htmlFor="inputCity" className="form-label cart-meta">Città</label>
                                         <input value={newOrder.city} id="city" onChange={handleChange} type="text" className="form-control" placeholder="Roma" required />
@@ -202,6 +210,11 @@ export default function CheckoutPage() {
                                     </div>
 
                                 </div>
+                                 {serverError && (
+                                    <h4 className="text-danger d-flex justify-content-center mb-4">
+                                        {serverError}
+                                    </h4>
+                                )}
                             </div>
 
                         </div>
@@ -270,7 +283,7 @@ export default function CheckoutPage() {
 
 
                                     {couponMessage && (
-                                        <div className={`mt-2 small ${couponStatus === "valid" ? "text-success" : "text-danger"} d-flex justify-content-center`}>
+                                        <div className={`mt-2  ${couponStatus === "valid" ? "text-success" : "text-danger"} d-flex justify-content-center`}>
                                             {couponMessage}
                                         </div>
                                     )}
@@ -318,10 +331,12 @@ export default function CheckoutPage() {
                                     </button>
                                 </div>
 
-                                {orderMessage &&
-                                    <div>ordine effettuato a breve verrai reindirizzato nella pagina di conferma</div>
+                                {orderMessage===true &&
+                                  <div className="text-success">ordine effettuato a breve verrai reindirizzato nella pagina di conferma!</div>
                                 }
 
+
+                               
 
                                 <hr />
 
