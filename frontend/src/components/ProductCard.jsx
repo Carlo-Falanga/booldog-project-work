@@ -43,10 +43,12 @@ export default function ProductCard({ product, addToCart }) {
           <div className="border-top pt-3 d-flex align-items-center justify-content-between">
             <div className="cart-name fs-4">{product.price} €</div>
             <div className="">
+              {/* se conosco lo stock e vale 0 disabilito il bottone e mostro "Esaurito" */}
               <button
                 onClick={addToCart}
+                disabled={product.stock === 0}
                 className="btn btn-dark btn-sm px-3 rounded-pill">
-                Aggiungi al carrello
+                {product.stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
               </button>
             </div>
           </div>
