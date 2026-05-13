@@ -72,10 +72,11 @@ export default function CheckoutPage() {
             const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
             console.log(data)
             setOrderMessage(true)
-            setCart([])
+            
 
             setTimeout(() => {
                 navigate(`/order-confirmed/${data.order_id}`)
+                setCart([])
             }, 1500);
 
 
@@ -158,7 +159,7 @@ export default function CheckoutPage() {
             <div className="container my-4 ">
                 <div className="d-flex justify-content-start ">
                     <Link to="/cart">
-                        <button className="btn btn-dark rounded-pill border-0 btn_cart"><i class="bi bi-arrow-left-short"></i>Modifica Carrello</button>
+                        <button className="btn btn-dark rounded-pill border-0 btn_cart"><i className="bi bi-arrow-left-short pe-2"></i> Modifica Carrello</button>
                     </Link>
                 </div>
             </div>
@@ -345,7 +346,7 @@ export default function CheckoutPage() {
                                     </span>
                                 </div>
                                 <span className="cart-meta">EUR · IVA inclusa · senza costi nascosti</span>
-                                <div className="d-flex justify-content-center mt-4 mb-3">
+                                <div className="d-flex justify-content-center  mt-4 mb-3">
                                     <button type="submit" className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart">
                                         <span className="fs-6">
                                             paga € {total.toFixed(2)}
