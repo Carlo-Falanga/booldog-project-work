@@ -50,26 +50,39 @@ function HomePage() {
   }
 
   const getAnimalBadgeClass = (id) => {
-    if (id === 1) return 'badge--dog'
+    if (id === 1) return 'badge--dog' 
     if (id === 2) return 'badge--cat'
     return 'badge--both'
   }
+
+  
+  const marchi = [
+    { name: 'Catit',  img: 'http://localhost:3000/images/brands/catit.png'  },
+    { name: 'Ferplast',  img: 'http://localhost:3000/images/brands/ferplast.png'  },
+    { name: 'Flexi',  img: 'http://localhost:3000/images/brands/flexi.png'  },
+    { name: 'Hunter',  img: 'http://localhost:3000/images/brands/hunter.svg'  },
+    { name: 'Hurtta',  img: 'http://localhost:3000/images/brands/hurtta.png'  },
+    { name: 'Julius',  img: 'http://localhost:3000/images/brands/julius-k9.png'  },
+    { name: 'Kong',  img: 'http://localhost:3000/images/brands/kong.png'  },
+    { name: 'Ruffwear',  img: 'http://localhost:3000/images/brands/ruffwear.png'  },
+    { name: 'Stefanplast',  img: 'http://localhost:3000/images/brands/stefanplast.png'  },
+    { name: 'Trixie', img: 'http://localhost:3000/images/brands/trixie.png' },
+  ]
 
   return (
     <>
       {/* jumbo */}
       <section className="hero">
-
         <div className="hero__grid">
           <div className="hero__left">
             <div className="hero__tag">
               <span className="hero__tag-num">01</span>
-              <span className="hero__tag-rule" />
+              <span className="hero__tag-rule"/>
               <span className="hero__tag-label">Selezione SS&apos;26</span>
             </div>
             <h1 className="hero__headline">
-              Il meglio per<br />
-              cani e gatti,<br />
+              Il meglio per<br/>
+              cani e gatti,<br/>
               <em>ogni giorno.</em>
             </h1>
             <div className="hero__blurb">
@@ -92,79 +105,85 @@ function HomePage() {
           </div>
 
           <aside className="hero__feature">
-            <img
-              src="/public/pets/canegatto.jpg"
-              alt=""
-              className="hero__feature-img"
-            />
+            <img src="/pets/canegatto.jpg" alt="" className="hero__feature-img" />
           </aside>
         </div>
-
-        {/* strip metriche */}
-        {/* <div className="hero__meta" aria-hidden="true">
-          <div>
-            <span className="hero__meta-num">∞</span>
-            <span><strong>Spedizione gratuita</strong>su ogni ordine, sempre</span>
-          </div>
-          <div>
-            <span className="hero__meta-num">22</span>
-            <span><strong>Marchi premium</strong>europei selezionati</span>
-          </div>
-          <div>
-            <span className="hero__meta-num">30</span>
-            <span><strong>Giorni di prova</strong>resi gratuiti</span>
-          </div>
-          <div>
-            <span className="hero__meta-num">∞</span>
-            <span><strong>Veterinari</strong>al telefono inclusi</span>
-          </div>
-        </div> */}
       </section>
 
       {/* categorie */}
-      <section id="categorie" className="py-5 bg-light">
-        <div className="container">
-          <h2 className="text-center fw-bold mb-2">Scegli il tuo animale</h2>
-          <p className="text-center text-muted mb-5">
-            Prodotti pensati appositamente per cani e gatti
-          </p>
+      <section id="categorie" className="section">
+        <div className="section__head">
+          <span className="section__num">02 — Per specie</span>
+          <h2 className="section__title">
+            Due animali, due <em>universi.</em><br />
+            Una sola filosofia.
+          </h2>
+        </div>
 
-          <div className="row g-4 justify-content-center">
-            {/* card cane */}
-            <div className="col-sm-6 col-md-5">
-              <div className="card category-card category-card--dog border-0 shadow-sm text-white text-center h-100">
-                <div className="card-body py-5">
-                  <div style={{ fontSize: '4rem' }}>🐶</div>
-                  <h3 className="card-title fw-bold mt-3">Cane</h3>
-                  <p className="card-text category-card__text">
-                    Cibo, guinzagli, giochi e tanto altro per il tuo cane
-                  </p>
-                  <a href="#" className="btn btn-light fw-semibold mt-2">Esplora →</a>
+        <div className="cat-list">
+          <article className="cat-row" id="cane">
+            <div className="cat-row__content">
+              <div>
+                <div className="cat-row__meta">
+                  <span className="cat-row__index">01</span>
+                  <span className="cat-row__rule" />
+                  <span>Cane</span>
+                </div>
+                <h3 className="cat-row__title">
+                  Per il <em>cane</em><br />di casa.
+                </h3>
+                <p className="cat-row__desc">
+                  Cibo, guinzagli, giochi e tanto altro per il benessere del tuo cane.
+                </p>
+              </div>
+              <div>
+                <div className="cat-row__foot">
+                  <a className="cat-row__cta-circle" href="#cane" aria-label="Sfoglia cane">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
+            <div className="cat-row__image cat-row__image--dog">
+              <img src="/pets/cane.jpg" alt="Cane" className="cat-row__image-img" />
+            </div>
+          </article>
 
-            {/* card gatto */}
-            <div className="col-sm-6 col-md-5">
-              <div className="card category-card category-card--cat border-0 shadow-sm text-white text-center h-100">
-                <div className="card-body py-5">
-                  <div style={{ fontSize: '4rem' }}>🐱</div>
-                  <h3 className="card-title fw-bold mt-3">Gatto</h3>
-                  <p className="card-text category-card__text">
-                    Lettiere, crocchette, giocattoli e accessori per il tuo gatto
-                  </p>
-                  <a href="#" className="btn btn-light fw-semibold mt-2">Esplora →</a>
+          <article className="cat-row cat-row--flip" id="gatto">
+            <div className="cat-row__content">
+              <div>
+                <div className="cat-row__meta">
+                  <span className="cat-row__index">02</span>
+                  <span className="cat-row__rule" />
+                  <span>Gatto</span>
+                </div>
+                <h3 className="cat-row__title">
+                  Per il <em>gatto</em><br />che decide.
+                </h3>
+                <p className="cat-row__desc">
+                  Lettiere, crocchette, giocattoli e accessori per il tuo gatto.
+                </p>
+              </div>
+              <div>
+                <div className="cat-row__foot">
+                  <a className="cat-row__cta-circle" href="#gatto" aria-label="Sfoglia gatto">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
             <div className="cat-row__image cat-row__image--cat">
-              <img src="/public/pets/gatto.jpg" alt="Gatto" className="cat-row__image-img" />
+              <img src="/pets/gatto.jpg" alt="Gatto" className="cat-row__image-img" />
             </div>
           </article>
         </div>
       </section>
 
-      {/* prodotti in evidenza*/}
+      {/* prodotti in evidenza */}
       <section id="prodotti" className="section section--products">
         <div className="section__head">
           <span className="section__num">03 — In evidenza</span>
@@ -173,22 +192,21 @@ function HomePage() {
           </h2>
         </div>
 
-          {/* Filtri */}
-          <div className="d-flex justify-content-center gap-2 mb-5">
-            {[
-              { key: 'tutti', label: '🐾 Tutti' },
-              { key: 'cane',  label: '🐶 Cane' },
-              { key: 'gatto', label: '🐱 Gatto' },].map(({ key, label }) => (
-              <button
-                key={key}
-                className={`btn btn-sm px-4 ${activeFilter === key ? 'btn-dark' : 'btn-outline-dark'}`}
-                onClick={() => setActiveFilter(key)}>
-                {label}
-              </button>
-            ))}
-          </div>
+        <div className="products__filters">
+          {[
+            { key: 'tutti', label: '🐾 Tutti' },
+            { key: 'cane',  label: '🐶 Cane'  },
+            { key: 'gatto', label: '🐱 Gatto' },
+          ].map(({ key, label }) => (
+            <button
+              key={key}
+              className={`filter-btn ${activeFilter === key ? 'filter-btn--active' : ''}`}
+              onClick={() => setActiveFilter(key)}>
+              {label}
+            </button>
+          ))}
+        </div>
 
-        {/* Caricamento */}
         {loading && (
           <div className="products__state">
             <div className="products__spinner" role="status">
@@ -198,14 +216,12 @@ function HomePage() {
           </div>
         )}
 
-        {/* Errore */}
         {error && (
           <div className="products__error" role="alert">
             ⚠️ {error} — il server non è in esecuzione
           </div>
         )}
 
-        {/* Vuoto */}
         {!loading && !error && filteredProducts.length === 0 && (
           <div className="products__empty">
             <span className="products__empty-icon">🔍</span>
@@ -213,12 +229,22 @@ function HomePage() {
           </div>
         )}
 
-          {/* Griglia prodotti */}
-          {!loading && !error && filteredProducts.length > 0 && (
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-              {filteredProducts.map(product => (
-                <div className="col" key={product.id}>
-                  <div className="card h-100 border-0 shadow-sm">
+        {!loading && !error && filteredProducts.length > 0 && (
+          <div className="products__grid">
+            {filteredProducts.map(product => (
+              <div className="product-card" key={product.id}>
+                <div className="product-card__image">
+                  {product.img_url ? (
+                    <img
+                      src={`http://localhost:3000/images/products/${product.img_url}`}
+                      alt={product.name}
+                    />
+                  ) : (
+                    <span className="product-card__emoji">
+                      {getAnimalEmoji(product.animal_type_id)}
+                    </span>
+                  )}
+                </div>
 
                     {/* Immagine prodotto */}
                     <div className="product-card__image d-flex align-items-center justify-content-center bg-light">
@@ -266,6 +292,35 @@ function HomePage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* marchi */}
+      <section id="marchi" className="partners">
+        <div className="partners__inner">
+
+          <div className="section__head partners__head">
+            <span className="section__num">04 — Marchi</span>
+            <h2 className="section__title">
+              Le case che <em>scegliamo,</em><br />
+              e che scelgono noi.
+            </h2>
+          </div>
+
+          <p className="partners__lede">
+            Prodotti europei selezionati uno per uno — per qualità dei materiali,
+            rispetto degli animali e prodotti che durano nel tempo.
+          </p>
+
+          {/* loghi brand */}
+          <div className="partners__row" aria-label="Marchi partner">
+            {marchi.map((m) => (
+              <div className="partners__brand" key={m.name}>
+                <img src={m.img} alt={m.name} className="partners__brand-img" />
+              </div>
+            ))}
+          </div>
+
+        </div>
       </section>
     </>
   )
