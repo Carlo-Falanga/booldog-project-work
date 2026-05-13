@@ -3,6 +3,7 @@ import axios from "axios";
 import { useGlobal } from "../context/CartContext";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
+
 export default function CheckoutPage() {
 
     const [couponCode, setCouponCode] = useState("");
@@ -13,6 +14,7 @@ export default function CheckoutPage() {
     const [isLoadingCoupon, setIsLoadingCoupon] = useState(false);
     const [couponName, setCouponName] = useState(null)
     const { cart, setCart } = useGlobal()
+    
     const [orderMessage, setOrderMessage] = useState(false)
     const [newOrder, setNewOrder] = useState({
         "user_full_name": "",
@@ -65,11 +67,13 @@ export default function CheckoutPage() {
 
         try {
             const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
-
-
+            console.log(data);
+            
             setTimeout(() => {
-                navigate("/order-confirmed")
-            }, 3000);
+                navigate(`/order-confirmed/${data.order_id}`)
+            }, 500);
+
+            
 
         } catch (err) {
             console.error(err);

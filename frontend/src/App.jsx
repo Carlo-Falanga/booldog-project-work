@@ -13,27 +13,28 @@ import AnimalPage from "./pages/AnimalPage";
 import OrderConfirmedPage from "./pages/OrderConfirmedPage";
 
 
+
 function App() {
 
   return (
     <CartContextProvider>
       <WishListContextProvider>
-
-        <BrowserRouter>
-          <Routes>
-            <Route element={<DefaultLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="product/:slug" element={<ProductPage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/wishlist" element={<WishListPage />} />
-              <Route path="/animal-products/:animalSlug" element={<AnimalPage />} />
-              <Route path="/order-confirmed" element={<OrderConfirmedPage />} />
-              <Route />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        
+          <BrowserRouter>
+            <Routes>
+              <Route element={<DefaultLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="product/:slug" element={<ProductPage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/wishlist" element={<WishListPage />} />
+                <Route path="/animal-products/:animalSlug" element={<AnimalPage />} />
+                <Route path="/order-confirmed/:id" element={<OrderConfirmedPage />} />
+                <Route />
+              </Route>
+            </Routes>
+          </BrowserRouter>
 
       </WishListContextProvider>
     </CartContextProvider>
