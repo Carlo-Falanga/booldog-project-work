@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import './HomePage.css'
 import { Link } from "react-router-dom"
 
 const API_URL = 'http://localhost:3000'
@@ -75,9 +74,9 @@ function HomePage() {
         <div className="hero__grid">
           <div className="hero__left">
             <div className="hero__tag">
-              <span className="hero__tag-num">01</span>
+              
               <span className="hero__tag-rule"/>
-              <span className="hero__tag-label">Selezione SS&apos;26</span>
+              <span className="hero__tag-label">La nostra selezione</span>
             </div>
             <h1 className="hero__headline">
               Il meglio per<br/>
@@ -112,7 +111,7 @@ function HomePage() {
       {/* ── CATEGORIE ── */}
       <section id="categorie" className="section">
         <div className="section__head">
-          <span className="section__num">02 — Per specie</span>
+          
           <h2 className="section__title">
             Due animali, due <em>universi.</em><br />
             Una sola filosofia.
@@ -124,9 +123,8 @@ function HomePage() {
             <div className="cat-row__content">
               <div>
                 <div className="cat-row__meta">
-                  <span className="cat-row__index">01</span>
-                  <span className="cat-row__rule" />
-                  <span>Cane</span>
+                  
+                  
                 </div>
                 <h3 className="cat-row__title">
                   Per il <em>cane</em><br />di casa.
@@ -154,9 +152,9 @@ function HomePage() {
             <div className="cat-row__content">
               <div>
                 <div className="cat-row__meta">
-                  <span className="cat-row__index">02</span>
-                  <span className="cat-row__rule" />
-                  <span>Gatto</span>
+                  
+                  
+                  
                 </div>
                 <h3 className="cat-row__title">
                   Per il <em>gatto</em><br />che decide.
@@ -185,26 +183,13 @@ function HomePage() {
       {/* ── PRODOTTI IN EVIDENZA ── */}
       <section id="prodotti" className="section section--products">
         <div className="section__head">
-          <span className="section__num">03 — In evidenza</span>
+          
           <h2 className="section__title">
             Prodotti <em>in evidenza.</em>
           </h2>
         </div>
 
-        <div className="products__filters">
-          {[
-            { key: 'tutti', label: '🐾 Tutti' },
-            { key: 'cane',  label: '🐶 Cane'  },
-            { key: 'gatto', label: '🐱 Gatto' },
-          ].map(({ key, label }) => (
-            <button
-              key={key}
-              className={`filter-btn ${activeFilter === key ? 'filter-btn--active' : ''}`}
-              onClick={() => setActiveFilter(key)}>
-              {label}
-            </button>
-          ))}
-        </div>
+        
 
         {loading && (
           <div className="products__state">
@@ -284,7 +269,7 @@ function HomePage() {
         <div className="partners__inner">
 
           <div className="section__head partners__head">
-            <span className="section__num">04 — Marchi</span>
+            
             <h2 className="section__title">
               Le case che <em>scegliamo,</em><br />
               e che scelgono noi.
