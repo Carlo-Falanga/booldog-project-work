@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './HomePage.css'
-import { Link, NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const API_URL = 'http://localhost:3000'
 
@@ -12,11 +12,10 @@ function HomePage() {
   const [error, setError] = useState(null)
   const [activeFilter, setActiveFilter] = useState('tutti')
 
-  // chiamata axios per i prodotti in evidenza
   useEffect(() => {
     axios.get(`${API_URL}/products`)
       .then(res => {
-        const featured = res.data.filter(product => product.is_featured === 1 || product.is_featured === true)
+        const featured = res.data.filter(p => p.is_featured === 1 || p.is_featured === true)
         setProducts(featured)
         setFilteredProducts(featured)
         setLoading(false)
@@ -27,208 +26,284 @@ function HomePage() {
       })
   }, [])
 
-  // filtra i prodotti 
   useEffect(() => {
     if (activeFilter === 'tutti') {
       setFilteredProducts(products)
     } else if (activeFilter === 'cane') {
-      setFilteredProducts(products.filter(product => product.animal_type_id === 1 || product.animal_type_id === 3))
+      setFilteredProducts(products.filter(p => p.animal_type_id === 1 || p.animal_type_id === 3))
     } else if (activeFilter === 'gatto') {
-      setFilteredProducts(products.filter(product => product.animal_type_id === 2 || product.animal_type_id === 3))
+      setFilteredProducts(products.filter(p => p.animal_type_id === 2 || p.animal_type_id === 3))
     }
   }, [activeFilter, products])
 
-  const getAnimalEmoji = (animal_type_id) => {
-    if (animal_type_id === 1) return '🐶'
-    if (animal_type_id === 2) return '🐱'
-    if (animal_type_id === 3) return '🐾'
+  const getAnimalEmoji = (id) => {
+    if (id === 1) return '🐶'
+    if (id === 2) return '🐱'
     return '🐾'
   }
 
-  const getAnimalName = (animal_type_id) => {
-    if (animal_type_id === 1) return 'Cane'
-    if (animal_type_id === 2) return 'Gatto'
-    if (animal_type_id === 3) return 'Cane e Gatto'
+  const getAnimalName = (id) => {
+    if (id === 1) return 'Cane'
+    if (id === 2) return 'Gatto'
+    if (id === 3) return 'Cane & Gatto'
     return ''
   }
 
-  const getAnimalBadgeClass = (animal_type_id) => {
-    if (animal_type_id === 1) return 'bg-warning text-dark'
-    if (animal_type_id === 2) return 'bg-primary'
-    if (animal_type_id === 3) return 'bg-success'
-    return 'bg-secondary'
+  const getAnimalBadgeClass = (id) => {
+    if (id === 1) return 'badge--dog'
+    if (id === 2) return 'badge--cat'
+    return 'badge--both'
   }
+
+  const marchi = [
+    { name: 'Catit',       img: 'http://localhost:3000/images/brands/catit.png'       },
+    { name: 'Ferplast',    img: 'http://localhost:3000/images/brands/ferplast.png'    },
+    { name: 'Flexi',       img: 'http://localhost:3000/images/brands/flexi.png'       },
+    { name: 'Hunter',      img: 'http://localhost:3000/images/brands/hunter.svg'      },
+    { name: 'Hurtta',      img: 'http://localhost:3000/images/brands/hurtta.png'      },
+    { name: 'Julius',      img: 'http://localhost:3000/images/brands/julius-k9.png'   },
+    { name: 'Kong',        img: 'http://localhost:3000/images/brands/kong.png'        },
+    { name: 'Ruffwear',    img: 'http://localhost:3000/images/brands/ruffwear.png'    },
+    { name: 'Stefanplast', img: 'http://localhost:3000/images/brands/stefanplast.png' },
+    { name: 'Trixie',      img: 'http://localhost:3000/images/brands/trixie.png'      },
+  ]
 
   return (
     <>
-      {/* jumbotron*/}
-      <div className="hero py-5 text-white text-center">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-8">
-              <div className="mb-3">
-                <span className="badge bg-warning text-dark fs-6 px-3 py-2">
-                  🐶 🐱 Tutto per i tuoi amici a 4 zampe
-                </span>
-              </div>
-              <h1 className="display-4 fw-bold mb-3">
-                Il meglio per cani e gatti,<br /> ogni giorno
-              </h1>
-              <p className="lead mb-4 hero__subtitle">
-                Cibo, accessori e tanto amore. Scopri i nostri prodotti selezionati
-                per il benessere del tuo animale.
+      {/* ── HERO ── */}
+      <section className="hero">
+        <div className="hero__grid">
+          <div className="hero__left">
+            <div className="hero__tag">
+              <span className="hero__tag-num">01</span>
+              <span className="hero__tag-rule"/>
+              <span className="hero__tag-label">Selezione SS&apos;26</span>
+            </div>
+            <h1 className="hero__headline">
+              Il meglio per<br/>
+              cani e gatti,<br/>
+              <em>ogni giorno.</em>
+            </h1>
+            <div className="hero__blurb">
+              <p>
+                Cibo, accessori e tanto amore. Scopri i nostri prodotti
+                selezionati per il benessere del tuo animale.
               </p>
-              <div className="d-flex gap-3 justify-content-center flex-wrap">
-                <a href="#prodotti" className="btn btn-warning btn-lg fw-semibold px-4">
+              <div className="hero__cta">
+                <a href="#prodotti" className="btn btn--primary">
                   Scopri i prodotti
+                  <svg className="btn__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
                 </a>
-                <a href="#categorie" className="btn btn-outline-light btn-lg px-4">
+                <a href="#categorie" className="btn btn--ghost">
                   Sfoglia categorie
                 </a>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* categorie */}
-      <section id="categorie" className="py-5 bg-light">
-        <div className="container">
-          <h2 className="text-center fw-bold mb-2">Scegli il tuo animale</h2>
-          <p className="text-center text-muted mb-5">
-            Prodotti pensati appositamente per cani e gatti
-          </p>
-
-          <div className="row g-4 justify-content-center">
-            {/* card cane */}
-            <div className="col-sm-6 col-md-5">
-              <Link to="/animal-products/cane" className='text-decoration-none'>
-                <div className="card category-card category-card--dog border-0 shadow-sm text-white text-center h-100">
-                  <div className="card-body py-5">
-                    <div style={{ fontSize: '4rem' }}>🐶</div>
-                    <h3 className="card-title fw-bold mt-3">Cane</h3>
-                    <p className="card-text category-card__text">
-                      Cibo, guinzagli, giochi e tanto altro per il tuo cane
-                    </p>
-                    <button href="#" className="btn btn-light fw-semibold mt-2">Esplora →</button>
-                  </div>
-                </div>
-              </Link>
-            </div>
-
-            {/* card gatto */}
-            <div className="col-sm-6 col-md-5">
-              <Link to="/animal-products/gatto" className=' text-decoration-none'>
-                <div className="card category-card category-card--cat border-0 shadow-sm text-white text-center h-100">
-                  <div className="card-body py-5">
-                    <div style={{ fontSize: '4rem' }}>🐱</div>
-                    <h3 className="card-title fw-bold mt-3">Gatto</h3>
-                    <p className="card-text category-card__text">
-                      Lettiere, crocchette, giocattoli e accessori per il tuo gatto
-                    </p>
-                    <button href="#" className="btn btn-light fw-semibold mt-2">Esplora →</button>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </div>
+          <aside className="hero__feature">
+            <img src="/pets/canegatto.jpg" alt="" className="hero__feature-img" />
+          </aside>
         </div>
       </section>
 
-      {/* prodotti in evidenza */}
-      <section id="prodotti" className="py-5">
-        <div className="container">
-          <h2 className="fw-bold text-center mb-2">Prodotti in evidenza</h2>
-          <p className="text-center text-muted mb-4">I più amati dai nostri clienti</p>
+      {/* ── CATEGORIE ── */}
+      <section id="categorie" className="section">
+        <div className="section__head">
+          <span className="section__num">02 — Per specie</span>
+          <h2 className="section__title">
+            Due animali, due <em>universi.</em><br />
+            Una sola filosofia.
+          </h2>
+        </div>
 
-          {/* Filtri */}
-          <div className="d-flex justify-content-center gap-2 mb-5">
-            {[
-              { key: 'tutti', label: '🐾 Tutti' },
-              { key: 'cane', label: '🐶 Cane' },
-              { key: 'gatto', label: '🐱 Gatto' },].map(({ key, label }) => (
-                <button
-                  key={key}
-                  className={`btn btn-sm px-4 ${activeFilter === key ? 'btn-dark' : 'btn-outline-dark'}`}
-                  onClick={() => setActiveFilter(key)}>
-                  {label}
-                </button>
-              ))}
+        <div className="cat-list">
+          <article className="cat-row" id="cane">
+            <div className="cat-row__content">
+              <div>
+                <div className="cat-row__meta">
+                  <span className="cat-row__index">01</span>
+                  <span className="cat-row__rule" />
+                  <span>Cane</span>
+                </div>
+                <h3 className="cat-row__title">
+                  Per il <em>cane</em><br />di casa.
+                </h3>
+                <p className="cat-row__desc">
+                  Cibo, guinzagli, giochi e tanto altro per il benessere del tuo cane.
+                </p>
+              </div>
+              <div>
+                <div className="cat-row__foot">
+                  <a className="cat-row__cta-circle" href="#cane" aria-label="Sfoglia cane">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="cat-row__image cat-row__image--dog">
+              <img src="/pets/cane.jpg" alt="Cane" className="cat-row__image-img" />
+            </div>
+          </article>
+
+          <article className="cat-row cat-row--flip" id="gatto">
+            <div className="cat-row__content">
+              <div>
+                <div className="cat-row__meta">
+                  <span className="cat-row__index">02</span>
+                  <span className="cat-row__rule" />
+                  <span>Gatto</span>
+                </div>
+                <h3 className="cat-row__title">
+                  Per il <em>gatto</em><br />che decide.
+                </h3>
+                <p className="cat-row__desc">
+                  Lettiere, crocchette, giocattoli e accessori per il tuo gatto.
+                </p>
+              </div>
+              <div>
+                <div className="cat-row__foot">
+                  <a className="cat-row__cta-circle" href="#gatto" aria-label="Sfoglia gatto">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="cat-row__image cat-row__image--cat">
+              <img src="/pets/gatto.jpg" alt="Gatto" className="cat-row__image-img" />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* ── PRODOTTI IN EVIDENZA ── */}
+      <section id="prodotti" className="section section--products">
+        <div className="section__head">
+          <span className="section__num">03 — In evidenza</span>
+          <h2 className="section__title">
+            Prodotti <em>in evidenza.</em>
+          </h2>
+        </div>
+
+        <div className="products__filters">
+          {[
+            { key: 'tutti', label: '🐾 Tutti' },
+            { key: 'cane',  label: '🐶 Cane'  },
+            { key: 'gatto', label: '🐱 Gatto' },
+          ].map(({ key, label }) => (
+            <button
+              key={key}
+              className={`filter-btn ${activeFilter === key ? 'filter-btn--active' : ''}`}
+              onClick={() => setActiveFilter(key)}>
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {loading && (
+          <div className="products__state">
+            <div className="products__spinner" role="status">
+              <span className="visually-hidden">Caricamento...</span>
+            </div>
+            <p>Caricamento prodotti...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="products__error" role="alert">
+            ⚠️ {error} — il server non è in esecuzione
+          </div>
+        )}
+
+        {!loading && !error && filteredProducts.length === 0 && (
+          <div className="products__empty">
+            <span className="products__empty-icon">🔍</span>
+            <p>Nessun prodotto trovato.</p>
+          </div>
+        )}
+
+        {!loading && !error && filteredProducts.length > 0 && (
+          <div className="products__grid">
+            {filteredProducts.map(product => (
+              <div className="product-card" key={product.id}>
+                <div className="product-card__image">
+                  {product.img_url ? (
+                    <img
+                      src={`http://localhost:3000/images/products/${product.img_url}`}
+                      alt={product.name}
+                    />
+                  ) : (
+                    <span className="product-card__emoji">
+                      {getAnimalEmoji(product.animal_type_id)}
+                    </span>
+                  )}
+                </div>
+
+                <Link to={`/product/${product.slug}`} className="product-card__body">
+                  <div className="product-card__badges">
+                    <span className={`product-card__badge ${getAnimalBadgeClass(product.animal_type_id)}`}>
+                      {getAnimalEmoji(product.animal_type_id)} {getAnimalName(product.animal_type_id)}
+                    </span>
+                    {product.category && (
+                      <span className="product-card__badge product-card__badge--cat">
+                        {product.category}
+                      </span>
+                    )}
+                  </div>
+
+                  <h5 className="product-card__name">{product.name}</h5>
+                  <p className="product-card__desc">
+                    {product.description || 'Prodotto di qualità per il tuo animale.'}
+                  </p>
+
+                  <div className="product-card__footer">
+                    <span className="product-card__price">
+                      €{Number(product.price).toFixed(2)}
+                    </span>
+                    <span className="product-card__arrow">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                        <path d="M5 12h14M13 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* ── MARCHI ── */}
+      <section id="marchi" className="partners">
+        <div className="partners__inner">
+
+          <div className="section__head partners__head">
+            <span className="section__num">04 — Marchi</span>
+            <h2 className="section__title">
+              Le case che <em>scegliamo,</em><br />
+              e che scelgono noi.
+            </h2>
           </div>
 
-          {/* Stato caricamento */}
-          {loading && (
-            <div className="text-center py-5">
-              <div className="spinner-border text-dark" role="status">
-                <span className="visually-hidden">Caricamento...</span>
+          <p className="partners__lede">
+            Prodotti europei selezionati uno per uno — per qualità dei materiali,
+            rispetto degli animali e prodotti che durano nel tempo.
+          </p>
+
+          <div className="partners__row" aria-label="Marchi partner">
+            {marchi.map((m) => (
+              <div className="partners__brand" key={m.name}>
+                <img src={m.img} alt={m.name} className="partners__brand-img" />
               </div>
-              <p className="mt-3 text-muted">Caricamento prodotti...</p>
-            </div>
-          )}
+            ))}
+          </div>
 
-          {/* Stato errore */}
-          {error && (
-            <div className="alert alert-danger text-center" role="alert">
-              ⚠️ {error} — il server non è in esecuzione
-            </div>
-          )}
-
-          {/* Nessun prodotto */}
-          {!loading && !error && filteredProducts.length === 0 && (
-            <div className="text-center text-muted py-5">
-              <div className="empty-state__icon">🔍</div>
-              <p className="mt-2">Nessun prodotto trovato.</p>
-            </div>
-          )}
-
-          {/* Griglia prodotti */}
-          {!loading && !error && filteredProducts.length > 0 && (
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-              {filteredProducts.map(product => (
-                <div className="col" key={product.id}>
-                  <div className="card h-100 border-0 shadow-sm">
-
-                    {/* Immagine prodotto */}
-                    <div className="product-card__image d-flex align-items-center justify-content-center bg-light">
-                      {product.img_url ? (
-                        <img className=" object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} />
-
-                        //if/else immagine
-                      ) : (
-                        <span className="product-card__emoji">
-                          {getAnimalEmoji(product.animal_type_id)}
-                        </span>
-                      )}
-                    </div>
-
-                    <Link to={`/product/${product.slug}`} className="card-body d-flex flex-column text-decoration-none">
-                      {/* Badge animale */}
-                      <span className={`badge mb-2 product-card__badge ${getAnimalBadgeClass(product.animal_type_id)}`}>
-                        {getAnimalEmoji(product.animal_type_id)} {getAnimalName(product.animal_type_id)}
-                      </span>
-
-                      {/* Badge categoria */}
-                      {product.category && (
-                        <span className="badge bg-light text-dark border mb-2 product-card__badge">
-                          {product.category}
-                        </span>
-                      )}
-
-                      <h5 className="card-title fw-semibold">{product.name}</h5>
-                      <p className="card-text text-muted small flex-grow-1">
-                        {product.description || 'Prodotto di qualità per il tuo animale.'}
-                      </p>
-
-                      <div className="d-flex justify-content-between align-items-center mt-3">
-                        <span className="fs-5 fw-bold">€{Number(product.price).toFixed(2)}</span>
-                      </div>
-                    </Link>
-
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </section>
     </>
@@ -236,5 +311,3 @@ function HomePage() {
 }
 
 export default HomePage
-
-
