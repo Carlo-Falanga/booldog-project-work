@@ -7,6 +7,7 @@ import ProductCard from "../components/ProductCard";
 import SideCart from "../components/SideCart";
 
 export default function ProductPage() {
+
   const {
     cart,
     setCart,
@@ -18,17 +19,13 @@ export default function ProductPage() {
     updateQuantity,
     productQuantity,
   } = useGlobal();
-  const { wishlist, setWishlist } = useWishlist();
+
+  const {
+    wishlist,
+    setWishlist
+  } = useWishlist();
 
   const [dataProduct, setDataProduct] = useState(null);
-
-  useEffect(() => {
-    if (asideCart) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-  }, [asideCart]);
 
   const { slug } = useParams();
 

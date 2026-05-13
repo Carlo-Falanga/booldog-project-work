@@ -17,27 +17,29 @@ import OrderConfirmedPage from "./pages/OrderConfirmedPage";
 function App() {
 
   return (
-    <CartContextProvider>
-      <WishListContextProvider>
-        
-          <BrowserRouter>
-            <Routes>
-              <Route element={<DefaultLayout />}>
-                <Route index element={<HomePage />} />
-                <Route path="product/:slug" element={<ProductPage />} />
-                <Route path="/search" element={<SearchPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/wishlist" element={<WishListPage />} />
-                <Route path="/animal-products/:animalSlug" element={<AnimalPage />} />
-                <Route path="/order-confirmed/:id" element={<OrderConfirmedPage />} />
-                <Route />
-              </Route>
-            </Routes>
-          </BrowserRouter>
 
-      </WishListContextProvider>
-    </CartContextProvider>
+
+    <BrowserRouter>
+      <CartContextProvider>
+        <WishListContextProvider>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="product/:slug" element={<ProductPage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/wishlist" element={<WishListPage />} />
+              <Route path="/animal-products/:animalSlug" element={<AnimalPage />} />
+              <Route path="/order-confirmed/:id" element={<OrderConfirmedPage />} />
+              <Route />
+            </Route>
+          </Routes>
+        </WishListContextProvider>
+      </CartContextProvider>
+    </BrowserRouter>
+
+
   );
 }
 
