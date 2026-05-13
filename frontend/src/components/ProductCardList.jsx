@@ -23,7 +23,8 @@ export default function ProductCardList({ product, addToCart }) {
 
     <div className="card p-3 h-100 position-relative">
       <div className='text-decoration-none text-reset row'>
-        <div className="col-2 p-3">
+
+        <div className="col-2">
           <button onClick={addToWishList} className="position-absolute start-0 pe-4 z-1 border-0">
             <i className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}></i>
           </button>
@@ -34,17 +35,14 @@ export default function ProductCardList({ product, addToCart }) {
               </div>
             </div>
           </Link>
-
         </div>
-        <div className="col-5 opacity-75">
-          <div>{product.category}</div>
-          <div>{product.animal_name}</div>
-        </div>
-        <div className="col-5">
+        <div className="col-8">
+          <div>{product.category} {product.animal_name}</div>
           <h3 className="card-title">{product.name}</h3>
           <div className=" fs-4">&euro; {product.price}</div>
         </div>
-        <div>
+
+        <div className="col-2">
           <button
             onClick={addToCart}
             className="btn btn-dark btn-sm px-3 rounded-pill">
