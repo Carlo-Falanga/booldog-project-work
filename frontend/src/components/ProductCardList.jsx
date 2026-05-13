@@ -1,7 +1,7 @@
 import { useWishlist } from "../context/WishListContext";
 import { Link, useParams } from "react-router-dom";
 
-export default function ProductCardList({ product }) {
+export default function ProductCardList({ product, addToCart }) {
   const { wishlist, setWishlist } = useWishlist();
 
   // verifico se il prodotto esiste nel carrello
