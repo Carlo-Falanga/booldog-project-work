@@ -133,9 +133,9 @@ function HomePage() {
                     </p>
                   </div>
                   <div className="border-top mt-4 pt-4 d-flex justify-content-end">
-                    <a href="#cane" className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle" aria-label="Sfoglia cane">
+                    <Link to="/animal-products/cane" className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle" aria-label="Sfoglia cane">
                       <i className="bi bi-arrow-right"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -161,9 +161,9 @@ function HomePage() {
                     </p>
                   </div>
                   <div className="border-top mt-4 pt-4 d-flex justify-content-end">
-                    <a href="#gatto" className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle" aria-label="Sfoglia gatto">
+                    <Link to="/animal-products/gatto" className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle" aria-label="Sfoglia gatto">
                       <i className="bi bi-arrow-right"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
