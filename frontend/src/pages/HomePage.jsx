@@ -212,7 +212,7 @@ function HomePage() {
                       <img
                         src={`http://localhost:3000/images/products/${product.img_url}`}
                         alt={product.name}
-                        className="object-fit-cover product-card-img"
+                        className="object-fit-contain product-card-img"
                       />
                     ) : (
                       <div className="d-flex align-items-center justify-content-center display-1">
