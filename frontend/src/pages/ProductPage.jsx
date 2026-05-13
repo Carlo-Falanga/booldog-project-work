@@ -4,16 +4,14 @@ import axios from "axios";
 import { useGlobal } from "../context/CartContext";
 import { useWishlist } from "../context/WishListContext";
 import ProductCard from "../components/ProductCard";
-
 import SideCart from "../components/SideCart";
 
 export default function ProductPage() {
-  const { cart, setCart } = useGlobal();
+
+  const { cart, setCart, asideCart, setAsideCart, addToCart, increaseQuantity, decreaseQuantity, productQuantity } = useGlobal();
   const { wishlist, setWishlist } = useWishlist();
 
   const [dataProduct, setDataProduct] = useState(null);
-
-  const [asideCart, setAsideCart] = useState(false);
 
   useEffect(() => {
     if (asideCart) {
@@ -24,8 +22,6 @@ export default function ProductPage() {
     }
   }, [asideCart]);
 
-  const [productQuantity, setProductQuantity] = useState(1);
-
   const { slug } = useParams();
 
   useEffect(() => {
@@ -34,42 +30,7 @@ export default function ProductPage() {
       .then((res) => setDataProduct(res.data));
   }, [slug]);
 
-  // funzione aggiungi al carrello
-  const addToCart = (item, quantity) => {
-    // verifico se il prodotto esiste nel carrello
-    const existingProduct = cart.find((product) => product.id === item.id);
 
-    // se esiste aggiorno la quantità del prodotto esistente
-    if (existingProduct) {
-      const updatedCart = cart.map((product) =>
-        product.id === item.id
-          ? { ...product, quantity: product.quantity + quantity }
-          : product,
-      );
-      setCart(updatedCart);
-      // se non esiste aggiungo nuovo prodotto con quantità 1
-    } else {
-      setCart([...cart, { ...item, quantity: quantity }]);
-    }
-
-    setAsideCart(true);
-    setProductQuantity(1);
-  };
-
-  // aumento quantità da aggiungere al carrello con stock come massimale
-  // come massimale andrà inserito stock meno quantità già nel carrello
-  const increaseQuantity = () => {
-    if (productQuantity < dataProduct?.stock) {
-      setProductQuantity(productQuantity + 1);
-    }
-  };
-
-  // diminuisco quantità da aggiungere al carrello se maggiore di 1
-  const decreaseQuantity = () => {
-    if (productQuantity > 1) {
-      setProductQuantity(productQuantity - 1);
-    }
-  };
 
   // verifico se il prodotto esiste nel carrello
   const existingProductWL = wishlist.find((item) => item.slug === slug);
