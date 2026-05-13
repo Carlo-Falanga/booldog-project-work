@@ -232,63 +232,45 @@ function HomePage() {
         {!loading && !error && filteredProducts.length > 0 && (
           <div className="products__grid">
             {filteredProducts.map(product => (
-              <div className="product-card" key={product.id}>
-                <div className="product-card__image">
-                  {product.img_url ? (
-                    <img
-                      src={`http://localhost:3000/images/products/${product.img_url}`}
-                      alt={product.name}
-                    />
-                  ) : (
-                    <span className="product-card__emoji">
-                      {getAnimalEmoji(product.animal_type_id)}
-                    </span>
-                  )}
-                </div>
-
-                    {/* Immagine prodotto */}
-                    <div className="product-card__image d-flex align-items-center justify-content-center bg-light">
-                      {product.img_url ? (
-                        <img className=" object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} />
-
-                //if/else immagine
+              <article className="product-card" key={product.id}>
+                <Link to={`/product/${product.slug}`} className="product-card__link">
+                  <div className="product-card__image">
+                    {product.img_url ? (
+                      <img
+                        src={`http://localhost:3000/images/products/${product.img_url}`}
+                        alt={product.name}
+                        className="product-card__img"
+                      />
                     ) : (
-                        <span className="product-card__emoji">
-                          {getAnimalEmoji(product.animal_type_id)}
-                        </span>
-                      )}
-                    </div>
+                      <span className="product-card__emoji">{getAnimalEmoji(product.animal_type_id)}</span>
+                    )}
+                  </div>
 
-                    <Link to={`/product/${product.slug}`}  className="card-body d-flex flex-column text-decoration-none">
-                      {/* Badge animale */}
-                      <span className={`badge mb-2 product-card__badge ${getAnimalBadgeClass(product.animal_type_id)}`}>
-                        {getAnimalEmoji(product.animal_type_id)} {getAnimalName(product.animal_type_id)}
+                  <div className="product-card__info">
+                    <span className={`badge mb-2 product-card__badge ${getAnimalBadgeClass(product.animal_type_id)}`}>
+                      {getAnimalEmoji(product.animal_type_id)} {getAnimalName(product.animal_type_id)}
+                    </span>
+
+                    {product.category && (
+                      <span className="badge bg-light text-dark border mb-2 product-card__badge">
+                        {product.category}
                       </span>
+                    )}
 
-                      {/* Badge categoria */}
-                      {product.category && (
-                        <span className="badge bg-light text-dark border mb-2 product-card__badge">
-                          {product.category}
-                        </span>
-                      )}
+                    <h5 className="product-card__name">{product.name}</h5>
+                    <p className="product-card__desc">{product.description || 'Prodotto di qualità per il tuo animale.'}</p>
 
-                  <h5 className="product-card__name">{product.name}</h5>
-                  <p className="product-card__desc">
-                    {product.description || 'Prodotto di qualità per il tuo animale.'}
-                  </p>
-
-                  <div className="product-card__footer">
-                    <span className="product-card__price">
-                      €{Number(product.price).toFixed(2)}
-                    </span>
-                    <span className="product-card__arrow">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                        <path d="M5 12h14M13 5l7 7-7 7" />
-                      </svg>
-                    </span>
+                    <div className="product-card__footer">
+                      <span className="product-card__price">€{Number(product.price).toFixed(2)}</span>
+                      <span className="product-card__arrow" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                          <path d="M5 12h14M13 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </Link>
-              </div>
+              </article>
             ))}
           </div>
         )}
