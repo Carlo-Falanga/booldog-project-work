@@ -79,15 +79,15 @@ function HomePage() {
               </div>
             </div>
 
-            <aside className="col-lg-6">
+            <div className="col-lg-6">
               <div className="overflow-hidden h-100 hero-feature">
                 <img
                   src="/pets/canegatto.jpg"
-                  alt=""
+                  alt="Un cane e un gatto"
                   className="w-100 h-100 object-fit-cover d-block"
                 />
               </div>
-            </aside>
+            </div>
           </div>
         </div>
       </section>
