@@ -97,8 +97,6 @@ export default function SearchPage() {
 
 
 // Missioni future:
-// implementare la doppia visualizzazione (lista e griglia)
-// creare pagina gatto e pagina cane
 // implementare i filtri per categoria e per tipo di animale, magari anche brand (EXTRA)
 // aggiungere nella home page i link alle pagine per tipo di animale e per categoria (sentirsi con nabil)
 // fittare il design della pagina con quello del progetto

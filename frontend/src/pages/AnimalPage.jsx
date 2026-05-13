@@ -99,4 +99,4 @@ export default function AnimalPage() {
 
 
 // missione attuale:
-// filtrare lato backend i risultati 
+// implementare visualizzazione a griglia e a lista come nella searchpage
