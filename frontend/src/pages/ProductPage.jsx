@@ -112,7 +112,7 @@ export default function ProductPage() {
           </div>
 
           <div className="py-5">
-            <h3>Related</h3>
+            <h3>Prodotti correlati</h3>
             <div className="row row-cols-4">
               {dataProduct.related.map((product) => (
                 <div key={product.slug}>
