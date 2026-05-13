@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom';
 import { useSearchFilters } from '../hooks/useSearchFilters';
+import { useGlobal } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import ProductCardList from '../components/ProductCardList';
 import SearchBar from '../components/SearchBar';
 import OrderSelect from '../components/OrderSelect';
 import VisualizationButton from '../components/VisualizationButton';
+import SideCart from '../components/SideCart';
 
 export default function SearchPage() {
 
     const { products, search, order, handleFilterChange, listView, setListView } = useSearchFilters("");
+
+    const { asideCart, setAsideCart, addToCart } = useGlobal();
 
     return (
         <>
@@ -32,13 +36,13 @@ export default function SearchPage() {
                             listView ?
                                 (
                                     <div key={product.slug} className="col-12">
-                                        <ProductCardList product={product} />
+                                        <ProductCardList product={product} addToCart={() => addToCart(product, 1)} />
                                     </div>
                                 )
                                 :
                                 (
                                     <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <ProductCard product={product} />
+                                        <ProductCard product={product} addToCart={() => addToCart(product, 1)} />
                                     </div>
                                 )
                         ))}
@@ -56,12 +60,3 @@ export default function SearchPage() {
 
 
 
-
-// Missione attuale: 
-
-
-// Missioni future:
-// implementare i filtri per categoria e per tipo di animale, magari anche brand (EXTRA)
-// aggiungere nella home page i link alle pagine per tipo di animale e per categoria (sentirsi con nabil)
-// fittare il design della pagina con quello del progetto
-// aggiungere hover e altri effetti (design finale della pagina alla fine -giustamente-)
