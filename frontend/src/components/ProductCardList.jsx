@@ -22,16 +22,19 @@ export default function ProductCardList({ product, addToCart }) {
   return (
 
     <div className="card p-3 h-100 position-relative">
-      <button onClick={addToWishList} className="btn position-absolute start-0 pe-4 z-1 border-0">
-        <i className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}></i>
-      </button>
-      <Link to={`/product/${product.slug}`} className='text-decoration-none text-reset row'>
+      <div className='text-decoration-none text-reset row'>
         <div className="col-2 p-3">
-          <div className="ratio ratio-1x1">
-            <div className="d-flex align-items-center justify-content-center">
-              <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+          <button onClick={addToWishList} className="position-absolute start-0 pe-4 z-1 border-0">
+            <i className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}></i>
+          </button>
+          <Link to={`/product/${product.slug}`}>
+            <div className="ratio ratio-1x1">
+              <div className="d-flex align-items-center justify-content-center">
+                <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+              </div>
             </div>
-          </div>
+          </Link>
+
         </div>
         <div className="col-5 opacity-75">
           <div>{product.category}</div>
@@ -48,7 +51,7 @@ export default function ProductCardList({ product, addToCart }) {
             Aggiungi al carrello
           </button>
         </div>
-      </Link>
+      </div>
     </div >
   );
 }
