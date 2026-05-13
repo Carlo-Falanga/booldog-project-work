@@ -7,8 +7,17 @@ import ProductCard from "../components/ProductCard";
 import SideCart from "../components/SideCart";
 
 export default function ProductPage() {
-
-  const { cart, setCart, asideCart, setAsideCart, addToCart, increaseQuantity, decreaseQuantity, productQuantity } = useGlobal();
+  const {
+    cart,
+    setCart,
+    asideCart,
+    setAsideCart,
+    addToCart,
+    increaseQuantity,
+    decreaseQuantity,
+    updateQuantity,
+    productQuantity,
+  } = useGlobal();
   const { wishlist, setWishlist } = useWishlist();
 
   const [dataProduct, setDataProduct] = useState(null);
@@ -16,8 +25,7 @@ export default function ProductPage() {
   useEffect(() => {
     if (asideCart) {
       document.body.classList.add("overflow-hidden");
-    }
-    else {
+    } else {
       document.body.classList.remove("overflow-hidden");
     }
   }, [asideCart]);
@@ -29,8 +37,6 @@ export default function ProductPage() {
       .get(`http://localhost:3000/products/${slug}`)
       .then((res) => setDataProduct(res.data));
   }, [slug]);
-
-
 
   // verifico se il prodotto esiste nel carrello
   const existingProductWL = wishlist.find((item) => item.slug === slug);
@@ -45,7 +51,6 @@ export default function ProductPage() {
       // altrimenti lo aggiungo
       setWishlist([...wishlist, { ...dataProduct }]);
     }
-
   };
 
   return (
@@ -53,14 +58,22 @@ export default function ProductPage() {
       {dataProduct && (
         <div>
           <div className="row row-cols-2">
-
             <div>
               <div className="ratio ratio-1x1">
                 <div className="d-flex align-items-center justify-content-center">
-                  <button onClick={addToWishList} className="btn position-absolute end-0 top-0">
-                    <i className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}></i>
+                  <button
+                    onClick={addToWishList}
+                    className="btn position-absolute end-0 top-0"
+                  >
+                    <i
+                      className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}
+                    ></i>
                   </button>
-                  <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${dataProduct.img_url}`} alt={dataProduct.name} />
+                  <img
+                    className="w-100 h-100 object-fit-contain"
+                    src={`http://localhost:3000/images/products/${dataProduct.img_url}`}
+                    alt={dataProduct.name}
+                  />
                 </div>
               </div>
             </div>
@@ -72,12 +85,29 @@ export default function ProductPage() {
                 <p>{dataProduct.price} €</p>
 
                 <div className="btn-group mb-3">
-                  <button onClick={decreaseQuantity} type="button" className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn">-</button>
-                  <div className="btn btn-outline-secondary btn-sm px-3 border-start-0 border-end-0">{productQuantity}</div>
-                  <button onClick={increaseQuantity} type="button" className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn">+</button>
+                  <button
+                    onClick={decreaseQuantity}
+                    type="button"
+                    className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"
+                  >
+                    -
+                  </button>
+                  <div className="btn btn-outline-secondary btn-sm px-3 border-start-0 border-end-0">
+                    {productQuantity}
+                  </div>
+                  <button
+                    onClick={() => increaseQuantity(dataProduct?.stock)}
+                    type="button"
+                    className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"
+                  >
+                    +
+                  </button>
                 </div>
 
-                <button onClick={() => addToCart(dataProduct, productQuantity)} className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart">
+                <button
+                  onClick={() => addToCart(dataProduct, productQuantity)}
+                  className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart"
+                >
                   Aggiungi al carrello
                 </button>
               </div>
@@ -89,7 +119,10 @@ export default function ProductPage() {
             <div className="row row-cols-4">
               {dataProduct.related.map((product) => (
                 <div key={product.slug}>
-                  <ProductCard product={product} addToCart={() => addToCart(product, 1)} />
+                  <ProductCard
+                    product={product}
+                    addToCart={() => addToCart(product, 1)}
+                  />
                 </div>
               ))}
             </div>
