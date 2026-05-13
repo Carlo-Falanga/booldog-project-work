@@ -39,7 +39,7 @@ function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="custom_hero_bg_color">
+      <section className="custom_hero">
         <div className="container-fluid p-0 mb-5">
           <div className="row g-0 align-items-stretch">
             <div className="col-lg-6 d-flex flex-column justify-content-between py-5 hero-text-col">
