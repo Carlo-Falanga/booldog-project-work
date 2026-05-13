@@ -24,18 +24,23 @@ export default function Navbar() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">
-            <NavLink to="/" className="nav-link " href="#">
+            <NavLink to="/" className="nav-link " >
               Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/products/cane" className="nav-link " href="#">
+            <NavLink to="/products/cane" className="nav-link " >
               Cani
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/products/gatto" className="nav-link " href="#">
+            <NavLink to="/products/gatto" className="nav-link " >
               Gatti
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/products" className="nav-link " end>
+              Catalogo completo
             </NavLink>
           </li>
         </ul>
