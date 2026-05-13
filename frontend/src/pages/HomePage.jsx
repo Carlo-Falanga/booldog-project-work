@@ -71,7 +71,7 @@ function HomePage() {
     <>
       {/* ── HERO ── */}
       <section className="custom_hero_bg_color">
-        <div className="container-fluid px-4 px-md-5 py-5 mb-5">
+        <div className="container-fluid px-5 py-5 mb-5">
         <div className="row g-4 g-lg-5 align-items-stretch">
           <div className="col-lg-7 d-flex flex-column justify-content-between">
             <div className="d-flex align-items-center gap-3 mb-4 mb-md-5">
@@ -258,7 +258,7 @@ function HomePage() {
 
       {/* ── MARCHI ── */}
       <section id="marchi" className="custom_brand_bg text-light overflow-hidden">
-        <div className="container-fluid px-4 px-md-5 py-5 my-md-5">
+        <div className="container-fluid px-5 py-5 my-md-5">
           <header className="pb-3 mb-5 partners-head">
             <h2 className="section-title mb-0 text-light">
               Le case che <em>scegliamo,</em><br />
