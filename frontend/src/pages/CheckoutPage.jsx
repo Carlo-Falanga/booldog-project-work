@@ -15,7 +15,6 @@ export default function CheckoutPage() {
     const [couponName, setCouponName] = useState(null)
     const { cart, setCart } = useGlobal()
     const [orderMessage, setOrderMessage] = useState(null)
-    // messaggio di errore dal server (es. stock insufficiente, validazione, ecc.)
     const [serverError, setServerError] = useState("")
     const [newOrder, setNewOrder] = useState({
         "user_full_name": "",
@@ -82,9 +81,6 @@ export default function CheckoutPage() {
 
 
         } catch (error) {
-            // il server può rispondere in due modi diversi:
-            // 1) errori di validazione  -> { errors: [{ msg: "..." }, ...] }
-            // 2) errore singolo          -> { error: "messaggio" }  (es. stock insufficiente)
             const data = error.response?.data;
 
             if (Array.isArray(data?.errors)) {
@@ -159,9 +155,19 @@ export default function CheckoutPage() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div className="container d-flex justify-content-center p-5">
-                    <div className="row row-cols row-cols-sm-1 row-cols-md-2">
+
+
+
+                <div className="container d-flex justify-content-center my-5 ">
+
+                    <div className="row row-cols-1 row-cols-md-2">
                         <div className="col">
+
+                            <div className="d-flex justify-content-start ">
+                                <Link to="/cart">
+                                    <button className="btn btn-dark rounded-pill border-0 btn_cart"><i class="bi bi-arrow-left-short"></i>Modifica Carrello</button>
+                                </Link>
+                            </div>
 
                             {/* CONTATTO */}
                             <div className="d-flex flex-column justify-content-between d-lg-flex flex-lg-row ">
@@ -227,7 +233,7 @@ export default function CheckoutPage() {
                                     </div>
 
                                 </div>
-                                 {serverError && (
+                                {serverError && (
                                     <h4 className="text-danger d-flex justify-content-center mb-4">
                                         {serverError}
                                     </h4>
@@ -348,12 +354,12 @@ export default function CheckoutPage() {
                                     </button>
                                 </div>
 
-                                {orderMessage===true &&
-                                  <div className="text-success">ordine effettuato a breve verrai reindirizzato nella pagina di conferma!</div>
+                                {orderMessage === true &&
+                                    <div className="text-success">ordine effettuato a breve verrai reindirizzato nella pagina di conferma!</div>
                                 }
 
 
-                               
+
 
                                 <hr />
 
