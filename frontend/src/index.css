@@ -269,7 +269,16 @@ main {
   }
 }
 
+/* Spaziatura laterale custom sezioni hero e brand della Home Page */
+.hero-text-col {
+  padding-left: clamp(1.5rem, 6vw, 6rem);
+  padding-right: clamp(1.5rem, 3vw, 3rem);
+}
 
+.section-side-gutter {
+  padding-left: clamp(1.5rem, 6vw, 6rem);
+  padding-right: clamp(1.5rem, 6vw, 6rem);
+}
 
 .hero-feature {
   background: var(--bool-bone-deep);

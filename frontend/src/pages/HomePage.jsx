@@ -36,33 +36,14 @@ function HomePage() {
       .catch((err) => console.error("Errore caricamento brand:", err));
   }, []);
 
-  useEffect(() => {
-    if (activeFilter === "tutti") {
-      setFilteredProducts(products);
-    } else if (activeFilter === "cane") {
-      setFilteredProducts(
-        products.filter(
-          (p) => p.animal_type_id === 1 || p.animal_type_id === 3,
-        ),
-      );
-    } else if (activeFilter === "gatto") {
-      setFilteredProducts(
-        products.filter(
-          (p) => p.animal_type_id === 2 || p.animal_type_id === 3,
-        ),
-      );
-    }
-  }, [activeFilter, products]);
-
   return (
     <>
       {/* ── HERO ── */}
-      <section className="custom_hero">
-        <div className="container-fluid px-4 px-md-5 py-5 mb-5">
-          <div className="row g-4 g-lg-5 align-items-stretch">
-            <div className="col-lg-6 d-flex flex-column justify-content-between">
-              <div className="d-flex align-items-center gap-3 mb-4 mb-md-5">
-              </div>
+      <section className="custom_hero_bg_color">
+        <div className="container-fluid p-0 mb-5">
+          <div className="row g-0 align-items-stretch">
+            <div className="col-lg-6 d-flex flex-column justify-content-between py-5 hero-text-col">
+              <div className="d-flex align-items-center gap-3 mb-4 mb-md-5"></div>
 
               <h1 className="headline mb-4">
                 Il meglio per
@@ -80,7 +61,7 @@ function HomePage() {
                   Cibo, accessori e tanto amore. Scopri i nostri prodotti
                   selezionati per il benessere del tuo animale.
                 </p>
-                <div className="d-flex flex-wrap gap-2">
+                <div className="d-flex flex-wrap gap-2 mb-5">
                   <a
                     href="#prodotti"
                     className="btn btn-dark rounded-pill px-4 py-3 d-inline-flex align-items-center gap-2 btn-cta"
@@ -98,8 +79,8 @@ function HomePage() {
               </div>
             </div>
 
-            <aside className="col-lg-5">
-              <div className="rounded overflow-hidden shadow-sm h-100 hero-feature">
+            <aside className="col-lg-6">
+              <div className="overflow-hidden h-100 hero-feature">
                 <img
                   src="/pets/canegatto.jpg"
                   alt=""
@@ -276,7 +257,7 @@ function HomePage() {
         id="marchi"
         className="custom_brand_bg text-light overflow-hidden"
       >
-        <div className="container-fluid px-5 py-5 my-md-5">
+        <div className="container-fluid py-5 my-md-5 section-side-gutter">
           <header className="pb-3 mb-5 partners-head">
             <h2 className="section-title mb-0 text-light">
               Le case che <em>scegliamo,</em>
