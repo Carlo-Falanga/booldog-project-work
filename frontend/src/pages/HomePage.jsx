@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './HomePage.css'
-import {Link, NavLink} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const API_URL = 'http://localhost:3000'
 
@@ -50,28 +50,27 @@ function HomePage() {
   }
 
   const getAnimalBadgeClass = (id) => {
-    if (id === 1) return 'badge--dog' 
+    if (id === 1) return 'badge--dog'
     if (id === 2) return 'badge--cat'
     return 'badge--both'
   }
 
-  
   const marchi = [
-    { name: 'Catit',  img: 'http://localhost:3000/images/brands/catit.png'  },
-    { name: 'Ferplast',  img: 'http://localhost:3000/images/brands/ferplast.png'  },
-    { name: 'Flexi',  img: 'http://localhost:3000/images/brands/flexi.png'  },
-    { name: 'Hunter',  img: 'http://localhost:3000/images/brands/hunter.svg'  },
-    { name: 'Hurtta',  img: 'http://localhost:3000/images/brands/hurtta.png'  },
-    { name: 'Julius',  img: 'http://localhost:3000/images/brands/julius-k9.png'  },
-    { name: 'Kong',  img: 'http://localhost:3000/images/brands/kong.png'  },
-    { name: 'Ruffwear',  img: 'http://localhost:3000/images/brands/ruffwear.png'  },
-    { name: 'Stefanplast',  img: 'http://localhost:3000/images/brands/stefanplast.png'  },
-    { name: 'Trixie', img: 'http://localhost:3000/images/brands/trixie.png' },
+    { name: 'Catit',       img: 'http://localhost:3000/images/brands/catit.png'       },
+    { name: 'Ferplast',    img: 'http://localhost:3000/images/brands/ferplast.png'    },
+    { name: 'Flexi',       img: 'http://localhost:3000/images/brands/flexi.png'       },
+    { name: 'Hunter',      img: 'http://localhost:3000/images/brands/hunter.svg'      },
+    { name: 'Hurtta',      img: 'http://localhost:3000/images/brands/hurtta.png'      },
+    { name: 'Julius',      img: 'http://localhost:3000/images/brands/julius-k9.png'   },
+    { name: 'Kong',        img: 'http://localhost:3000/images/brands/kong.png'        },
+    { name: 'Ruffwear',    img: 'http://localhost:3000/images/brands/ruffwear.png'    },
+    { name: 'Stefanplast', img: 'http://localhost:3000/images/brands/stefanplast.png' },
+    { name: 'Trixie',      img: 'http://localhost:3000/images/brands/trixie.png'      },
   ]
 
   return (
     <>
-      {/* jumbo */}
+      {/* ── HERO ── */}
       <section className="hero">
         <div className="hero__grid">
           <div className="hero__left">
@@ -110,7 +109,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* categorie */}
+      {/* ── CATEGORIE ── */}
       <section id="categorie" className="section">
         <div className="section__head">
           <span className="section__num">02 — Per specie</span>
@@ -183,7 +182,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* prodotti in evidenza */}
+      {/* ── PRODOTTI IN EVIDENZA ── */}
       <section id="prodotti" className="section section--products">
         <div className="section__head">
           <span className="section__num">03 — In evidenza</span>
@@ -232,51 +231,55 @@ function HomePage() {
         {!loading && !error && filteredProducts.length > 0 && (
           <div className="products__grid">
             {filteredProducts.map(product => (
-              <article className="product-card" key={product.id}>
-                <Link to={`/product/${product.slug}`} className="product-card__link">
-                  <div className="product-card__image">
-                    {product.img_url ? (
-                      <img
-                        src={`http://localhost:3000/images/products/${product.img_url}`}
-                        alt={product.name}
-                        className="product-card__img"
-                      />
-                    ) : (
-                      <span className="product-card__emoji">{getAnimalEmoji(product.animal_type_id)}</span>
-                    )}
-                  </div>
+              <div className="product-card" key={product.id}>
+                <div className="product-card__image">
+                  {product.img_url ? (
+                    <img
+                      src={`http://localhost:3000/images/products/${product.img_url}`}
+                      alt={product.name}
+                    />
+                  ) : (
+                    <span className="product-card__emoji">
+                      {getAnimalEmoji(product.animal_type_id)}
+                    </span>
+                  )}
+                </div>
 
-                  <div className="product-card__info">
-                    <span className={`badge mb-2 product-card__badge ${getAnimalBadgeClass(product.animal_type_id)}`}>
+                <Link to={`/product/${product.slug}`} className="product-card__body">
+                  <div className="product-card__badges">
+                    <span className={`product-card__badge ${getAnimalBadgeClass(product.animal_type_id)}`}>
                       {getAnimalEmoji(product.animal_type_id)} {getAnimalName(product.animal_type_id)}
                     </span>
-
                     {product.category && (
-                      <span className="badge bg-light text-dark border mb-2 product-card__badge">
+                      <span className="product-card__badge product-card__badge--cat">
                         {product.category}
                       </span>
                     )}
+                  </div>
 
-                    <h5 className="product-card__name">{product.name}</h5>
-                    <p className="product-card__desc">{product.description || 'Prodotto di qualità per il tuo animale.'}</p>
+                  <h5 className="product-card__name">{product.name}</h5>
+                  <p className="product-card__desc">
+                    {product.description || 'Prodotto di qualità per il tuo animale.'}
+                  </p>
 
-                    <div className="product-card__footer">
-                      <span className="product-card__price">€{Number(product.price).toFixed(2)}</span>
-                      <span className="product-card__arrow" aria-hidden="true">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                          <path d="M5 12h14M13 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
+                  <div className="product-card__footer">
+                    <span className="product-card__price">
+                      €{Number(product.price).toFixed(2)}
+                    </span>
+                    <span className="product-card__arrow">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                        <path d="M5 12h14M13 5l7 7-7 7" />
+                      </svg>
+                    </span>
                   </div>
                 </Link>
-              </article>
+              </div>
             ))}
           </div>
         )}
       </section>
 
-      {/* marchi */}
+      {/* ── MARCHI ── */}
       <section id="marchi" className="partners">
         <div className="partners__inner">
 
@@ -293,7 +296,6 @@ function HomePage() {
             rispetto degli animali e prodotti che durano nel tempo.
           </p>
 
-          {/* loghi brand */}
           <div className="partners__row" aria-label="Marchi partner">
             {marchi.map((m) => (
               <div className="partners__brand" key={m.name}>
@@ -309,5 +311,3 @@ function HomePage() {
 }
 
 export default HomePage
-
-   
