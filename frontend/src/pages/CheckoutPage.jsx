@@ -72,7 +72,7 @@ export default function CheckoutPage() {
 
             setTimeout(() => {
                 navigate(`/order-confirmed/${data.order_id}`)
-            }, 500);
+            }, 1500);
 
             
 
