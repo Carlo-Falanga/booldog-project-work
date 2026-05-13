@@ -67,6 +67,77 @@ const index = (req, res) => {
 
 }
 
+const indexAnimalType = (req, res) => {
+
+    // prendo l'animal type passato dalla call api
+    const { animalType } = req.params
+
+    //salvo l'ordine passato nell'url e il search
+    const { sort, search } = req.query;
+
+    let orderQuery = `p.created_at DESC`;
+
+    switch (sort) {
+        //modifico la query string sulla base dell'ordine selezionato
+        case "price-up":
+            orderQuery = `p.price`;
+            break;
+        case "price-down":
+            orderQuery = `p.price DESC`;
+            break;
+        case "name":
+            orderQuery = `p.name`;
+            break;
+        default:
+            //nel caso default, che è anche quello iniziale, il sortaggio è per latest
+            orderQuery = `p.created_at DESC`;
+    }
+
+    const queryParams = [`${animalType}`];
+
+    let sql = `
+    SELECT 
+    p.id,
+    p.slug,
+    p.name,
+    p.description,
+    p.price,
+    p.color,
+    p.material,
+    p.size,
+    p.stock,
+    p.img_url,
+    p.category,
+    p.is_featured,
+    p.created_at,
+    b.name AS brand_name,
+    b.slug AS brand_slug,
+    a.name AS animal_name,
+    a.slug AS animal_slug
+    FROM products p
+    JOIN brands b ON b.id = p.brand_id
+    JOIN animal_types a ON a.id = p.animal_type_id
+     WHERE a.slug IN (?, "cane-gatto")`;
+
+    if (search && search.trim() !== "") {
+        sql += ` AND p.name LIKE ?`;
+        queryParams.push(`%${search}%`);
+    }
+
+    sql += ` ORDER BY ${orderQuery}`;
+
+    connection.query(sql, queryParams, (err, results) => {
+
+        if (err) return res.status(500).json({
+            error: true,
+            message: "Database error"
+        })
+
+        res.json(results)
+    })
+
+}
+
 const show = (req, res) => {
     const { slug } = req.params;
 
@@ -151,4 +222,4 @@ const show = (req, res) => {
     ;
 }
 
-module.exports = { index, show }
+module.exports = { index, show, indexAnimalType }

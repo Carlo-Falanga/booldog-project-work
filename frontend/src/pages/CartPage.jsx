@@ -33,6 +33,16 @@ export default function CartPage() {
         ) : (
           <div className="row row-cols-1 row-cols-lg-2 g-5 ">
             <div className="col">
+              {/* Freccia indietro per tornare alla visualizzazione dei prodotti */}
+              <Link
+                to="/search"
+                className="d-inline-flex align-items-center gap-2 mb-4 text-decoration-none text-dark"
+              >
+                <i className="bi bi-arrow-left"></i>
+                Continua lo shopping
+              </Link>
+
+              {/* Componente lista prodotti nel carrello */}
               <CartProductsList
                 total={total}
                 updateQuantity={updateQuantity}
@@ -61,23 +71,8 @@ export default function CartPage() {
                   </li>
                 </ul>
 
-                {/* Totale */}
-                <div className="d-flex justify-content-between align-items-baseline pt-3 border-top">
-                  <h3
-                    className="cart-name mb-0"
-                    
-                  >
-                    Totale
-                  </h3>
-                  <span
-                    className="cart-name cart_total"
-                  >
-                    € {total.toFixed(2).split(".")[0]}
-                    <span className=" ms-1 cart_cents">
-                      ,{total.toFixed(2).split(".")[1]}
-                    </span>
-                  </span>
-                </div>
+                {/* Componente totale carrello */}
+               <CartTotal/>
 
                 <p className="cart-meta mb-4 mt-1">
                   IVA inclusa ·Spedizione Gratuita

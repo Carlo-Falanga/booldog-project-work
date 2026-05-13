@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, } from "react";
 import axios from "axios";
 import { useGlobal } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+
 
 export default function CheckoutPage() {
 
@@ -13,6 +14,8 @@ export default function CheckoutPage() {
     const [isLoadingCoupon, setIsLoadingCoupon] = useState(false);
     const [couponName, setCouponName] = useState(null)
     const { cart, setCart } = useGlobal()
+    const [orderMessage, setOrderMessage] = useState(null)
+    const [serverError, setServerError] = useState([])
     const [newOrder, setNewOrder] = useState({
         "user_full_name": "",
         "email": "",
@@ -44,6 +47,8 @@ export default function CheckoutPage() {
         setNewOrder(prev => ({ ...prev, [id]: value }));
     }
 
+    const navigate = useNavigate()
+
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -55,15 +60,34 @@ export default function CheckoutPage() {
             }))
             ,
             coupon_code: couponStatus === "valid" ? couponCode.trim() : undefined
+
         };
+
+
 
         try {
             const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
-            console.log(data);
-        } catch (err) {
-            console.error(err);
+            console.log(data)
+            setOrderMessage(true)
+
+            setTimeout(() => {
+                navigate(`/order-confirmed/${data.order_id}`)
+            }, 1500);
+
+            
+
+        } catch (error) {
+            if (error.response){
+                const {errors} = error.response.data;
+                
+                errors.forEach(err=>setServerError(err.msg) )
+                ;
+            }
+            setOrderMessage(false)
         }
     }
+
+
 
     const handleApplyCoupon = async (e) => {
         e.preventDefault()
@@ -115,6 +139,9 @@ export default function CheckoutPage() {
 
 
 
+
+
+
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -152,7 +179,7 @@ export default function CheckoutPage() {
                             {/* SPEDIZIONE */}
                             <div className="mt-5">
                                 <div className="d-flex gap-2 align-items-end ">
-                                    <p className="">02</p>
+                                    <p className="cart-meta">02</p>
                                     <h3>Indirizzo di spedizione</h3>
                                 </div>
 
@@ -167,7 +194,7 @@ export default function CheckoutPage() {
                                     <label htmlFor="inputAddress" className="form-label cart-meta">Indirizzo</label>
                                     <input value={newOrder.address} id="address" onChange={handleChange} type="text" className="form-control" placeholder="Via Roma 1" required />
                                 </div>
-                                <div className="d-flex gap-2 mb-3">
+                                <div className="d-flex gap-2 mb-1">
                                     <div className="">
                                         <label htmlFor="inputCity" className="form-label cart-meta">Città</label>
                                         <input value={newOrder.city} id="city" onChange={handleChange} type="text" className="form-control" placeholder="Roma" required />
@@ -186,6 +213,11 @@ export default function CheckoutPage() {
                                     </div>
 
                                 </div>
+                                 {serverError && (
+                                    <h4 className="text-danger d-flex justify-content-center mb-4">
+                                        {serverError}
+                                    </h4>
+                                )}
                             </div>
 
                         </div>
@@ -210,54 +242,55 @@ export default function CheckoutPage() {
 
                                 <div className="d-flex flex-column gap-3">
                                     {cart.map(item => (
-                                        <div className="d-flex justify-content-between align-items-center">
+                                        <div key={item.slug} className="d-flex justify-content-between align-items-center">
                                             <div className="d-flex flex-column">
                                                 <span className="cart-meta">{item.brand_name}</span>
-                                                <span className="order_product_font fw-medium">{item.name} <i class="bi bi-x"></i>{item.quantity}</span>
+                                                <span className="order_product_font fw-medium pe-1">{item.name} <i className="bi bi-x"></i>{item.quantity}</span>
                                             </div>
                                             <span className="order_product_font fw-medium">€{item.price}</span>
                                         </div>
                                     ))}
                                 </div>
                                 {/* COUPON */}
-                                <div className="d-flex justify-content-center mt-4 mb-4">
-                                    <form className="w-100" onSubmit={handleApplyCoupon}>
-                                        <div className="input-group">
-                                            <input
-                                                type="text"
-                                                className={`form-control ${couponStatus === "valid" ? "is-valid" : couponStatus === "invalid" ? "is-invalid" : ""} rounded-start-pill p-3`}
-                                                id="inputCoupon"
-                                                maxLength="20"
-                                                value={couponCode}
-                                                onChange={(e) => setCouponCode(e.target.value)}
-                                                disabled={couponStatus === "valid"}
-                                                placeholder="Codice coupon"
-                                            />
-                                            {couponStatus === "valid" ? (
-                                                <button className="btn btn-outline-danger rounded-end-pill" onClick={handleRemoveCoupon} type="button">
-                                                    Rimuovi
-                                                </button>
-                                            ) : (
-                                                <button
-                                                    className="btn rounded-end-pill btn-dark "
-                                                    onClick={handleApplyCoupon}
-                                                    type="button"
-                                                    disabled={isLoadingCoupon || !couponCode.trim()}
-                                                >
-                                                    {isLoadingCoupon ? (
-                                                        <span className="spinner-border spinner-border-sm" />
-                                                    ) : "Applica"}
-                                                </button>
-                                            )}
-                                        </div>
+                                <div className="d-flex flex-column justify-content-center mt-4 mb-4">
 
+                                    <div className="input-group">
+                                        <input
+                                            type="text"
+                                            className={`form-control ${couponStatus === "valid" ? "is-valid" : couponStatus === "invalid" ? "is-invalid" : ""} rounded-start-pill p-3`}
+                                            id="inputCoupon"
+                                            maxLength="20"
+                                            value={couponCode}
+                                            onChange={(e) => setCouponCode(e.target.value)}
 
-                                        {couponMessage && (
-                                            <div className={`mt-2 small ${couponStatus === "valid" ? "text-success" : "text-danger"}`}>
-                                                {couponMessage}
-                                            </div>
+                                            disabled={couponStatus === "valid"}
+                                            placeholder="Codice coupon"
+                                        />
+                                        {couponStatus === "valid" ? (
+                                            <button className="btn btn-outline-danger rounded-end-pill" onClick={handleRemoveCoupon} type="button">
+                                                Rimuovi
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="btn rounded-end-pill btn-dark "
+                                                onClick={handleApplyCoupon}
+                                                type="button"
+                                                disabled={isLoadingCoupon || !couponCode.trim()}
+                                            >
+                                                {isLoadingCoupon ? (
+                                                    <span className="spinner-border spinner-border-sm" />
+                                                ) : "Applica"}
+                                            </button>
                                         )}
-                                    </form>
+                                    </div>
+
+
+                                    {couponMessage && (
+                                        <div className={`mt-2  ${couponStatus === "valid" ? "text-success" : "text-danger"} d-flex justify-content-center`}>
+                                            {couponMessage}
+                                        </div>
+                                    )}
+
                                 </div>
 
                                 <hr />
@@ -301,11 +334,18 @@ export default function CheckoutPage() {
                                     </button>
                                 </div>
 
+                                {orderMessage===true &&
+                                  <div className="text-success">ordine effettuato a breve verrai reindirizzato nella pagina di conferma!</div>
+                                }
+
+
+                               
+
                                 <hr />
 
                                 <ul className="list-unstyled mb-0">
                                     <li className="d-flex gap-3 mb-3">
-                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <i className="bi bi-hand-thumbs-up"></i>
                                         <div>
                                             <div className="fw-medium">Pagamento protetto</div>
                                             <div className="small text-muted">

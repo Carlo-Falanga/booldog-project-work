@@ -1,23 +1,32 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useSearchFilters } from '../hooks/useSearchFilters';
-import { useGlobal } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import ProductCardList from '../components/ProductCardList';
 import SearchBar from '../components/SearchBar';
 import OrderSelect from '../components/OrderSelect';
 import VisualizationButton from '../components/VisualizationButton';
-import SideCart from '../components/SideCart';
 
-export default function SearchPage() {
+export default function AnimalPage() {
 
-    const { products, search, order, handleFilterChange, listView, setListView } = useSearchFilters("");
+    const { animalSlug } = useParams();
 
-    const { asideCart, setAsideCart, addToCart } = useGlobal();
+    const { products, search, order, handleFilterChange, listView, setListView } = useSearchFilters(`animal/${animalSlug}`);
+
+
+
 
     return (
         <>
             <div className="container">
-                <h1 className='text-center mt-5 mb-3'>Ricerca prodotti</h1>
+                {animalSlug === "gatto" ?
+                    <h1 className='text-center mt-5 mb-3'>
+                        Prodotti per gatti
+                    </h1>
+                    :
+                    <h1 className='text-center mt-5 mb-3'>
+                        Prodotti per cani
+                    </h1>
+                }
 
                 <VisualizationButton setListView={setListView} />
 
@@ -36,13 +45,13 @@ export default function SearchPage() {
                             listView ?
                                 (
                                     <div key={product.slug} className="col-12">
-                                        <ProductCardList product={product} addToCart={() => addToCart(product, 1)} />
+                                        <ProductCardList product={product} />
                                     </div>
                                 )
                                 :
                                 (
                                     <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <ProductCard product={product} addToCart={() => addToCart(product, 1)} />
+                                        <ProductCard product={product} />
                                     </div>
                                 )
                         ))}
@@ -50,9 +59,6 @@ export default function SearchPage() {
                     :
                     <h2 className=' position-absolute top-50 start-50 translate-middle'>Nessun prodotto trovato</h2>
                 }
-
-                {asideCart && <SideCart setAsideCart={setAsideCart} />}
-
             </div>
         </>
     )
@@ -60,3 +66,5 @@ export default function SearchPage() {
 
 
 
+// missione attuale:
+// implementare visualizzazione a griglia e a lista come nella searchpage
