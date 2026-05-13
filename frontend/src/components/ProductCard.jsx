@@ -1,7 +1,7 @@
 import { useWishlist } from "../context/WishListContext";
 import { Link, useParams } from "react-router-dom";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, addToCart }) {
   const { wishlist, setWishlist } = useWishlist();
 
   // verifico se il prodotto esiste nel carrello
@@ -25,20 +25,34 @@ export default function ProductCard({ product }) {
       <button onClick={addToWishList} className="btn position-absolute end-0 z-1 border-0">
         <i className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}></i>
       </button>
-      <Link to={`/product/${product.slug}`} className=' text-decoration-none text-reset'>
-        <div className="ratio ratio-1x1">
-          <div className="d-flex align-items-center justify-content-center">
-            <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+      <div className="text-decoration-none text-reset">
+
+        <Link to={`/product/${product.slug}`}>
+          <div className="ratio ratio-1x1">
+            <div className="d-flex align-items-center justify-content-center">
+              <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+            </div>
           </div>
-        </div>
+        </Link>
+
         <div className="px-3 pt-3 pb-4">
           <div className="cart-meta mb-3">{product.category}</div>
           <h3 className="cart-name h5">{product.name}</h3>
-          <div className="border-top pt-3">
+          {product.id}
+
+          <div className="border-top pt-3 d-flex align-items-center justify-content-between">
             <div className="cart-name fs-4">{product.price} €</div>
+            <div className="">
+              <button
+                onClick={addToCart}
+                className="btn btn-dark btn-sm px-3 rounded-pill">
+                Aggiungi al carrello
+              </button>
+            </div>
           </div>
+
         </div>
-      </Link>
+      </div>
 
 
     </div>

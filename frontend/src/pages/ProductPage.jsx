@@ -4,18 +4,23 @@ import axios from "axios";
 import { useGlobal } from "../context/CartContext";
 import { useWishlist } from "../context/WishListContext";
 import ProductCard from "../components/ProductCard";
-
 import SideCart from "../components/SideCart";
 
 export default function ProductPage() {
-  const { cart, setCart } = useGlobal();
+
+  const { cart, setCart, asideCart, setAsideCart, addToCart, increaseQuantity, decreaseQuantity, productQuantity } = useGlobal();
   const { wishlist, setWishlist } = useWishlist();
 
   const [dataProduct, setDataProduct] = useState(null);
 
-  const [asideCart, setAsideCart] = useState(false);
-
-  const [productQuantity, setProductQuantity] = useState(1);
+  useEffect(() => {
+    if (asideCart) {
+      document.body.classList.add("overflow-hidden");
+    }
+    else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [asideCart]);
 
   const { slug } = useParams();
 
@@ -25,42 +30,7 @@ export default function ProductPage() {
       .then((res) => setDataProduct(res.data));
   }, [slug]);
 
-  // funzione aggiungi al carrello
-  const addToCart = () => {
-    // verifico se il prodotto esiste nel carrello
-    const existingProduct = cart.find((item) => item.id === dataProduct.id);
 
-    // se esiste aggiorno la quantità del prodotto esistente
-    if (existingProduct) {
-      const updatedCart = cart.map((item) =>
-        item.id === dataProduct.id
-          ? { ...item, quantity: item.quantity + productQuantity }
-          : item,
-      );
-      setCart(updatedCart);
-      // se non esiste aggiungo nuovo prodotto con quantità 1
-    } else {
-      setCart([...cart, { ...dataProduct, quantity: productQuantity }]);
-    }
-
-    setAsideCart(true);
-    setProductQuantity(1);
-  };
-
-  // aumento quantità da aggiungere al carrello con stock come massimale
-  // come massimale andrà inserito stock meno quantità già nel carrello
-  const increaseQuantity = () => {
-    if (productQuantity < dataProduct?.stock) {
-      setProductQuantity(productQuantity + 1);
-    }
-  };
-
-  // diminuisco quantità da aggiungere al carrello se maggiore di 1
-  const decreaseQuantity = () => {
-    if (productQuantity > 1) {
-      setProductQuantity(productQuantity - 1);
-    }
-  };
 
   // verifico se il prodotto esiste nel carrello
   const existingProductWL = wishlist.find((item) => item.slug === slug);
@@ -100,12 +70,14 @@ export default function ProductPage() {
                 <h1>{dataProduct.name}</h1>
                 <p>{dataProduct.description}</p>
                 <p>{dataProduct.price} €</p>
-                <div className="d-flex">
-                  <button onClick={decreaseQuantity}>-</button>
-                  <div>{productQuantity}</div>
-                  <button onClick={increaseQuantity}>+</button>
+
+                <div className="btn-group mb-3">
+                  <button onClick={decreaseQuantity} type="button" className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn">-</button>
+                  <div className="btn btn-outline-secondary btn-sm px-3 border-start-0 border-end-0">{productQuantity}</div>
+                  <button onClick={increaseQuantity} type="button" className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn">+</button>
                 </div>
-                <button onClick={addToCart} className="btn btn-primary">
+
+                <button onClick={() => addToCart(dataProduct, productQuantity)} className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart">
                   Aggiungi al carrello
                 </button>
               </div>
@@ -117,7 +89,7 @@ export default function ProductPage() {
             <div className="row row-cols-4">
               {dataProduct.related.map((product) => (
                 <div key={product.slug}>
-                  <ProductCard product={product} />
+                  <ProductCard product={product} addToCart={() => addToCart(product, 1)} />
                 </div>
               ))}
             </div>
