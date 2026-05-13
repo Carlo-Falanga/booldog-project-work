@@ -57,11 +57,21 @@ export function CartContextProvider({ children }) {
     // se stock non è un numero uso Infinity come fallback (non blocca l'aggiunta)
     const stock = typeof item.stock === "number" ? item.stock : Infinity;
 
+    // se lo stock è 0 (o negativo) non aggiungo proprio il prodotto al carrello
+    if (stock <= 0) {
+      return;
+    }
+
     // verifico se il prodotto esiste nel carrello
     const existingProduct = cart.find((product) => product.id === item.id);
 
     // se esiste aggiorno la quantità del prodotto esistente
     if (existingProduct) {
+      // se ho già tutti i pezzi disponibili non aggiorno
+      if (existingProduct.quantity >= stock) {
+        return;
+      }
+
       const updatedCart = cart.map((product) => {
         if (product.id === item.id) {
           // sommo la quantità nuova a quella già nel carrello
