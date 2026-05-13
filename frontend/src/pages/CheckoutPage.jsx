@@ -3,6 +3,7 @@ import axios from "axios";
 import { useGlobal } from "../context/CartContext";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
+
 export default function CheckoutPage() {
 
     const [couponCode, setCouponCode] = useState("");
@@ -70,8 +71,10 @@ export default function CheckoutPage() {
             setOrderMessage(true)
 
             setTimeout(() => {
-                navigate("/order-confirmed")
-            }, 3000);
+                navigate(`/order-confirmed/${data.order_id}`)
+            }, 500);
+
+            
 
         } catch (error) {
             if (error.response){
