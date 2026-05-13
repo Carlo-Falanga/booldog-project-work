@@ -164,6 +164,15 @@ main {
   }
 }
 
+.remove_product_list {
+  color: #000000;
+  transition: color 0.2s ease;
+}
+
+.remove_product_list:hover {
+  color: var(--bool-forest);
+}
+
 /* CART SUMMARY */
 .bg-paper {
   background-color: var(--bool-paper);

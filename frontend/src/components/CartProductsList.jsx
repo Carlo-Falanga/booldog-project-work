@@ -90,7 +90,7 @@ export default function CartProductsList() {
 
                   <button
                     type="button"
-                    className="btn btn-link btn-sm text-muted p-0 text-decoration-none"
+                    className="btn btn-link btn-sm p-0 text-decoration-none remove_product_list"
                     onClick={() => removeFromCart(item.slug)}
                   >
                     Rimuovi
