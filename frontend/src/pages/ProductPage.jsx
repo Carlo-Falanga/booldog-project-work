@@ -18,6 +18,7 @@ export default function ProductPage() {
     decreaseQuantity,
     updateQuantity,
     productQuantity,
+    setProductQuantity,
   } = useGlobal();
 
   const {
@@ -29,11 +30,28 @@ export default function ProductPage() {
 
   const { slug } = useParams();
 
+  // ogni volta che cambio prodotto resetto la quantità a 1
+  // (così non eredito la quantità scelta sul prodotto precedente)
   useEffect(() => {
+    setProductQuantity(1);
     axios
       .get(`http://localhost:3000/products/${slug}`)
       .then((res) => setDataProduct(res.data));
   }, [slug]);
+
+  // controllo se questo prodotto è già nel carrello e con che quantità
+  const existingInCart = cart.find((p) => p.id === dataProduct?.id);
+  const quantityInCart = existingInCart ? existingInCart.quantity : 0;
+
+  // quanti pezzi può ancora aggiungere l'utente al carrello
+  const stock = dataProduct?.stock ?? 0;
+  const remainingStock = stock - quantityInCart;
+
+  // disabilito il "+" se la prossima aggiunta supererebbe lo stock
+  const isPlusDisabled = productQuantity >= remainingStock;
+
+  // disabilito "Aggiungi al carrello" se non c'è più stock disponibile
+  const isAddDisabled = remainingStock <= 0;
 
   // verifico se il prodotto esiste nel carrello
   const existingProductWL = wishlist.find((item) => item.slug === slug);
@@ -85,6 +103,7 @@ export default function ProductPage() {
                   <button
                     onClick={decreaseQuantity}
                     type="button"
+                    disabled={productQuantity <= 1}
                     className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"
                   >
                     -
@@ -93,19 +112,31 @@ export default function ProductPage() {
                     {productQuantity}
                   </div>
                   <button
-                    onClick={() => increaseQuantity(dataProduct?.stock)}
+                    onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
                     type="button"
+                    disabled={isPlusDisabled}
                     className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"
                   >
                     +
                   </button>
                 </div>
 
+                {/* messaggio informativo sullo stock */}
+                {stock === 0 && (
+                  <p className="text-danger small mb-2">Prodotto esaurito</p>
+                )}
+                {stock > 0 && remainingStock <= 0 && (
+                  <p className="text-warning small mb-2">
+                    Hai già tutti i pezzi disponibili nel carrello
+                  </p>
+                )}
+
                 <button
                   onClick={() => addToCart(dataProduct, productQuantity)}
+                  disabled={isAddDisabled}
                   className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart"
                 >
-                  Aggiungi al carrello
+                  {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
                 </button>
               </div>
             </div>

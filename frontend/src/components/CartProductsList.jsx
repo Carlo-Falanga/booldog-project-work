@@ -19,7 +19,15 @@ export default function CartProductsList() {
 
         {/* Lista */}
         <ul className="list-unstyled m-0">
-          {cart.map((item) => (
+          {cart.map((item) => {
+            // se non conosco lo stock non blocco i bottoni
+            const hasStock = typeof item.stock === "number";
+            // disabilito "+" se ho già raggiunto il massimo disponibile
+            const isPlusDisabled = hasStock && item.quantity >= item.stock;
+            // disabilito "-" se sono già a 1 (non si può scendere sotto)
+            const isMinusDisabled = item.quantity <= 1;
+
+            return (
             <li
               key={item.slug}
               className="d-flex gap-4 py-4 border-bottom cart-item"
@@ -61,6 +69,7 @@ export default function CartProductsList() {
                   <div className="btn-group" role="group" aria-label="Quantità">
                     <button
                       type="button"
+                      disabled={isMinusDisabled}
                       className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"
                       onClick={() => updateQuantity(item.slug, -1)}
                     >
@@ -71,6 +80,7 @@ export default function CartProductsList() {
                     </span>
                     <button
                       type="button"
+                      disabled={isPlusDisabled}
                       className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"
                       onClick={() => updateQuantity(item.slug, +1)}
                     >
@@ -96,7 +106,8 @@ export default function CartProductsList() {
                 <span className="cart-name fs-4">€ {item.price}</span>
               </div>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </section>
     </>

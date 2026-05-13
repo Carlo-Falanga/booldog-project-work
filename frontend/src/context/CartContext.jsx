@@ -33,9 +33,13 @@ export function CartContextProvider({ children }) {
 
   const [productQuantity, setProductQuantity] = useState(1);
 
-  // aumento quantità da aggiungere al carrello con stock come massimale
-  const increaseQuantity = (stock) => {
-    if (productQuantity < stock) {
+  // aumento quantità da aggiungere al carrello tenendo conto
+  // sia dello stock disponibile sia di quanti pezzi sono già nel carrello
+  const increaseQuantity = (stock, quantityInCart = 0) => {
+    // se stock non è un numero non blocco l'utente (fallback)
+    const maxStock = typeof stock === "number" ? stock : Infinity;
+
+    if (productQuantity + quantityInCart < maxStock) {
       setProductQuantity(productQuantity + 1);
     }
   };
@@ -50,20 +54,29 @@ export function CartContextProvider({ children }) {
 
   // funzione aggiungi al carrello
   const addToCart = (item, quantity) => {
+    // se stock non è un numero uso Infinity come fallback (non blocca l'aggiunta)
+    const stock = typeof item.stock === "number" ? item.stock : Infinity;
+
     // verifico se il prodotto esiste nel carrello
     const existingProduct = cart.find((product) => product.id === item.id);
 
     // se esiste aggiorno la quantità del prodotto esistente
     if (existingProduct) {
-      const updatedCart = cart.map((product) =>
-        product.id === item.id
-          ? { ...product, quantity: product.quantity + quantity }
-          : product,
-      );
+      const updatedCart = cart.map((product) => {
+        if (product.id === item.id) {
+          // sommo la quantità nuova a quella già nel carrello
+          const newQuantity = product.quantity + quantity;
+          // ma non supero mai lo stock disponibile
+          const finalQuantity = Math.min(newQuantity, stock);
+          return { ...product, quantity: finalQuantity };
+        }
+        return product;
+      });
       setCart(updatedCart);
-      // se non esiste aggiungo nuovo prodotto con quantità 1
+      // se non esiste aggiungo il nuovo prodotto (sempre limitato dallo stock)
     } else {
-      setCart([...cart, { ...item, quantity: quantity }]);
+      const safeQuantity = Math.min(quantity, stock);
+      setCart([...cart, { ...item, quantity: safeQuantity }]);
     }
 
     setAsideCart(true);
@@ -78,14 +91,21 @@ export function CartContextProvider({ children }) {
     0,
   );
 
-  // Aggiorna la quantita' del prodotto
+  // Aggiorna la quantita' del prodotto nel carrello (+1 o -1)
   const updateQuantity = (slug, amount) => {
     const updated = cart.map((item) => {
+      if (item.slug !== slug) return item;
+
+      // calcolo la nuova quantità
       const newQty = item.quantity + amount;
-      if (item.slug === slug) {
-        return { ...item, quantity: Math.max(1, Math.min(newQty, item.stock)) };
-      }
-      return item;
+
+      // se non conosco lo stock uso Infinity (non blocco l'utente)
+      const maxStock = typeof item.stock === "number" ? item.stock : Infinity;
+
+      // la quantità deve stare tra 1 e lo stock disponibile
+      const safeQty = Math.max(1, Math.min(newQty, maxStock));
+
+      return { ...item, quantity: safeQty };
     });
 
     setCart(updated);
@@ -111,7 +131,8 @@ export function CartContextProvider({ children }) {
       addToCart,
       increaseQuantity,
       decreaseQuantity,
-      productQuantity
+      productQuantity,
+      setProductQuantity
     }}>
       {children}
     </CartContext.Provider>
