@@ -50,16 +50,29 @@ function HomePage() {
   }
 
   const getAnimalBadgeClass = (id) => {
-    if (id === 1) return 'badge--dog'
+    if (id === 1) return 'badge--dog' 
     if (id === 2) return 'badge--cat'
     return 'badge--both'
   }
+
+  
+  const marchi = [
+    { name: 'Catit',  img: 'http://localhost:3000/images/brands/catit.png'  },
+    { name: 'Ferplast',  img: 'http://localhost:3000/images/brands/ferplast.png'  },
+    { name: 'Flexi',  img: 'http://localhost:3000/images/brands/flexi.png'  },
+    { name: 'Hunter',  img: 'http://localhost:3000/images/brands/hunter.svg'  },
+    { name: 'Hurtta',  img: 'http://localhost:3000/images/brands/hurtta.png'  },
+    { name: 'Julius',  img: 'http://localhost:3000/images/brands/julius-k9.png'  },
+    { name: 'Kong',  img: 'http://localhost:3000/images/brands/kong.png'  },
+    { name: 'Ruffwear',  img: 'http://localhost:3000/images/brands/ruffwear.png'  },
+    { name: 'Stefanplast',  img: 'http://localhost:3000/images/brands/stefanplast.png'  },
+    { name: 'Trixie', img: 'http://localhost:3000/images/brands/trixie.png' },
+  ]
 
   return (
     <>
       {/* jumbo */}
       <section className="hero">
-
         <div className="hero__grid">
           <div className="hero__left">
             <div className="hero__tag">
@@ -92,33 +105,9 @@ function HomePage() {
           </div>
 
           <aside className="hero__feature">
-            <img
-              src="/pets/canegatto.jpg"
-              alt=""
-              className="hero__feature-img"
-            />
+            <img src="/pets/canegatto.jpg" alt="" className="hero__feature-img" />
           </aside>
         </div>
-
-        {/* strip metriche */}
-        {/* <div className="hero__meta" aria-hidden="true">
-          <div>
-            <span className="hero__meta-num">∞</span>
-            <span><strong>Spedizione gratuita</strong>su ogni ordine, sempre</span>
-          </div>
-          <div>
-            <span className="hero__meta-num">22</span>
-            <span><strong>Marchi premium</strong>europei selezionati</span>
-          </div>
-          <div>
-            <span className="hero__meta-num">30</span>
-            <span><strong>Giorni di prova</strong>resi gratuiti</span>
-          </div>
-          <div>
-            <span className="hero__meta-num">∞</span>
-            <span><strong>Veterinari</strong>al telefono inclusi</span>
-          </div>
-        </div> */}
       </section>
 
       {/* categorie */}
@@ -129,11 +118,9 @@ function HomePage() {
             Due animali, due <em>universi.</em><br />
             Una sola filosofia.
           </h2>
-
         </div>
 
         <div className="cat-list">
-          {/* Cane */}
           <article className="cat-row" id="cane">
             <div className="cat-row__content">
               <div>
@@ -164,7 +151,6 @@ function HomePage() {
             </div>
           </article>
 
-          {/* Gatto */}
           <article className="cat-row cat-row--flip" id="gatto">
             <div className="cat-row__content">
               <div>
@@ -197,7 +183,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* prodotti in evidenza*/}
+      {/* prodotti in evidenza */}
       <section id="prodotti" className="section section--products">
         <div className="section__head">
           <span className="section__num">03 — In evidenza</span>
@@ -206,11 +192,10 @@ function HomePage() {
           </h2>
         </div>
 
-        {/* Filtri */}
         <div className="products__filters">
           {[
             { key: 'tutti', label: '🐾 Tutti' },
-            { key: 'cane', label: '🐶 Cane' },
+            { key: 'cane',  label: '🐶 Cane'  },
             { key: 'gatto', label: '🐱 Gatto' },
           ].map(({ key, label }) => (
             <button
@@ -222,7 +207,6 @@ function HomePage() {
           ))}
         </div>
 
-        {/* Caricamento */}
         {loading && (
           <div className="products__state">
             <div className="products__spinner" role="status">
@@ -232,14 +216,12 @@ function HomePage() {
           </div>
         )}
 
-        {/* Errore */}
         {error && (
           <div className="products__error" role="alert">
             ⚠️ {error} — il server non è in esecuzione
           </div>
         )}
 
-        {/* Vuoto */}
         {!loading && !error && filteredProducts.length === 0 && (
           <div className="products__empty">
             <span className="products__empty-icon">🔍</span>
@@ -247,7 +229,6 @@ function HomePage() {
           </div>
         )}
 
-        {/* Griglia */}
         {!loading && !error && filteredProducts.length > 0 && (
           <div className="products__grid">
             {filteredProducts.map(product => (
@@ -297,6 +278,35 @@ function HomePage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* marchi */}
+      <section id="marchi" className="partners">
+        <div className="partners__inner">
+
+          <div className="section__head partners__head">
+            <span className="section__num">04 — Marchi</span>
+            <h2 className="section__title">
+              Le case che <em>scegliamo,</em><br />
+              e che scelgono noi.
+            </h2>
+          </div>
+
+          <p className="partners__lede">
+            Prodotti europei selezionati uno per uno — per qualità dei materiali,
+            rispetto degli animali e prodotti che durano nel tempo.
+          </p>
+
+          {/* loghi brand */}
+          <div className="partners__row" aria-label="Marchi partner">
+            {marchi.map((m) => (
+              <div className="partners__brand" key={m.name}>
+                <img src={m.img} alt={m.name} className="partners__brand-img" />
+              </div>
+            ))}
+          </div>
+
+        </div>
       </section>
     </>
   )
