@@ -258,7 +258,7 @@ function HomePage() {
 
       {/* ── MARCHI ── */}
       <section id="marchi" className="custom_brand_bg text-light overflow-hidden">
-        <div className="container-fluid px-4 px-md-5 py-5 my-md-5">
+        <div className="container-fluid px-5 py-5 my-md-5">
           <header className="pb-3 mb-5 partners-head">
             <h2 className="section-title mb-0 text-light">
               Le case che <em>scegliamo,</em><br />
