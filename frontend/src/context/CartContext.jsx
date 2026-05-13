@@ -7,6 +7,14 @@ export function CartContextProvider({ children }) {
   // aside cart
   const [asideCart, setAsideCart] = useState(false);
 
+  useEffect(() => {
+    if (asideCart) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [asideCart]);
+
   // cart
   const cartArr = [];
 
