@@ -1,5 +1,6 @@
 const { body } = require("express-validator");
 const validator = require("validator");
+const { isValidPhoneNumber, parsePhoneNumber } = require('libphonenumber-js') 
 
 // mappa nome paese (italiano/inglese) -> codice ISO 3166-1 alpha-2
 const COUNTRY_NAME_TO_CODE = {
@@ -169,21 +170,21 @@ const storeOrderValidation = [
 
   // phone_number: validato in base al country (fallback generico)
   body("phone_number")
-    .optional({ checkFalsy: true })
-    .trim()
-    .custom((value, { req }) => {
-      const country = resolveCountryCode(req.body.country);
-      const locale = country ? `${country.toLowerCase()}-${country}` : "any";
-      try {
-        if (validator.isMobilePhone(value, locale)) return true;
-      } catch (e) {
-        // locale non supportato, vado al fallback
-      }
-      if (!validator.isMobilePhone(value, "any")) {
-        throw new Error("Numero di telefono non valido");
-      }
-      return true;
-    }),
+  .optional({ checkFalsy: true })
+  .trim()
+  .custom((value, { req }) => {
+    const country = resolveCountryCode(req.body.country); // es. "IT"
+
+    // prova prima con il paese specificato, poi come numero internazionale
+    const validForCountry = country && isValidPhoneNumber(value, country);
+    const validInternational = isValidPhoneNumber(value); // richiede prefisso +xx
+
+    if (!validForCountry && !validInternational) {
+      throw new Error("Numero di telefono non valido per il paese selezionato");
+    }
+
+    return true;
+  }),
 
   body("products")
     .isArray({ min: 1 }).withMessage("Carrello vuoto"),

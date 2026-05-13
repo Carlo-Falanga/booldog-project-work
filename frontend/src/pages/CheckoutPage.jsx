@@ -72,7 +72,7 @@ export default function CheckoutPage() {
             const { data } = await axios.post("http://localhost:3000/orders", orderToSend);
             console.log(data)
             setOrderMessage(true)
-            
+
 
             setTimeout(() => {
                 navigate(`/order-confirmed/${data.order_id}`)
@@ -190,7 +190,8 @@ export default function CheckoutPage() {
                                 <div className="">
                                     <label htmlFor="inputTel" className="form-label cart-meta">Numero di telefono</label>
                                     <input value={newOrder.phone_number} id="phone_number" onChange={(e) => {
-                                        e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 15);
+                                        e.target.value = e.target.value
+                                            .replace(/[^0-9+]/g, "").replace(/(.)\+/g, "$1") .slice(0, 15);
                                         handleChange(e);
                                     }} type="text"
                                         inputMode="numeric" className="form-control" placeholder="3334568752" maxLength="15" minLength="11" required />
