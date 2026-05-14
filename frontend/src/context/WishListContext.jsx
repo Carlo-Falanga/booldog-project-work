@@ -17,16 +17,31 @@ export function WishListContextProvider({ children }) {
   }, [wishlist]);
 
 
-  // Rimuove il prodotto dal carrello
-  const removeFromWishlist = (slug) => {
-    const updated = wishlist.filter((item) => item.slug !== slug);
-    setWishlist(updated);
-    localStorage.setItem("wish_data", JSON.stringify(updated));
+  // verifico se il prodotto esiste nel carrello
+  const isInWishList = (slug) => wishlist.find((item) => item.slug === slug);
+
+
+  // funzione aggiungi wishlist
+  const addToWishList = (product) => {
+
+    // se esiste al click lo rimuovo
+    if (isInWishList(product.slug)) {
+      const updatedWishList = wishlist.filter((item) => item.slug !== product.slug);
+      setWishlist(updatedWishList);
+    } else {
+      // altrimenti lo aggiungo
+      setWishlist([...wishlist, { ...product }]);
+    }
   };
 
 
   return (
-    <WishListContext.Provider value={{ wishlist, setWishlist }}>
+    <WishListContext.Provider value={{
+      wishlist,
+      setWishlist,
+      addToWishList,
+      isInWishList
+    }}>
       {children}
     </WishListContext.Provider>
   );

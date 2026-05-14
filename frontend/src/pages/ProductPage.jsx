@@ -23,15 +23,17 @@ export default function ProductPage() {
 
   const {
     wishlist,
-    setWishlist
+    setWishlist,
+    addToWishList,
+    isInWishList
   } = useWishlist();
 
   const [dataProduct, setDataProduct] = useState(null);
 
   const { slug } = useParams();
 
-  // ogni volta che cambio prodotto resetto la quantità a 1
-  // (così non eredito la quantità scelta sul prodotto precedente)
+  const addedToWishList = isInWishList(slug)
+
   useEffect(() => {
     setProductQuantity(1);
     axios
@@ -56,18 +58,6 @@ export default function ProductPage() {
   // verifico se il prodotto esiste nel carrello
   const existingProductWL = wishlist.find((item) => item.slug === slug);
 
-  // funzione aggiungi wishlist
-  const addToWishList = () => {
-    // se esiste al click lo rimuovo
-    if (existingProductWL) {
-      const updatedWishList = wishlist.filter((item) => item.slug !== slug);
-      setWishlist(updatedWishList);
-    } else {
-      // altrimenti lo aggiungo
-      setWishlist([...wishlist, { ...dataProduct }]);
-    }
-  };
-
   return (
     <div className="container py-5">
       {dataProduct && (
@@ -77,11 +67,11 @@ export default function ProductPage() {
               <div className="ratio ratio-1x1">
                 <div className="d-flex align-items-center justify-content-center">
                   <button
-                    onClick={addToWishList}
+                    onClick={() => addToWishList(dataProduct)}
                     className="btn position-absolute end-0 top-0"
                   >
                     <i
-                      className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}
+                      className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
                     ></i>
                   </button>
                   <img

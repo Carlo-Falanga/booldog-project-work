@@ -2,22 +2,10 @@ import { useWishlist } from "../context/WishListContext";
 import { Link, useParams } from "react-router-dom";
 
 export default function ProductCardList({ product, addToCart }) {
-  const { wishlist, setWishlist } = useWishlist();
 
-  // verifico se il prodotto esiste nel carrello
-  const existingProductWL = wishlist.find((item) => item.slug === product.slug);
+  const { wishlist, setWishlist, addToWishList, isInWishList } = useWishlist();
 
-  // funzione aggiungi wishlist
-  const addToWishList = () => {
-    // se esiste al click lo rimuovo
-    if (existingProductWL) {
-      const updatedWishList = wishlist.filter((item) => item.slug !== product.slug);
-      setWishlist(updatedWishList);
-    } else {
-      // altrimenti lo aggiungo
-      setWishlist([...wishlist, { ...product }]);
-    }
-  };
+  const addedToWishList = isInWishList(product.slug)
 
   return (
 
@@ -25,8 +13,8 @@ export default function ProductCardList({ product, addToCart }) {
       <div className='text-decoration-none text-reset row'>
 
         <div className="col-2">
-          <button onClick={addToWishList} className="position-absolute start-0 pe-4 z-1 border-0">
-            <i className={`bi ${existingProductWL ? "bi-heart-fill" : "bi-heart"}`}></i>
+          <button onClick={() => addToWishList(product)} className="position-absolute start-0 pe-4 z-1 border-0">
+            <i className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}></i>
           </button>
           <Link to={`/product/${product.slug}`}>
             <div className="ratio ratio-1x1">
