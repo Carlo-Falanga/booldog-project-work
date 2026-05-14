@@ -4,14 +4,13 @@ import { useWishlist } from "../context/WishListContext";
 import ProductCard from "../components/ProductCard";
 import ProductCardList from "../components/ProductCardList";
 import { useState } from "react";
-import SideCart from "../components/SideCart";
 
 
 export default function WishListPage() {
 
   const [listView, setListView] = useState(true)
 
-  const { asideCart, setAsideCart, addToCart } = useGlobal();
+  const { addToCart } = useGlobal();
   const { wishlist } = useWishlist();
 
   return (
@@ -54,8 +53,6 @@ export default function WishListPage() {
             </div>
           )
         }
-
-        {asideCart && <SideCart setAsideCart={setAsideCart} />}
 
       </div>
     </section >
