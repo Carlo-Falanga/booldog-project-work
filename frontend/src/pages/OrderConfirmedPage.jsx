@@ -51,36 +51,39 @@ export default function OrderConfirmedPage() {
                     </ul>
                     <hr />
                     <span className="fw-medium d-flex justify-content-center m-3">Prodotti acquistati</span>
-                    <table class="table table-dark table-hover">
-                        <thead>
-                            <tr>
-                                
-                                <th scope="col">Prodotto</th>
-                                <th scope="col">Quantità</th>
-                                <th scope="col">Prezzo</th>
-                                <th scope="col">Subtotale</th>
-                                <th scope="col">Totale</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.items?.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.name}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>{item.price}€</td>
-                                    <td>{(item.price * item.quantity).toFixed(2)}€</td>
-                                    <td></td>
+                    <div className="table-responsive">
+                        <table class="table table-dark table-hover">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Prodotto</th>
+                                    <th scope="col">Quantità</th>
+                                    <th scope="col">Prezzo</th>
+                                    <th scope="col">Subtotale</th>
+                                    <th scope="col">Totale</th>
                                 </tr>
-                            ))}
-                            <tr className="table-secondary">
-                                <td className="fw-bold">Totale</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td className="fw-semibold">{data.total}€</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {data.items?.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.name}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>{item.price}€</td>
+                                        <td>{(item.price * item.quantity).toFixed(2)}€</td>
+                                        <td></td>
+                                    </tr>
+                                ))}
+                                <tr className="table-secondary">
+                                    <td className="fw-bold">Totale</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="fw-semibold">{data.total}€</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div className="d-flex justify-content-center align-items-center m-3">
                         <Link to="/">
                             <button className="btn btn-dark rounded-pill border-0 btn_cart"><i class="bi bi-arrow-left-short"></i>Torna alla Home</button>
