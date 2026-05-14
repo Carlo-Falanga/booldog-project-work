@@ -94,6 +94,7 @@ h6 {
 
 main {
   min-height: 100vh;
+  position: relative;
 }
 
 #order_section {
@@ -264,7 +265,7 @@ main {
 .custom_hero {
   background-color: var(--bool-paper);
 
-  .row{
+  .row {
     min-height: 70vh;
   }
 }
@@ -423,7 +424,7 @@ main {
   width: auto;
 }
 
-.navbar_icons_hover:hover{
+.navbar_icons_hover:hover {
   scale: 1.2;
   transition: all 0.3s;
 }
@@ -434,3 +435,23 @@ main {
   color: #fff;
 }
 
+.bg_404_img {
+  background-image: url(../public/pets/404_bg.png);
+  background-repeat: no-repeat;
+  background-size: fill;
+  background-position: -500px;
+  height: 100vh;
+}
+
+.navbar_custom_bg {
+  background: rgba(242, 238, 230, 0.86);
+  backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid white;
+}
+
+@media screen and (min-width: 768px) {
+  .bg_404_img {
+    background-size: cover;
+    background-position: right;
+  }
+}
