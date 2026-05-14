@@ -11,6 +11,7 @@ import SearchPage from "./pages/SearchPage";
 import WishListPage from "./pages/WishListPage";
 import OrderConfirmedPage from "./pages/OrderConfirmedPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 
@@ -22,6 +23,7 @@ function App() {
     <BrowserRouter>
       <CartContextProvider>
         <WishListContextProvider>
+          <ScrollToTop />
           <Routes>
             <Route element={<DefaultLayout />}>
               <Route index element={<HomePage />} />
