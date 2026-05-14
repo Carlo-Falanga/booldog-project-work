@@ -10,6 +10,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import SearchPage from "./pages/SearchPage";
 import WishListPage from "./pages/WishListPage";
 import OrderConfirmedPage from "./pages/OrderConfirmedPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 
 
@@ -31,7 +32,7 @@ function App() {
               <Route path="/cart" element={<CartPage />} />
               <Route path="/wishlist" element={<WishListPage />} />
               <Route path="/order-confirmed/:id" element={<OrderConfirmedPage />} />
-              <Route />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </WishListContextProvider>
