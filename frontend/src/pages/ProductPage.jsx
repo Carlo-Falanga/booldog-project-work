@@ -41,6 +41,8 @@ export default function ProductPage() {
       .then((res) => setDataProduct(res.data));
   }, [slug]);
 
+  console.log(dataProduct)
+
   // controllo se questo prodotto è già nel carrello e con che quantità
   const existingInCart = cart.find((p) => p.id === dataProduct?.id);
   const quantityInCart = existingInCart ? existingInCart.quantity : 0;
@@ -59,95 +61,105 @@ export default function ProductPage() {
   const existingProductWL = wishlist.find((item) => item.slug === slug);
 
   return (
-    <div className="container py-5">
-      {dataProduct && (
-        <div>
-          <div className="row row-cols-2">
-            <div>
-              <div className="ratio ratio-1x1">
-                <div className="d-flex align-items-center justify-content-center">
-                  <button
-                    onClick={() => addToWishList(dataProduct)}
-                    className="btn position-absolute end-0 top-0"
-                  >
-                    <i
-                      className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
-                    ></i>
-                  </button>
-                  <img
-                    className="w-100 h-100 object-fit-contain"
-                    src={`http://localhost:3000/images/products/${dataProduct.img_url}`}
-                    alt={dataProduct.name}
-                  />
-                </div>
-              </div>
-            </div>
+    <section>
+      <div className="container-lg py-3">
+        {dataProduct && (
+          <div>
+            <div className="row">
 
-            <div className="d-flex align-items-center justify-content-center">
-              <div className="p-5 text-center">
-                <h1>{dataProduct.name}</h1>
-                <p>{dataProduct.description}</p>
-                <p>{dataProduct.price} €</p>
-
-                <div className="btn-group mb-3">
-                  <button
-                    onClick={decreaseQuantity}
-                    type="button"
-                    disabled={productQuantity <= 1}
-                    className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"
-                  >
-                    -
-                  </button>
-                  <div className="btn btn-outline-secondary btn-sm px-3 border-start-0 border-end-0">
-                    {productQuantity}
+              <div className="offset-1 offset-md-0 col-10 col-md-6">
+                <div className="ratio ratio-1x1">
+                  <div className="d-flex align-items-center justify-content-center">
+                    <button
+                      onClick={() => addToWishList(dataProduct)}
+                      className="btn position-absolute end-0 top-0"
+                    >
+                      <i
+                        className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
+                      ></i>
+                    </button>
+                    <img
+                      className="w-100 h-100 object-fit-contain"
+                      src={`http://localhost:3000/images/products/${dataProduct.img_url}`}
+                      alt={dataProduct.name}
+                    />
                   </div>
+                </div>
+              </div>
+
+              <div className="col-md-6 d-flex align-items-center justify-content-center">
+                <div className="px-md-5 text-center">
+                  <div className="cart-meta mb-5">
+                    {dataProduct.category} {dataProduct.animal_name}
+                  </div>
+                  <h1>{dataProduct.name}</h1>
+                  <p>{dataProduct.description}</p>
+                  <div className="cart-meta mb-5">
+                    {dataProduct.size} {dataProduct.color} {dataProduct.material}
+                  </div>
+                  <p>{dataProduct.price} €</p>
+
+                  <div className="btn-group mb-3">
+                    <button
+                      onClick={decreaseQuantity}
+                      type="button"
+                      disabled={productQuantity <= 1}
+                      className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"
+                    >
+                      -
+                    </button>
+                    <div className="btn btn-outline-secondary btn-sm px-3 border-start-0 border-end-0">
+                      {productQuantity}
+                    </div>
+                    <button
+                      onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
+                      type="button"
+                      disabled={isPlusDisabled}
+                      className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  {/* messaggio informativo sullo stock */}
+                  {stock === 0 && (
+                    <p className="text-danger small mb-2">Prodotto esaurito</p>
+                  )}
+                  {stock > 0 && remainingStock <= 0 && (
+                    <p className="text-warning small mb-2">
+                      Hai già tutti i pezzi disponibili nel carrello
+                    </p>
+                  )}
+
                   <button
-                    onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
-                    type="button"
-                    disabled={isPlusDisabled}
-                    className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"
+                    onClick={() => addToCart(dataProduct, productQuantity)}
+                    disabled={isAddDisabled}
+                    className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart"
                   >
-                    +
+                    {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
                   </button>
                 </div>
+              </div>
 
-                {/* messaggio informativo sullo stock */}
-                {stock === 0 && (
-                  <p className="text-danger small mb-2">Prodotto esaurito</p>
-                )}
-                {stock > 0 && remainingStock <= 0 && (
-                  <p className="text-warning small mb-2">
-                    Hai già tutti i pezzi disponibili nel carrello
-                  </p>
-                )}
+            </div>
 
-                <button
-                  onClick={() => addToCart(dataProduct, productQuantity)}
-                  disabled={isAddDisabled}
-                  className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart"
-                >
-                  {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
-                </button>
+            <div className="py-5">
+              <h3>Prodotti correlati</h3>
+              <div className="row row-cols-2 row-cols-md-4 g-2 g-lg-3">
+                {dataProduct.related.map((product) => (
+                  <div key={product.slug}>
+                    <ProductCard
+                      product={product}
+                      addToCart={() => addToCart(product, 1)}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+        )}
 
-          <div className="py-5">
-            <h3>Prodotti correlati</h3>
-            <div className="row row-cols-4">
-              {dataProduct.related.map((product) => (
-                <div key={product.slug}>
-                  <ProductCard
-                    product={product}
-                    addToCart={() => addToCart(product, 1)}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-    </div>
+      </div>
+    </section>
   );
 }
