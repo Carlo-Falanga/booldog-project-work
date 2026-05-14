@@ -88,37 +88,17 @@ export default function ProductPage() {
               </div>
 
               <div className="col-md-6 d-flex align-items-center justify-content-center">
-                <div className="px-md-5 text-center">
-                  <div className="cart-meta mb-5">
+                <div className="px-md-5">
+                  <div className="cart-meta mb-3">
                     {dataProduct.category} {dataProduct.animal_name}
                   </div>
-                  <h1>{dataProduct.name}</h1>
+                  <h1 className="display-3 lh-1 fw-normal">{dataProduct.name}</h1>
                   <p>{dataProduct.description}</p>
                   <div className="cart-meta mb-5">
                     {dataProduct.size} {dataProduct.color} {dataProduct.material}
                   </div>
-                  <p>{dataProduct.price} €</p>
-
-                  <div className="btn-group mb-3">
-                    <button
-                      onClick={decreaseQuantity}
-                      type="button"
-                      disabled={productQuantity <= 1}
-                      className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"
-                    >
-                      -
-                    </button>
-                    <div className="btn btn-outline-secondary btn-sm px-3 border-start-0 border-end-0">
-                      {productQuantity}
-                    </div>
-                    <button
-                      onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
-                      type="button"
-                      disabled={isPlusDisabled}
-                      className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"
-                    >
-                      +
-                    </button>
+                  <div className="border-top pt-4">
+                    <p className="h1">{dataProduct.price} €</p>
                   </div>
 
                   {/* messaggio informativo sullo stock */}
@@ -131,13 +111,39 @@ export default function ProductPage() {
                     </p>
                   )}
 
-                  <button
-                    onClick={() => addToCart(dataProduct, productQuantity)}
-                    disabled={isAddDisabled}
-                    className="btn btn-dark btn-lg w-100 rounded-pill py-3 mb-4 d-flex align-items-center justify-content-center gap-2 border-0 btn_cart"
-                  >
-                    {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
-                  </button>
+                  <div className="row gx-2 align-items-center">
+                    <div className="btn-group col-auto">
+                      <button
+                        onClick={decreaseQuantity}
+                        type="button"
+                        disabled={productQuantity <= 1}
+                        className="bg-paper py-3 rounded-start-pill border border-end-0 increse_decrease_btn"
+                      >
+                        -
+                      </button>
+                      <div className="bg-paper border-top border-bottom py-3 border-start-0 border-end-0">
+                        {productQuantity}
+                      </div>
+                      <button
+                        onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
+                        type="button"
+                        disabled={isPlusDisabled}
+                        className="bg-paper py-3 rounded-end-pill border border-start-0 increse_decrease_btn"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div className="col">
+                      <button
+                        onClick={() => addToCart(dataProduct, productQuantity)}
+                        disabled={isAddDisabled}
+                        className="btn btn-dark w-100 py-3 rounded-pill border-0 btn_cart"
+                      >
+                        {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
