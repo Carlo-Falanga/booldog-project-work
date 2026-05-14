@@ -47,8 +47,6 @@ export default function SearchPage() {
         setSearchParams(newParams);
     }
 
-
-
     const { asideCart, setAsideCart, addToCart } = useGlobal();
 
     return (
@@ -56,12 +54,21 @@ export default function SearchPage() {
             <div className="container">
                 <h1 className='text-center mt-5 mb-3'>Ricerca prodotti</h1>
 
-                <VisualizationButton setListView={setListView} />
 
                 <div className='d-flex align-items-center justify-content-between mb-3'>
+                    {/* bottone per visualizzazione doppia*/}
+                    <VisualizationButton setListView={setListView} />
                     {/* filters */}
                     <OrderSelect currentOrder={order} handleFilterChange={handleFilterChange} />
                 </div>
+                {
+                    search &&
+                    // bottone cancella ricerca
+                    <button className=' btn btn-outline-secondary mb-3' onClick={() => handleFilterChange('search', '')}>
+                        <i className='bi bi-x-lg'></i> Cancella ricerca
+                    </button>
+                }
+
             </div>
             <div className="container">
                 {products.length > 0 ?
