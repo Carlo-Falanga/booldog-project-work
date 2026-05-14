@@ -67,7 +67,7 @@ export default function ProductPage() {
           <div>
             <div className="row">
 
-              <div className="offset-1 offset-md-0 col-10 col-md-6">
+              <div className="col-10 col-md-5 col-lg-6 offset-1 offset-md-0">
                 <div className="ratio ratio-1x1">
                   <div className="d-flex align-items-center justify-content-center">
                     <button
@@ -87,8 +87,8 @@ export default function ProductPage() {
                 </div>
               </div>
 
-              <div className="col-md-6 d-flex align-items-center justify-content-center">
-                <div className="px-md-5">
+              <div className="col-md-7 col-lg-6 d-flex align-items-center justify-content-center">
+                <div className="px-lg-5">
                   <div className="cart-meta mb-3">
                     {dataProduct.category} {dataProduct.animal_name}
                   </div>
@@ -112,26 +112,28 @@ export default function ProductPage() {
                   )}
 
                   <div className="row gx-2">
-                    <div className="btn-group quantity-controls col-auto">
-                      <button
-                        onClick={decreaseQuantity}
-                        type="button"
-                        disabled={productQuantity <= 1}
-                        className="bg-paper py-3 rounded-start-pill border border-end-0"
-                      >
-                        -
-                      </button>
-                      <div className="bg-paper border-top border-bottom border-start-0 border-end-0 d-flex align-items-center justify-content-center">
-                        <span>{productQuantity}</span>
+                    <div className="col-auto">
+                      <div className="quantity-controls rounded-pill bg-paper border d-flex">
+                        <button
+                          onClick={decreaseQuantity}
+                          type="button"
+                          disabled={productQuantity <= 1}
+                          className="btn py-3 border-0"
+                        >
+                          -
+                        </button>
+                        <div className="d-flex align-items-center justify-content-center">
+                          <span>{productQuantity}</span>
+                        </div>
+                        <button
+                          onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
+                          type="button"
+                          disabled={isPlusDisabled}
+                          className="btn py-3 border-0"
+                        >
+                          +
+                        </button>
                       </div>
-                      <button
-                        onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
-                        type="button"
-                        disabled={isPlusDisabled}
-                        className="bg-paper py-3 rounded-end-pill border border-start-0"
-                      >
-                        +
-                      </button>
                     </div>
                     <div className="col">
                       <button
@@ -147,9 +149,7 @@ export default function ProductPage() {
                         onClick={() => addToWishList(dataProduct)}
                         className="bg-paper rounded-circle aspect-ratio-1x1 border h-100 d-flex align-items-center justify-content-center cursor-pointer"
                       >
-                        <i
-                          className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
-                        ></i>
+                        <i className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}></i>
                       </div>
                     </div>
                   </div>
