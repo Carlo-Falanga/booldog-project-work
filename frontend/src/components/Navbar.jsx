@@ -1,11 +1,39 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import CartPage from "../pages/CartPage";
 import { useGlobal } from "../context/CartContext";
 import booldog_logo from "../assets/logo/logo_booldog.jpg";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
 
   const { cart } = useGlobal();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    setSearch(searchParams.get('search') || "");
+  }, [searchParams])
+
+  // gestisce la ricerca tramite searchbar
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (search.trim() === "") return;
+
+    const newParams = new URLSearchParams(searchParams);
+
+    newParams.set('search', search);
+
+    let targetPath = location.pathname;
+    if (targetPath === '/') {
+      targetPath = '/products';
+    }
+
+    navigate(`${targetPath}?${newParams.toString()}`);
+
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-black px-4">
@@ -62,11 +90,15 @@ export default function Navbar() {
               <i className="bi bi-heart"></i>
             </div>
           </Link>
-          <Link to="/products" className="btn text-white border border-0">
-            <div className="navbar_icons_hover">
-              <i className="bi bi-search"></i>
-            </div>
-          </Link>
+          {/* Searchbar */}
+          <form onSubmit={handleSubmit}>
+            <input type="text" className='form-control d-inline w-75 rounded-pill' placeholder='Ricerca un prodotto...  '
+              value={search} onChange={(e) => setSearch(e.target.value)} />
+            <button className="btn btn-dark rounded-circle">
+              <i className="bi bi-search text-white ms-2"></i>
+            </button>
+          </form>
+
         </div>
       </div>
     </nav>

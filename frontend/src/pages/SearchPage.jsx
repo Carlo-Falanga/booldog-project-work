@@ -4,7 +4,6 @@ import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { useGlobal } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import ProductCardList from '../components/ProductCardList';
-import SearchBar from '../components/SearchBar';
 import OrderSelect from '../components/OrderSelect';
 import VisualizationButton from '../components/VisualizationButton';
 
@@ -12,13 +11,13 @@ export default function SearchPage() {
 
     const { animalSlug } = useParams();
 
-    const endpoint = animalSlug ? `animal/${animalSlug}` : "";
+    const endpoint = animalSlug ? animalSlug : "";
 
     const [searchParams, setSearchParams] = useSearchParams();
+    const search = searchParams.get('search') || "";
+    const order = searchParams.get('sort') || "";
 
     const [products, setProducts] = useState([]);
-    const [search, setSearch] = useState(searchParams.get('search') || "");
-    const [order, setOrder] = useState(searchParams.get('sort') || "");
     const [listView, setListView] = useState(false);
 
     const url = `http://localhost:3000/products/${endpoint}`
@@ -36,16 +35,6 @@ export default function SearchPage() {
         //copio i parametri attuali dell'url
         const newParams = new URLSearchParams(searchParams);
 
-        // modifico le variabili reattive 
-        switch (key) {
-            case 'sort':
-                setOrder(value);
-                break;
-            case 'search':
-                setSearch(value);
-                break;
-        }
-
         //modifico i parametri dell'url
         if (value) {
             newParams.set(key, value);
@@ -53,10 +42,9 @@ export default function SearchPage() {
             newParams.delete(key);
         }
 
+        //impost il nuovo url, che farà ricaricare la pagina secondo i nuovi filtri
         setSearchParams(newParams);
     }
-
-
 
     const { asideCart, setAsideCart, addToCart } = useGlobal();
 
@@ -65,14 +53,21 @@ export default function SearchPage() {
             <div className="container">
                 <h1 className='text-center mt-5 mb-3'>Ricerca prodotti</h1>
 
-                <VisualizationButton setListView={setListView} />
 
                 <div className='d-flex align-items-center justify-content-between mb-3'>
-                    {/* searchbar */}
-                    <SearchBar search={search} handleFilterChange={handleFilterChange} />
+                    {/* bottone per visualizzazione doppia*/}
+                    <VisualizationButton setListView={setListView} />
                     {/* filters */}
-                    <OrderSelect handleFilterChange={handleFilterChange} />
+                    <OrderSelect currentOrder={order} handleFilterChange={handleFilterChange} />
                 </div>
+                {
+                    search &&
+                    // bottone cancella ricerca
+                    <button className=' btn btn-outline-secondary mb-3' onClick={() => handleFilterChange('search', '')}>
+                        <i className='bi bi-x-lg'></i> Cancella ricerca
+                    </button>
+                }
+
             </div>
             <div className="container">
                 {products.length > 0 ?
