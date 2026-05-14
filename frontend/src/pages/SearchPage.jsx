@@ -7,7 +7,6 @@ import ProductCardList from '../components/ProductCardList';
 import SearchBar from '../components/SearchBar';
 import OrderSelect from '../components/OrderSelect';
 import VisualizationButton from '../components/VisualizationButton';
-import SideCart from '../components/SideCart';
 
 export default function SearchPage() {
 
@@ -97,8 +96,6 @@ export default function SearchPage() {
                     :
                     <h2 className=' position-absolute top-50 start-50 translate-middle'>Nessun prodotto trovato</h2>
                 }
-
-                {asideCart && <SideCart setAsideCart={setAsideCart} />}
 
             </div>
         </>
