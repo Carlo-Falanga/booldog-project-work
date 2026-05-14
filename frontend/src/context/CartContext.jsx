@@ -1,12 +1,19 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const CartContext = createContext();
 
 
 export function CartContextProvider({ children }) {
 
+  const location = useLocation();
+
   // aside cart
   const [asideCart, setAsideCart] = useState(false);
+
+  useEffect(() => {
+    setAsideCart(false)
+  }, [location.pathname])
 
   useEffect(() => {
     if (asideCart) {

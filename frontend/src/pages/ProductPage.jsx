@@ -148,7 +148,6 @@ export default function ProductPage() {
         </div>
       )}
 
-      {asideCart && <SideCart setAsideCart={setAsideCart} />}
     </div>
   );
 }
