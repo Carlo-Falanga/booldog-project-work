@@ -21,7 +21,9 @@ export default function SearchPage() {
     const [products, setProducts] = useState([]);
     const [listView, setListView] = useState(false);
 
-    const url = `http://localhost:3000/products/animal/${endpoint}`
+    const url = animalSlug
+        ? `http://localhost:3000/products/animal/${endpoint}`
+        : `http://localhost:3000/products`;
 
     //chiamata api per index dei prodotti
     useEffect(() => {

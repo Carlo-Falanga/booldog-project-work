@@ -29,7 +29,7 @@ function App() {
               <Route index element={<HomePage />} />
               <Route path="product/:slug" element={<ProductPage />} />
               <Route path="/products" element={<SearchPage />} />
-              <Route path="/products/:animalSlug" element={<SearchPage />} />
+              <Route path="/products/animal/:animalSlug" element={<SearchPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/wishlist" element={<WishListPage />} />

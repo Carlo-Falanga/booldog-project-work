@@ -102,12 +102,12 @@ export default function Navbar() {
           <div className="collapse navbar-collapse order-2" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink to="/products/cane" className="nav-link text-black">
+                <NavLink to="/products/animal/cane" className="nav-link text-black">
                   Cane
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/products/gatto" className="nav-link text-black">
+                <NavLink to="/products/animal/gatto" className="nav-link text-black">
                   Gatto
                 </NavLink>
               </li>
