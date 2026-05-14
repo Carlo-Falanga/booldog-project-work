@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import CartPage from "../pages/CartPage";
 import { useGlobal } from "../context/CartContext";
-import booldog_logo from "../assets/logo/logo_booldog.jpg";
+import booldog_logo from "../assets/logo/Booldog_logo.png";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
