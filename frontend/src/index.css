@@ -443,11 +443,15 @@ main {
   height: 100vh;
 }
 
-@media screen and (min-width: 768px) {
+.navbar_custom_bg {
+  background: rgba(242, 238, 230, 0.86);
+  backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid white;
+}
 
+@media screen and (min-width: 768px) {
   .bg_404_img {
     background-size: cover;
     background-position: right;
   }
-
 }
