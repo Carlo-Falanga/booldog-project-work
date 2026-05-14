@@ -11,7 +11,7 @@ import booldog_logo from "../assets/logo/logo_booldog.jpg";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  const { cart } = useGlobal();
+  const { cart, setAsideCart } = useGlobal();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,7 +43,6 @@ export default function Navbar() {
     <section className="navbar_custom_bg position-sticky top-0 z-3 px-4 py-2">
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg position-relative d-flex align-items-center ">
-         
           <button
             className="navbar-toggler"
             type="button"
@@ -56,8 +55,11 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-        
-          <Link to="/" className="navbar-brand position-absolute start-50 translate-middle-x" style={{ zIndex: 2 }}>
+          <Link
+            to="/"
+            className="navbar-brand position-absolute start-50 translate-middle-x"
+            style={{ zIndex: 2 }}
+          >
             <img
               src={booldog_logo}
               alt="Booldog Logo"
@@ -65,14 +67,18 @@ export default function Navbar() {
             />
           </Link>
 
-        
           <div className="d-none d-lg-flex align-items-center ms-auto order-3 gap-2">
-            <Link to="/cart" className="btn text-white border border-0">
+            <div
+              onClick={() => setAsideCart(true)}
+              className="btn text-white border border-0"
+            >
               <div className="navbar_icons_hover">
-                <span className="text-black">{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
+                <span className="text-black">
+                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
                 <i className="bi bi-cart text-black"></i>
               </div>
-            </Link>
+            </div>
             <Link to="/wishlist" className="btn text-white border border-0">
               <div className="navbar_icons_hover">
                 <i className="bi bi-heart text-black"></i>
@@ -93,7 +99,6 @@ export default function Navbar() {
             </form>
           </div>
 
-         
           <div className="collapse navbar-collapse order-2" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -113,12 +118,13 @@ export default function Navbar() {
               </li>
             </ul>
 
-            
             <div className="d-flex d-lg-none align-items-center w-100 mt-2 gap-2">
               <div className="d-flex align-items-center gap-2">
                 <Link to="/cart" className="btn text-white border border-0">
                   <div className="navbar_icons_hover">
-                    <span>{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>
+                    <span>
+                      {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                    </span>
                     <i className="bi bi-cart"></i>
                   </div>
                 </Link>
