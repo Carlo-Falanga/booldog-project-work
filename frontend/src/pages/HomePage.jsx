@@ -58,7 +58,7 @@ function HomePage() {
                   className="fs-5 text-body-secondary mb-4"
                   style={{ maxWidth: "44ch" }}
                 >
-                  Cibo, accessori e tanto amore. Scopri i nostri prodotti
+                  Giochi, accessori e tanto amore. Scopri i nostri prodotti
                   selezionati per il benessere del tuo animale.
                 </p>
                 <div className="d-flex flex-wrap gap-2 mb-5">
@@ -120,7 +120,7 @@ function HomePage() {
                       className="mt-4 text-body-secondary"
                       style={{ maxWidth: "38ch" }}
                     >
-                      Cibo, guinzagli, giochi e tanto altro per il benessere del
+                      Giochi, guinzagli, cucce e tanto altro per il benessere del
                       tuo cane.
                     </p>
                   </div>
@@ -169,7 +169,7 @@ function HomePage() {
                       className="mt-4 text-body-secondary"
                       style={{ maxWidth: "38ch" }}
                     >
-                      Lettiere, crocchette, giocattoli e accessori per il tuo
+                      Lettiere, giocattoli e accessori per il tuo
                       gatto.
                     </p>
                   </div>
