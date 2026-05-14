@@ -97,8 +97,8 @@ export default function ProductPage() {
                   <div className="cart-meta mb-5">
                     {dataProduct.size} {dataProduct.color} {dataProduct.material}
                   </div>
-                  <div className="border-top pt-4">
-                    <p className="h1">{dataProduct.price} €</p>
+                  <div className="border-top py-4">
+                    <p className="h1 mb-0">{dataProduct.price} €</p>
                   </div>
 
                   {/* messaggio informativo sullo stock */}
@@ -111,24 +111,24 @@ export default function ProductPage() {
                     </p>
                   )}
 
-                  <div className="row gx-2 align-items-center">
-                    <div className="btn-group col-auto">
+                  <div className="row gx-2">
+                    <div className="btn-group quantity-controls col-auto">
                       <button
                         onClick={decreaseQuantity}
                         type="button"
                         disabled={productQuantity <= 1}
-                        className="bg-paper py-3 rounded-start-pill border border-end-0 increse_decrease_btn"
+                        className="bg-paper py-3 rounded-start-pill border border-end-0"
                       >
                         -
                       </button>
-                      <div className="bg-paper border-top border-bottom py-3 border-start-0 border-end-0">
-                        {productQuantity}
+                      <div className="bg-paper border-top border-bottom border-start-0 border-end-0 d-flex align-items-center justify-content-center">
+                        <span>{productQuantity}</span>
                       </div>
                       <button
                         onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
                         type="button"
                         disabled={isPlusDisabled}
-                        className="bg-paper py-3 rounded-end-pill border border-start-0 increse_decrease_btn"
+                        className="bg-paper py-3 rounded-end-pill border border-start-0"
                       >
                         +
                       </button>
@@ -141,6 +141,16 @@ export default function ProductPage() {
                       >
                         {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
                       </button>
+                    </div>
+                    <div className="col-auto">
+                      <div
+                        onClick={() => addToWishList(dataProduct)}
+                        className="bg-paper rounded-circle aspect-ratio-1x1 border h-100 d-flex align-items-center justify-content-center cursor-pointer"
+                      >
+                        <i
+                          className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
+                        ></i>
+                      </div>
                     </div>
                   </div>
 
