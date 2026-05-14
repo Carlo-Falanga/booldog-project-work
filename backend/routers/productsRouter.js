@@ -8,7 +8,7 @@ const productController = require("../controllers/productController")
 router.get("/", productController.index)
 
 //index animal type
-router.get("/animal/:animalType", productController.indexAnimalType)
+router.get("/:animalType", productController.indexAnimalType)
 
 //show
 router.get("/:slug", productController.show)
