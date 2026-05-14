@@ -126,7 +126,7 @@ function HomePage() {
                   </div>
                   <div className="border-top mt-4 pt-4 d-flex justify-content-end">
                     <Link
-                      to="/products/cane"
+                      to="/products/animal/cane"
                       className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle"
                       aria-label="Sfoglia cane"
                     >
@@ -175,7 +175,7 @@ function HomePage() {
                   </div>
                   <div className="border-top mt-4 pt-4 d-flex justify-content-end">
                     <Link
-                      to="/products/gatto"
+                      to="/products/animal/gatto"
                       className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle"
                       aria-label="Sfoglia gatto"
                     >
