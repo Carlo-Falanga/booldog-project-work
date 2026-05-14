@@ -20,10 +20,13 @@ export default function OrderConfirmedPage() {
 
     return (
         <>
-            <div className="container mt-5">
+            <div className="container mt-5 mb-5">
 
-                <div className="card rounded-4 p-4">
-                    <h1 className="d-flex justify-content-center">Ordine confermato!</h1>
+                <div className="card rounded-4 p-4 bg-paper">
+                    <h3 className="cart-hero mt-3 mb-5 d-flex justify-content-center">
+                        <span className="d-block">Ordine<em className="d-block">Confermato!</em></span>
+                    </h3>
+
                     <span className="fw-medium d-flex justify-content-center m-3">Dati di fatturazione</span>
                     <ul className="list-unstyled">
                         <li><span className="fw-semibold">Cliente:</span> {data.user_full_name}</li>
@@ -33,7 +36,7 @@ export default function OrderConfirmedPage() {
                         <li><span className="fw-semibold">Indirizzo:</span> {data.address}, {data.zipcode}, {data.city}</li>
                     </ul>
                     <hr />
-                    <span className="fw-medium d-flex justify-content-center m-3">Dati dell'ordine</span>
+                    <span className="fw-medium d-flex justify-content-center m-3">Dettagli dell'ordine</span>
                     <ul className="list-unstyled">
                         <li><span className="fw-semibold">Codice Ordine:</span> {data.order_code}</li>
                         <li><span className="fw-semibold">Data:</span> {new Date(data.created_at).toLocaleDateString("it-IT", {
@@ -47,6 +50,37 @@ export default function OrderConfirmedPage() {
                         <li><span className="fw-semibold">Stato:</span> {data.status}</li>
                     </ul>
                     <hr />
+                    <span className="fw-medium d-flex justify-content-center m-3">Prodotti acquistati</span>
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                
+                                <th scope="col">Prodotto</th>
+                                <th scope="col">Quantità</th>
+                                <th scope="col">Prezzo</th>
+                                <th scope="col">Subtotale</th>
+                                <th scope="col">Totale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.items?.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.name}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.price}€</td>
+                                    <td>{(item.price * item.quantity).toFixed(2)}€</td>
+                                    <td></td>
+                                </tr>
+                            ))}
+                            <tr className="table-secondary">
+                                <td className="fw-bold">Totale</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="fw-semibold">{data.total}€</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div className="d-flex justify-content-center align-items-center m-3">
                         <Link to="/">
                             <button className="btn btn-dark rounded-pill border-0 btn_cart"><i class="bi bi-arrow-left-short"></i>Torna alla Home</button>
