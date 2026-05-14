@@ -427,3 +427,10 @@ main {
   scale: 1.2;
   transition: all 0.3s;
 }
+
+.my-custom-table td,
+.my-custom-table th {
+  background-color: var(--bool-clay-deep);
+  color: #fff;
+}
+

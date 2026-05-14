@@ -52,7 +52,7 @@ export default function OrderConfirmedPage() {
                     <hr />
                     <span className="fw-medium d-flex justify-content-center m-3">Prodotti acquistati</span>
                     <div className="table-responsive">
-                        <table class="table table-dark table-hover">
+                        <table class="table table-hover my-custom-table">
                             <thead>
                                 <tr>
 
@@ -73,7 +73,7 @@ export default function OrderConfirmedPage() {
                                         <td></td>
                                     </tr>
                                 ))}
-                                <tr className="table-secondary">
+                                <tr className="table-dark">
                                     <td className="fw-bold">Totale</td>
                                     <td></td>
                                     <td></td>
