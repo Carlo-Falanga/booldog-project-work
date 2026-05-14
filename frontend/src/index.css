@@ -94,6 +94,7 @@ h6 {
 
 main {
   min-height: 100vh;
+  position: relative;
 }
 
 #order_section {
@@ -443,10 +444,10 @@ main {
 }
 
 @media screen and (min-width: 768px) {
-  
+
   .bg_404_img {
     background-size: cover;
     background-position: right;
-}
+  }
 
 }

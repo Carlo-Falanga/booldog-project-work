@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import ProductCardList from '../components/ProductCardList';
 import OrderSelect from '../components/OrderSelect';
 import VisualizationButton from '../components/VisualizationButton';
+import Loader from '../components/Loader';
 
 export default function SearchPage() {
 
@@ -24,6 +25,7 @@ export default function SearchPage() {
 
     //chiamata api per index dei prodotti
     useEffect(() => {
+        setProducts([]);
         axios.get(`${url}?sort=${order}&search=${search}`)
             .then(res => {
                 setProducts(res.data);
@@ -89,10 +91,20 @@ export default function SearchPage() {
                         ))}
                     </div>
                     :
-                    <h2 className=' position-absolute top-50 start-50 translate-middle'>Nessun prodotto trovato</h2>
+                    <div className='position-absolute top-50 start-50 translate-middle'>
+                        {
+                            search ?
+                                <h2>
+                                    Nessun prodotto trovato
+                                </h2>
+                                :
+                                <Loader />
+                        }
+                    </div>
+
                 }
 
-            </div>
+            </div >
         </>
     )
 }
