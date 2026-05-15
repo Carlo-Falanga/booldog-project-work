@@ -1,10 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useGlobal } from "../context/CartContext";
 import { useWishlist } from "../context/WishListContext";
 import ProductCard from "../components/ProductCard";
 import SideCart from "../components/SideCart";
+import WishListButton from "../components/WishListButton";
 
 export default function ProductPage() {
 
@@ -41,7 +42,6 @@ export default function ProductPage() {
       .then((res) => setDataProduct(res.data));
   }, [slug]);
 
-  console.log(dataProduct)
 
   // controllo se questo prodotto è già nel carrello e con che quantità
   const existingInCart = cart.find((p) => p.id === dataProduct?.id);
@@ -70,14 +70,7 @@ export default function ProductPage() {
               <div className="col-10 col-md-5 col-lg-6 offset-1 offset-md-0">
                 <div className="ratio ratio-1x1">
                   <div className="d-flex align-items-center justify-content-center">
-                    <button
-                      onClick={() => addToWishList(dataProduct)}
-                      className="btn btn-wishlist position-absolute top-0 end-0 rounded-circle aspect-ratio-1x1 border d-flex align-items-center justify-content-center cursor-pointer"
-                    >
-                      <i
-                        className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
-                      ></i>
-                    </button>
+                    <WishListButton product={dataProduct} slug={slug} />
                     <img
                       className="w-100 h-100 object-fit-contain"
                       src={`http://localhost:3000/images/products/${dataProduct.img_url}`}
