@@ -410,26 +410,13 @@ main {
 }
 
 .cart_badge {
-  position: absolute;
-  top: 0;
-  right: 0;
   transform: translate(50%, -50%);
-  min-width: 20px;
-  height: 20px;
-  padding: 0 5px;
+  width: 18px;
+  height: 18px;
   background-color: var(--bool-forest);
-  color: #ffffff;
   font-family: var(--bool-font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0;
-  text-align: center;
-  border-radius: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
+  font-size: 10px;
+  line-height: 18px;
 }
 
 .my-custom-table td,
@@ -449,7 +436,7 @@ main {
 .navbar_custom_bg {
   background: rgba(242, 238, 230, 0.86);
   backdrop-filter: blur(16px) saturate(140%);
-  border-bottom: 1px solid white;
+  /* border-bottom: 1px solid white; */
 }
 
 .navbar_mobile_menu .nav-link {
