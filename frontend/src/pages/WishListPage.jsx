@@ -22,9 +22,13 @@ export default function WishListPage() {
           <em className="d-block">Wishlist.</em>
         </h1>
 
-        <div className="d-flex align-items-center justify-content-between mb-3">
-          <GridListButton setListView={setListView} />
-        </div>
+        {wishlist.length != 0 &&
+          <div className="d-flex align-items-center justify-content-between mb-3">
+
+            <GridListButton setListView={setListView} />
+
+          </div>
+        }
 
         <div className="row g-4 g-lg-3">
           {wishlist.map((product) => (
