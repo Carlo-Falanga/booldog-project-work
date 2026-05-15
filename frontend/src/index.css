@@ -462,4 +462,85 @@ main {
     background-size: cover;
     background-position: right;
   }
+
+}
+
+/* Titolo hero */
+.sp-hero-title {
+  font-family: var(--bool-font-display);
+  font-size: clamp(64px, 10vw, 160px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+.sp-hero-title em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--bool-accent);
+}
+
+/* Lede */
+.sp-lede {
+  font-family: var(--bool-font-display);
+  font-size: clamp(17px, 1.4vw, 21px);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--bool-ink-2);
+  max-width: 38ch;
+}
+
+/* Numeri stats */
+.sp-stats-num {
+  font-family: var(--bool-font-display);
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: var(--bool-accent);
+}
+
+/* Contatore toolbar */
+.sp-toolbar-count {
+  font-family: var(--bool-font-display);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--bool-ink);
+  line-height: 1;
+}
+
+/* Sort select */
+.sp-sort-wrap {
+  font-size: 13px;
+  background: var(--bool-paper)
+}
+
+.sp-sort-wrap:hover {
+  border-color: var(--bool-ink) !important
+}
+
+.sp-select {
+  font-size: 13px;
+  cursor: pointer;
+  outline: none
+}
+
+/* Toggle vista griglia/lista */
+.sp-view-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% !important;
+  color: var(--bool-muted);
+  display: grid;
+  place-items: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sp-view-btn:hover:not(.active) {
+  color: var(--bool-ink)
+}
+
+.sp-view-btn.active {
+  background: var(--bool-ink);
+  color: #fff
 }
