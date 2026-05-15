@@ -81,16 +81,6 @@ export default function ProductPage() {
                     <p className="h1 mb-0">{dataProduct.price} €</p>
                   </div>
 
-                  {/* messaggio informativo sullo stock */}
-                  {stock === 0 && (
-                    <p className="text-danger small mb-2">Prodotto esaurito</p>
-                  )}
-                  {stock > 0 && remainingStock <= 0 && (
-                    <p className="text-warning small mb-2">
-                      Hai già tutti i pezzi disponibili nel carrello
-                    </p>
-                  )}
-
                   <div className="row gx-2">
                     <div className="col-auto">
                       <div className="quantity-controls rounded-pill bg-paper border d-flex">
@@ -121,9 +111,16 @@ export default function ProductPage() {
                       <button
                         onClick={() => addToCart(dataProduct, productQuantity)}
                         disabled={isAddDisabled}
-                        className="btn btn-dark w-100 p-3 lh-1 rounded-pill border-0 btn_cart"
+                        className="btn btn-dark w-100 p-3 lh-1 rounded-pill border-0"
                       >
-                        {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
+                        {
+                          stock === 0
+                            ? "Esaurito"
+                            : remainingStock <= 0
+                              ? "Hai aggiunto tutti i prodotti disponibili"
+                              : "Aggiungi al carrello"
+                        }
+
                       </button>
                     </div>
                   </div>

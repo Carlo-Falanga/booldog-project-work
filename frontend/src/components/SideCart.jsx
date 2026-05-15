@@ -15,7 +15,7 @@ export default function SideCart() {
     <>
       {asideCart && (
         <div>
-          <div onClick={() => setAsideCart(false)} className="bg-body-secondary bg-opacity-50 position-fixed start-0 end-0 top-0 bottom-0">
+          <div onClick={() => setAsideCart(false)} className="bg-body-secondary bg-opacity-50 position-fixed start-0 end-0 top-0 bottom-0 z-2">
           </div>
           <aside className="aside-cart position-fixed top-0 end-0 h-100 bg-white shadow-lg p-3 z-3 sidebar_width overflow-scroll">
             <div className="mb-5">
