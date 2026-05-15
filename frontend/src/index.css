@@ -217,8 +217,8 @@ main {
   margin-left: 4px;
 }
 
-.quantity-controls>* {
-  width: 40px;
+.quantity-controls div {
+  width: 32px;
 }
 
 .btn_cart {

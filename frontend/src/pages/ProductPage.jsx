@@ -98,9 +98,9 @@ export default function ProductPage() {
                           onClick={decreaseQuantity}
                           type="button"
                           disabled={productQuantity <= 1}
-                          className="btn py-3 border-0"
+                          className="btn p-3 border-0"
                         >
-                          -
+                          <i class="bi bi-dash d-flex"></i>
                         </button>
                         <div className="d-flex align-items-center justify-content-center">
                           <span>{productQuantity}</span>
@@ -109,9 +109,9 @@ export default function ProductPage() {
                           onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
                           type="button"
                           disabled={isPlusDisabled}
-                          className="btn py-3 border-0"
+                          className="btn p-3 border-0"
                         >
-                          +
+                          <i class="bi bi-plus d-flex"></i>
                         </button>
                       </div>
                     </div>
@@ -119,7 +119,7 @@ export default function ProductPage() {
                       <button
                         onClick={() => addToCart(dataProduct, productQuantity)}
                         disabled={isAddDisabled}
-                        className="btn btn-dark w-100 py-3 rounded-pill border-0 btn_cart"
+                        className="btn btn-dark w-100 p-3 lh-1 rounded-pill border-0 btn_cart"
                       >
                         {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
                       </button>

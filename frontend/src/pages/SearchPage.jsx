@@ -58,10 +58,8 @@ export default function SearchPage() {
                 <h1 className='text-center mt-5 mb-3'>Ricerca prodotti</h1>
 
 
-                <div className='d-flex align-items-center justify-content-between mb-3'>
-                    {/* bottone per visualizzazione doppia*/}
+                <div className="d-flex align-items-center justify-content-between mb-3">
                     <GridListButton setListView={setListView} />
-                    {/* filters */}
                     <OrderSelect currentOrder={order} handleFilterChange={handleFilterChange} />
                 </div>
                 {
