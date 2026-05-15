@@ -19,7 +19,7 @@ export default function SearchPage() {
     const [listView, setListView] = useState(false);
 
     const url = animalSlug
-        ? `http://localhost:3000/products/animal/${endpoint}`
+        ? `http://localhost:3000/products/${endpoint}`
         : `http://localhost:3000/products`;
 
     useEffect(() => {
@@ -43,8 +43,8 @@ export default function SearchPage() {
 
     const sortOptions = [
         { value: '', label: 'Novità' },
-        { value: 'price_asc', label: 'Prezzo ↑' },
-        { value: 'price_desc', label: 'Prezzo ↓' },
+        { value: 'price-up', label: 'Prezzo ↑' },
+        { value: 'price-down', label: 'Prezzo ↓' },
         { value: 'name', label: 'Nome' },
     ];
 
