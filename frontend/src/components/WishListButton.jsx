@@ -12,7 +12,7 @@ export default function WishListButton({ product, slug }) {
     return (
         <button
             onClick={() => addToWishList(product)}
-            className="btn btn-wishlist bg-white position-absolute top-0 end-0 z-2 rounded-circle aspect-ratio-1x1 border d-flex align-items-center justify-content-center cursor-pointer"
+            className="btn btn-wishlist bg-white position-absolute top-0 end-0 z-2 m-2 rounded-circle aspect-ratio-1x1 border d-flex align-items-center justify-content-center cursor-pointer"
         >
             <i
                 className={`d-flex bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}

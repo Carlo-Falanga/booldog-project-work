@@ -5,10 +5,10 @@ export default function ProductCardList({ product, addToCart }) {
 
   return (
 
-    <div className="card p-3 h-100 position-relative">
-      <div className='text-decoration-none text-reset row'>
+    <div className="card h-100">
+      <div className=' row'>
 
-        <div className="col-2">
+        <div className="col-3 position-relative">
 
           <WishListButton product={product} slug={product.slug} />
 
