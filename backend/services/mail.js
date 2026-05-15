@@ -48,7 +48,7 @@ const sendAdminOrderConfirmation = async (order) => {
     subject: `Ordine ricevuto ${order_code}`,
     text: `Hai ricevuto un nuovo ordine da ${user_full_name}, Il codice ordine e' ${order_code}. Totale: €${total}`,
     html: `<div style="font-family: Arial, sans-serif; color: #333; padding: 20;">
-    <h2>Nome utente, ${user_full_name}!</h2>
+    <h2>Nuovo ordine da ${user_full_name}!</h2>
     <p>Codice ordine: <strong>${order_code}</strong></p>
     <ul>${itemsHtml}</ul>
     <p>Totale: <strong>€${total}</strong></p>
