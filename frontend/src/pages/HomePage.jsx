@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
+import { useGlobal } from "../context/CartContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ProductCard from "../components/ProductCard";
+
+
 
 const API_URL = "http://localhost:3000";
 
 function HomePage() {
+
+  const {
+    addToCart,
+  } = useGlobal();
+
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -197,56 +207,13 @@ function HomePage() {
           </h2>
         </header>
 
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-0 border-top border-start">
+        <div className="row row-cols-2 row-cols-md-4 g-2 g-lg-3">
           {filteredProducts.map((product) => (
-            <div className="col" key={product.id}>
-              <div className="card h-100 rounded-0 border-0 border-end border-bottom bg-body-tertiary product-card">
-                <div className="ratio ratio-4x3 bg-white border-bottom overflow-hidden">
-                  <img
-                    src={`http://localhost:3000/images/products/${product.img_url}`}
-                    alt={product.name}
-                    className="object-fit-contain product-card-img"
-                  />
-                </div>
-
-                <Link
-                  to={`/product/${product.slug}`}
-                  className="card-body d-flex flex-column p-4 text-decoration-none text-body"
-                >
-                  <div className="d-flex flex-wrap gap-1 mb-3">
-                    {product.category && (
-                      <span className="badge rounded-pill eyebrow fw-medium px-2 py-1 bg-body-secondary text-body-secondary border">
-                        {product.category}
-                      </span>
-                    )}
-                  </div>
-
-                  <h5 className="card-title fw-normal mb-2">{product.name}</h5>
-                  <p className="card-text small text-body-secondary flex-grow-1 mb-4">
-                    {product.description ||
-                      "Prodotto di qualità per il tuo animale."}
-                  </p>
-
-                  <div className="d-flex align-items-center justify-content-between border-top pt-3">
-                    <span className="product-price fs-3 fw-normal">
-                      €{Number(product.price).toFixed(2)}
-                    </span>
-                    <span className="rounded-circle border d-inline-flex align-items-center justify-content-center product-card-arrow">
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      >
-                        <path d="M5 12h14M13 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
-              </div>
+            <div key={product.slug}>
+              <ProductCard
+                product={product}
+                addToCart={() => addToCart(product, 1)}
+              />
             </div>
           ))}
         </div>

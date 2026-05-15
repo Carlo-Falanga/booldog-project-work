@@ -349,47 +349,7 @@ main {
 
 .cat-card:hover .cta-circle {
   background-color: var(--bool-accent) !important;
-  
-}
 
-/* Product card — hover su immagine + freccia */
-.product-card {
-  transition: background-color 0.2s;
-}
-
-.product-card:hover {
-  background-color: var(--bool-bone-deep) !important;
-}
-
-.product-card-img {
-  transition: transform 0.4s ease;
-}
-
-.product-card:hover .product-card-img {
-  transform: scale(1.04);
-}
-
-.product-card-arrow {
-  width: 34px;
-  height: 34px;
-  color: var(--bool-ink);
-  transition:
-    background-color 0.2s,
-    border-color 0.2s,
-    color 0.2s,
-    transform 0.2s;
-}
-
-.product-card:hover .product-card-arrow {
-  background-color: var(--bool-ink);
-  border-color: var(--bool-ink) !important;
-  color: var(--bool-bone);
- 
-}
-
-.product-price {
-  font-family: var(--bool-font-display);
-  letter-spacing: -0.02em;
 }
 
 /* Badge varianti animale */
