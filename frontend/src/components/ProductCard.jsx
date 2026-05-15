@@ -9,7 +9,7 @@ export default function ProductCard({ product, addToCart }) {
 
   return (
 
-    <div className="border rounded-3 overflow-hidden h-100 position-relative">
+    <div className="border rounded-3 overflow-hidden h-100 position-relative product-card">
       <button onClick={() => addToWishList(product)} className="btn position-absolute end-0 z-1 border-0">
         <i className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}></i>
       </button>
@@ -18,7 +18,7 @@ export default function ProductCard({ product, addToCart }) {
         <Link to={`/product/${product.slug}`}>
           <div className="ratio ratio-1x1">
             <div className="d-flex align-items-center justify-content-center">
-              <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+              <img className="w-100 h-100 object-fit-contain product-card-img" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
             </div>
           </div>
         </Link>

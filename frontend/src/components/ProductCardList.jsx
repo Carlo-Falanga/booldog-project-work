@@ -9,7 +9,7 @@ export default function ProductCardList({ product, addToCart }) {
 
   return (
 
-    <div className="card p-3 h-100 position-relative">
+    <div className="card p-3 h-100 position-relative product-card">
       <div className='text-decoration-none text-reset row'>
 
         <div className="col-2">
@@ -19,7 +19,7 @@ export default function ProductCardList({ product, addToCart }) {
           <Link to={`/product/${product.slug}`}>
             <div className="ratio ratio-1x1">
               <div className="d-flex align-items-center justify-content-center">
-                <img className="w-100 h-100 object-fit-contain" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+                <img className="w-100 h-100 object-fit-contain product-card-img" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
               </div>
             </div>
           </Link>
