@@ -1,8 +1,5 @@
 import { useWishlist } from "../context/WishListContext";
 
-
-
-
 export default function WishListButton({ product, slug }) {
 
     const {
@@ -18,7 +15,7 @@ export default function WishListButton({ product, slug }) {
             className="btn btn-wishlist bg-white position-absolute top-0 end-0 z-2 rounded-circle aspect-ratio-1x1 border d-flex align-items-center justify-content-center cursor-pointer"
         >
             <i
-                className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
+                className={`d-flex bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
             ></i>
         </button>
     )

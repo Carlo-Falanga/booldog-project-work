@@ -221,15 +221,6 @@ main {
   width: 40px;
 }
 
-.btn-wishlist {
-  height: 48px;
-  width: 48px;
-}
-
-.btn i {
-  line-height: 16px;
-}
-
 .btn_cart {
   transition:
     background 0.15s,

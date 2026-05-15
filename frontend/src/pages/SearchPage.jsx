@@ -5,7 +5,7 @@ import { useGlobal } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import ProductCardList from '../components/ProductCardList';
 import OrderSelect from '../components/OrderSelect';
-import VisualizationButton from '../components/VisualizationButton';
+import GridListButton from '../components/GridListButton';
 import Loader from '../components/Loader';
 
 export default function SearchPage() {
@@ -60,7 +60,7 @@ export default function SearchPage() {
 
                 <div className='d-flex align-items-center justify-content-between mb-3'>
                     {/* bottone per visualizzazione doppia*/}
-                    <VisualizationButton setListView={setListView} />
+                    <GridListButton setListView={setListView} />
                     {/* filters */}
                     <OrderSelect currentOrder={order} handleFilterChange={handleFilterChange} />
                 </div>

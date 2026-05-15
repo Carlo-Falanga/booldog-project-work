@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useGlobal } from "../context/CartContext";
 import { useWishlist } from "../context/WishListContext";
 import ProductCard from "../components/ProductCard";
 import ProductCardList from "../components/ProductCardList";
-import { useState } from "react";
+import GridListButton from "../components/GridListButton";
 
 
 export default function WishListPage() {
@@ -20,10 +21,8 @@ export default function WishListPage() {
           <span className="d-block">La tua</span>
           <em className="d-block">Wishlist.</em>
         </h1>
-        <div className="btn-group">
-          <button onClick={() => setListView(false)} type="button" className="btn btn-outline-secondary btn-sm rounded-start-pill border-end-0 increse_decrease_btn"><i className="bi bi-view-list"></i></button>
-          <button onClick={() => setListView(true)} className="btn btn-outline-secondary btn-sm rounded-end-pill border-start-0 increse_decrease_btn"><i className="bi bi-grid"></i></button>
-        </div>
+
+        <GridListButton setListView={setListView} />
 
         <div className="row g-4 g-lg-3">
           {wishlist.map((product) => (
