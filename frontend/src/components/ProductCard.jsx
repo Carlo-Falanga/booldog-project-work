@@ -10,34 +10,37 @@ export default function ProductCard({ product, addToCart }) {
 
       <WishListButton product={product} slug={product.slug} />
 
-      <div className="text-decoration-none text-reset">
+      <div className="d-flex flex-column h-100">
 
-        <Link to={`/product/${product.slug}`}>
-          <div className="ratio ratio-1x1">
-            <div className="d-flex align-items-center justify-content-center">
-              <img className="w-100 h-100 object-fit-contain product-card-img" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+        <div className="col-auto">
+          <Link to={`/product/${product.slug}`} className="aspect-ratio-1x1 d-flex align-items-center justify-content-center">
+            <img className="w-100 h-100 object-fit-contain p-3" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
+          </Link>
+        </div>
+
+        <div className="col px-3">
+          <div className="cart-meta mb-2">{product.category}</div>
+          <h3 className="cart-name h5 mb-3">{product.name}</h3>
+        </div>
+
+        <div className="px-3 col-auto">
+          <div className="border-top py-3 d-flex align-items-center justify-content-between">
+            <div className="cart-name fs-4">
+              {product.price} €
             </div>
-          </div>
-        </Link>
-
-        <div className="px-3 pt-3 pb-4">
-          <div className="cart-meta mb-3">{product.category}</div>
-          <h3 className="cart-name h5">{product.name}</h3>
-
-          <div className="border-top pt-3 d-flex align-items-center justify-content-between">
-            <div className="cart-name fs-4">{product.price} €</div>
-            <div className="">
-              {/* se conosco lo stock e vale 0 disabilito il bottone e mostro "Esaurito" */}
+            {product.stock === 0 ?
+              <div>Esaurito</div>
+              :
               <button
                 onClick={addToCart}
                 disabled={product.stock === 0}
-                className="btn btn-dark btn-sm px-3 rounded-pill">
-                {product.stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
+                className="btn bg-black p-2 border-0 rounded-pill text-white">
+                <i class="d-flex p-1 bi bi-cart2"></i>
               </button>
-            </div>
+            }
           </div>
-
         </div>
+
       </div>
 
 
