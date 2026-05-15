@@ -1,6 +1,9 @@
 const connection = require("../data/db");
 const { validationResult } = require("express-validator");
-const { sendOrderConfirmation } = require("./mailController");
+const {
+  sendOrderConfirmation,
+  sendAdminOrderConfirmation,
+} = require("../services/mail");
 
 // show - mostra un ordine con i suoi prodotti
 const show = (req, res) => {
@@ -141,7 +144,7 @@ const store = (req, res) => {
     }
 
     // funzione interna che salva l'ordine e i suoi prodotti
-    function insertOrder(coupon_id, finalTotal) {
+    async function insertOrder(coupon_id, finalTotal) {
       // genero un codice ordine semplice
       const order_code = `BD-${Date.now()}`;
 
@@ -177,7 +180,7 @@ const store = (req, res) => {
         const itemsValues = products.map((p) => [order_id, p.id, p.quantity]);
         const itemsSql = `INSERT INTO order_product (order_id, product_id, quantity) VALUES ?`;
 
-        connection.query(itemsSql, [itemsValues], (err) => {
+        connection.query(itemsSql, [itemsValues], async (err) => {
           if (err)
             return res.status(500).json({
               error: true,
@@ -198,16 +201,20 @@ const store = (req, res) => {
             return { name: dbProduct.name, quantity: p.quantity };
           });
 
-          // invio la mail di conferma (non blocco la risposta se fallisce)
-          sendOrderConfirmation({
+          const mailPayload = {
             email,
             user_full_name,
             order_code,
             total: finalTotal,
             items: itemsList,
-          }).catch((err) => {
-            console.error("Errore invio mail conferma:", err);
-          });
+          };
+
+          try {
+            await sendOrderConfirmation(mailPayload);
+            await sendAdminOrderConfirmation(mailPayload);
+          } catch (mailErr) {
+            console.error("Errore invio mail:", mailErr);
+          }
 
           res.status(201).json({
             message: "Ordine creato",
