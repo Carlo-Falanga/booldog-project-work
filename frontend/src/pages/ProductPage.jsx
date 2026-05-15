@@ -72,7 +72,7 @@ export default function ProductPage() {
                   <div className="d-flex align-items-center justify-content-center">
                     <button
                       onClick={() => addToWishList(dataProduct)}
-                      className="btn position-absolute end-0 top-0"
+                      className="btn btn-wishlist position-absolute top-0 end-0 rounded-circle aspect-ratio-1x1 border d-flex align-items-center justify-content-center cursor-pointer"
                     >
                       <i
                         className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
@@ -143,14 +143,6 @@ export default function ProductPage() {
                       >
                         {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
                       </button>
-                    </div>
-                    <div className="col-auto">
-                      <div
-                        onClick={() => addToWishList(dataProduct)}
-                        className="bg-paper rounded-circle aspect-ratio-1x1 border h-100 d-flex align-items-center justify-content-center cursor-pointer"
-                      >
-                        <i className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}></i>
-                      </div>
                     </div>
                   </div>
 
