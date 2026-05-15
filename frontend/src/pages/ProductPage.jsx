@@ -7,7 +7,6 @@ import SideCart from "../components/SideCart";
 import WishListButton from "../components/WishListButton";
 
 export default function ProductPage() {
-
   const {
     cart,
     setCart,
@@ -32,7 +31,6 @@ export default function ProductPage() {
       .then((res) => setDataProduct(res.data));
   }, [slug]);
 
-
   // controllo se questo prodotto è già nel carrello e con che quantità
   const existingInCart = cart.find((p) => p.id === dataProduct?.id);
   const quantityInCart = existingInCart ? existingInCart.quantity : 0;
@@ -53,7 +51,6 @@ export default function ProductPage() {
         {dataProduct && (
           <div>
             <div className="row">
-
               <div className="col-10 col-md-5 col-lg-6 offset-1 offset-md-0">
                 <div className="ratio ratio-1x1">
                   <div className="d-flex align-items-center justify-content-center">
@@ -72,10 +69,13 @@ export default function ProductPage() {
                   <div className="cart-meta mb-3">
                     {dataProduct.category} {dataProduct.animal_name}
                   </div>
-                  <h1 className="display-3 lh-1 fw-normal">{dataProduct.name}</h1>
+                  <h1 className="display-3 lh-1 fw-normal">
+                    {dataProduct.name}
+                  </h1>
                   <p>{dataProduct.description}</p>
                   <div className="cart-meta mb-5">
-                    {dataProduct.size} {dataProduct.color} {dataProduct.material}
+                    {dataProduct.size} {dataProduct.color}{" "}
+                    {dataProduct.material}
                   </div>
                   <div className="border-top py-4">
                     <p className="h1 mb-0">{dataProduct.price} €</p>
@@ -100,18 +100,20 @@ export default function ProductPage() {
                           disabled={productQuantity <= 1}
                           className="btn p-3 border-0"
                         >
-                          <i class="bi bi-dash d-flex"></i>
+                          <i className="bi bi-dash d-flex"></i>
                         </button>
                         <div className="d-flex align-items-center justify-content-center">
                           <span className="small">{productQuantity}</span>
                         </div>
                         <button
-                          onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
+                          onClick={() =>
+                            increaseQuantity(dataProduct.stock, quantityInCart)
+                          }
                           type="button"
                           disabled={isPlusDisabled}
                           className="btn p-3 border-0"
                         >
-                          <i class="bi bi-plus d-flex"></i>
+                          <i className="bi bi-plus d-flex"></i>
                         </button>
                       </div>
                     </div>
@@ -125,10 +127,8 @@ export default function ProductPage() {
                       </button>
                     </div>
                   </div>
-
                 </div>
               </div>
-
             </div>
 
             <div className="py-5">
@@ -146,7 +146,6 @@ export default function ProductPage() {
             </div>
           </div>
         )}
-
       </div>
     </section>
   );

@@ -53,7 +53,8 @@ export default function CartProductsList() {
                   <p className="text-muted small mb-0">
                     {item.size && (
                       <>
-                        Taglia <strong className="text-dark">{item.size} </strong>
+                        Taglia{" "}
+                        <strong className="text-dark">{item.size} </strong>
                       </>
                     )}
                     {item.color && (
@@ -73,7 +74,7 @@ export default function CartProductsList() {
                         className="btn p-2 border-0"
                         onClick={() => updateQuantity(item.slug, -1)}
                       >
-                        <i class="bi bi-dash d-flex"></i>
+                        <i className="bi bi-dash d-flex"></i>
                       </button>
                       <div className="d-flex align-items-center justify-content-center">
                         <span className="small">{item.quantity}</span>
@@ -84,7 +85,7 @@ export default function CartProductsList() {
                         className="btn p-2 border-0"
                         onClick={() => updateQuantity(item.slug, +1)}
                       >
-                        <i class="bi bi-plus d-flex"></i>
+                        <i className="bi bi-plus d-flex"></i>
                       </button>
                     </div>
 
