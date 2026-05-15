@@ -4,6 +4,8 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { useGlobal } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 import ProductCardList from '../components/ProductCardList';
+import OrderSelect from '../components/OrderSelect';
+import GridListButton from '../components/GridListButton';
 import Loader from '../components/Loader';
 
 export default function SearchPage() {
@@ -109,6 +111,10 @@ export default function SearchPage() {
                         </div>
 
                     </div>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-3">
+                    <GridListButton setListView={setListView} />
+                    <OrderSelect currentOrder={order} handleFilterChange={handleFilterChange} />
                 </div>
             </section>
 
