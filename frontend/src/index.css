@@ -21,6 +21,7 @@
   --bool-forest-deep: #b0291f;
   --bool-clay: #0a0a0a;
   --bool-clay-deep: #000000;
+  --bool-line: #E4E4E2;
 
   /* Alias per compatibilità */
   --bool-primary: var(--bool-forest);
