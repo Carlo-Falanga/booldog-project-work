@@ -81,7 +81,7 @@ export default function Navbar() {
           <div className="d-none d-lg-flex align-items-center ms-auto order-lg-3 gap-2">
             <div
               onClick={() => setAsideCart(true)}
-              className="btn"
+            
               role="button"
             >
               <div className="navbar_icons_hover position-relative">
@@ -93,7 +93,7 @@ export default function Navbar() {
             </div>
             <Link to="/wishlist" className="btn text-white border border-0">
               <div className="navbar_icons_hover">
-                <i className="bi bi-heart text-black"></i>
+                <i className="bi bi-heart text-black px-2"></i>
               </div>
             </Link>
             <form onSubmit={handleSubmit} className="d-flex align-items-center">
@@ -112,18 +112,18 @@ export default function Navbar() {
           </div>
 
           <div className="collapse navbar-collapse order-lg-2 mt-3 mt-lg-0 navbar_mobile_menu" id="navbarNav">
-            <ul className="navbar-nav me-auto mb-0 text-center text-lg-start w-100">
-              <li className="nav-item">
+            <ul className="navbar-nav me-auto mb-0 text-center text-lg-start w-100 d-flex align-items-center">
+              <li className="nav-item p-2">
                 <NavLink to="/products/animal/cane" className="nav-link">
                   Cane
                 </NavLink>
               </li>
-              <li className="nav-item">
+              <li className="nav-item px-2">
                 <NavLink to="/products/animal/gatto" className="nav-link">
                   Gatto
                 </NavLink>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ps-2">
                 <NavLink to="/products" className="nav-link" end>
                   Catalogo completo
                 </NavLink>

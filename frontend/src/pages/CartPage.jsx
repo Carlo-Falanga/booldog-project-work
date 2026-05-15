@@ -36,7 +36,7 @@ export default function CartPage() {
               {/* Freccia indietro per tornare alla visualizzazione dei prodotti */}
               <Link to="/products">
                 <button className="btn btn-dark rounded-pill border-0 btn_cart mb-5 px-4 py-2">
-                  <i class="bi bi-arrow-left-short pe-2"></i>
+                  <i className="bi bi-arrow-left-short pe-2"></i>
                   Continua a comprare
                 </button>
               </Link>
