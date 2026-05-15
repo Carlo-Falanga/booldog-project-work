@@ -32,7 +32,7 @@ export default function Navbar() {
     newParams.set("search", search);
 
     let targetPath = location.pathname;
-    if (targetPath === "/") {
+    if (targetPath !== "/products/animal/cane" && targetPath !== "/products/animal/gatto" && targetPath !== "/products") {
       targetPath = "/products";
     }
 
