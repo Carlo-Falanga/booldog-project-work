@@ -335,7 +335,7 @@ main {
 
 .cat-card:hover .cta-circle {
   background-color: var(--bool-accent) !important;
-  transform: rotate(-15deg);
+  
 }
 
 /* Product card — hover su immagine + freccia */
@@ -370,7 +370,7 @@ main {
   background-color: var(--bool-ink);
   border-color: var(--bool-ink) !important;
   color: var(--bool-bone);
-  transform: rotate(-15deg);
+ 
 }
 
 .product-price {
