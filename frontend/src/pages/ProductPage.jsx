@@ -1,10 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useGlobal } from "../context/CartContext";
-import { useWishlist } from "../context/WishListContext";
 import ProductCard from "../components/ProductCard";
 import SideCart from "../components/SideCart";
+import WishListButton from "../components/WishListButton";
 
 export default function ProductPage() {
 
@@ -21,18 +21,9 @@ export default function ProductPage() {
     setProductQuantity,
   } = useGlobal();
 
-  const {
-    wishlist,
-    setWishlist,
-    addToWishList,
-    isInWishList
-  } = useWishlist();
-
   const [dataProduct, setDataProduct] = useState(null);
 
   const { slug } = useParams();
-
-  const addedToWishList = isInWishList(slug)
 
   useEffect(() => {
     setProductQuantity(1);
@@ -41,7 +32,6 @@ export default function ProductPage() {
       .then((res) => setDataProduct(res.data));
   }, [slug]);
 
-  console.log(dataProduct)
 
   // controllo se questo prodotto è già nel carrello e con che quantità
   const existingInCart = cart.find((p) => p.id === dataProduct?.id);
@@ -57,9 +47,6 @@ export default function ProductPage() {
   // disabilito "Aggiungi al carrello" se non c'è più stock disponibile
   const isAddDisabled = remainingStock <= 0;
 
-  // verifico se il prodotto esiste nel carrello
-  const existingProductWL = wishlist.find((item) => item.slug === slug);
-
   return (
     <section>
       <div className="container-lg py-3">
@@ -67,17 +54,10 @@ export default function ProductPage() {
           <div>
             <div className="row">
 
-              <div className="offset-1 offset-md-0 col-10 col-md-6">
+              <div className="col-10 col-md-5 col-lg-6 offset-1 offset-md-0">
                 <div className="ratio ratio-1x1">
                   <div className="d-flex align-items-center justify-content-center">
-                    <button
-                      onClick={() => addToWishList(dataProduct)}
-                      className="btn position-absolute end-0 top-0"
-                    >
-                      <i
-                        className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}
-                      ></i>
-                    </button>
+                    <WishListButton product={dataProduct} slug={slug} />
                     <img
                       className="w-100 h-100 object-fit-contain"
                       src={`http://localhost:3000/images/products/${dataProduct.img_url}`}
@@ -87,8 +67,8 @@ export default function ProductPage() {
                 </div>
               </div>
 
-              <div className="col-md-6 d-flex align-items-center justify-content-center">
-                <div className="px-md-5">
+              <div className="col-md-7 col-lg-6 d-flex align-items-center justify-content-center">
+                <div className="px-lg-5">
                   <div className="cart-meta mb-3">
                     {dataProduct.category} {dataProduct.animal_name}
                   </div>
@@ -97,8 +77,8 @@ export default function ProductPage() {
                   <div className="cart-meta mb-5">
                     {dataProduct.size} {dataProduct.color} {dataProduct.material}
                   </div>
-                  <div className="border-top pt-4">
-                    <p className="h1">{dataProduct.price} €</p>
+                  <div className="border-top py-4">
+                    <p className="h1 mb-0">{dataProduct.price} €</p>
                   </div>
 
                   {/* messaggio informativo sullo stock */}
@@ -111,33 +91,35 @@ export default function ProductPage() {
                     </p>
                   )}
 
-                  <div className="row gx-2 align-items-center">
-                    <div className="btn-group col-auto">
-                      <button
-                        onClick={decreaseQuantity}
-                        type="button"
-                        disabled={productQuantity <= 1}
-                        className="bg-paper py-3 rounded-start-pill border border-end-0 increse_decrease_btn"
-                      >
-                        -
-                      </button>
-                      <div className="bg-paper border-top border-bottom py-3 border-start-0 border-end-0">
-                        {productQuantity}
+                  <div className="row gx-2">
+                    <div className="col-auto">
+                      <div className="quantity-controls rounded-pill bg-paper border d-flex">
+                        <button
+                          onClick={decreaseQuantity}
+                          type="button"
+                          disabled={productQuantity <= 1}
+                          className="btn p-3 border-0"
+                        >
+                          <i class="bi bi-dash d-flex"></i>
+                        </button>
+                        <div className="d-flex align-items-center justify-content-center">
+                          <span className="small">{productQuantity}</span>
+                        </div>
+                        <button
+                          onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
+                          type="button"
+                          disabled={isPlusDisabled}
+                          className="btn p-3 border-0"
+                        >
+                          <i class="bi bi-plus d-flex"></i>
+                        </button>
                       </div>
-                      <button
-                        onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
-                        type="button"
-                        disabled={isPlusDisabled}
-                        className="bg-paper py-3 rounded-end-pill border border-start-0 increse_decrease_btn"
-                      >
-                        +
-                      </button>
                     </div>
                     <div className="col">
                       <button
                         onClick={() => addToCart(dataProduct, productQuantity)}
                         disabled={isAddDisabled}
-                        className="btn btn-dark w-100 py-3 rounded-pill border-0 btn_cart"
+                        className="btn btn-dark w-100 p-3 lh-1 rounded-pill border-0 btn_cart"
                       >
                         {stock === 0 ? "Esaurito" : "Aggiungi al carrello"}
                       </button>

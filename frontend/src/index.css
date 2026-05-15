@@ -56,6 +56,16 @@ body {
   letter-spacing: -0.005em;
 }
 
+/* UTILITY */
+
+.aspect-ratio-1x1 {
+  aspect-ratio: 1/1;
+}
+
+.cursor-pointer {
+  cursor: pointer
+}
+
 /* TIPOGRAFIA */
 
 h1,
@@ -205,6 +215,10 @@ main {
   font-weight: 300;
   font-size: 22px;
   margin-left: 4px;
+}
+
+.quantity-controls div {
+  width: 32px;
 }
 
 .btn_cart {
