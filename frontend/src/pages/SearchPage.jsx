@@ -43,8 +43,8 @@ export default function SearchPage() {
 
     const sortOptions = [
         { value: '', label: 'Novità' },
-        { value: 'price_asc', label: 'Prezzo ↑' },
-        { value: 'price_desc', label: 'Prezzo ↓' },
+        { value: 'price-up', label: 'Prezzo ↑' },
+        { value: 'price-down', label: 'Prezzo ↓' },
         { value: 'name', label: 'Nome' },
     ];
 
