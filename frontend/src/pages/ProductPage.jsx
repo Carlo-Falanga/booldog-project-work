@@ -103,7 +103,7 @@ export default function ProductPage() {
                           <i class="bi bi-dash d-flex"></i>
                         </button>
                         <div className="d-flex align-items-center justify-content-center">
-                          <span>{productQuantity}</span>
+                          <span className="small">{productQuantity}</span>
                         </div>
                         <button
                           onClick={() => increaseQuantity(dataProduct.stock, quantityInCart)}
