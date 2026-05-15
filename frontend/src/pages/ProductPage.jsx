@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useGlobal } from "../context/CartContext";
-import { useWishlist } from "../context/WishListContext";
 import ProductCard from "../components/ProductCard";
 import SideCart from "../components/SideCart";
 import WishListButton from "../components/WishListButton";
@@ -22,18 +21,9 @@ export default function ProductPage() {
     setProductQuantity,
   } = useGlobal();
 
-  const {
-    wishlist,
-    setWishlist,
-    addToWishList,
-    isInWishList
-  } = useWishlist();
-
   const [dataProduct, setDataProduct] = useState(null);
 
   const { slug } = useParams();
-
-  const addedToWishList = isInWishList(slug)
 
   useEffect(() => {
     setProductQuantity(1);
@@ -56,9 +46,6 @@ export default function ProductPage() {
 
   // disabilito "Aggiungi al carrello" se non c'è più stock disponibile
   const isAddDisabled = remainingStock <= 0;
-
-  // verifico se il prodotto esiste nel carrello
-  const existingProductWL = wishlist.find((item) => item.slug === slug);
 
   return (
     <section>
