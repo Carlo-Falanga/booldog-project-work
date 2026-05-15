@@ -34,7 +34,7 @@ export default function CartPage() {
           <div className="row row-cols-1 row-cols-lg-2 g-5 ">
             <div className="col">
               {/* Freccia indietro per tornare alla visualizzazione dei prodotti */}
-              <Link to="/search">
+              <Link to="/products">
                 <button className="btn btn-dark rounded-pill border-0 btn_cart mb-5 px-4 py-2">
                   <i class="bi bi-arrow-left-short pe-2"></i>
                   Continua a comprare

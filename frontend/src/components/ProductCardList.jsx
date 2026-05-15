@@ -1,21 +1,17 @@
-import { useWishlist } from "../context/WishListContext";
 import { Link, useParams } from "react-router-dom";
+import WishListButton from "./WishListButton";
 
 export default function ProductCardList({ product, addToCart }) {
 
-  const { wishlist, setWishlist, addToWishList, isInWishList } = useWishlist();
-
-  const addedToWishList = isInWishList(product.slug)
-
   return (
 
-    <div className="card p-3 h-100 position-relative product-card">
-      <div className='text-decoration-none text-reset row'>
+    <div className="card h-100">
+      <div className=' row'>
 
-        <div className="col-2">
-          <button onClick={() => addToWishList(product)} className="position-absolute start-0 pe-4 z-1 border-0">
-            <i className={`bi ${addedToWishList ? "bi-heart-fill" : "bi-heart"}`}></i>
-          </button>
+        <div className="col-3 position-relative">
+
+          <WishListButton product={product} slug={product.slug} />
+
           <Link to={`/product/${product.slug}`}>
             <div className="ratio ratio-1x1">
               <div className="d-flex align-items-center justify-content-center">

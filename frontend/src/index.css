@@ -56,6 +56,16 @@ body {
   letter-spacing: -0.005em;
 }
 
+/* UTILITY */
+
+.aspect-ratio-1x1 {
+  aspect-ratio: 1/1;
+}
+
+.cursor-pointer {
+  cursor: pointer
+}
+
 /* TIPOGRAFIA */
 
 h1,
@@ -207,6 +217,10 @@ main {
   margin-left: 4px;
 }
 
+.quantity-controls div {
+  width: 32px;
+}
+
 .btn_cart {
   transition:
     background 0.15s,
@@ -335,7 +349,7 @@ main {
 
 .cat-card:hover .cta-circle {
   background-color: var(--bool-accent) !important;
-  transform: rotate(-15deg);
+  
 }
 
 /* Product card — hover su immagine + freccia */
@@ -370,7 +384,7 @@ main {
   background-color: var(--bool-ink);
   border-color: var(--bool-ink) !important;
   color: var(--bool-bone);
-  transform: rotate(-15deg);
+ 
 }
 
 .product-price {
@@ -457,11 +471,10 @@ main {
   line-height: 1;
   letter-spacing: 0;
   text-align: center;
-  border-radius: 999px;
+  border-radius: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 2px var(--bool-bone-deep);
   pointer-events: none;
 }
 

@@ -81,7 +81,7 @@ export default function Navbar() {
           <div className="d-none d-lg-flex align-items-center ms-auto order-lg-3 gap-2">
             <div
               onClick={() => setAsideCart(true)}
-              className="btn border-0"
+              className="btn"
               role="button"
             >
               <div className="navbar_icons_hover position-relative">

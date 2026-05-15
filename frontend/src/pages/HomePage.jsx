@@ -127,7 +127,7 @@ function HomePage() {
                   <div className="border-top mt-4 pt-4 d-flex justify-content-end">
                     <Link
                       to="/products/animal/cane"
-                      className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle"
+                      className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle border border-0"
                       aria-label="Sfoglia cane"
                     >
                       <i className="bi bi-arrow-right"></i>
@@ -176,7 +176,7 @@ function HomePage() {
                   <div className="border-top mt-4 pt-4 d-flex justify-content-end">
                     <Link
                       to="/products/animal/gatto"
-                      className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle"
+                      className="btn btn-dark rounded-circle d-inline-flex align-items-center justify-content-center cta-circle border border-0"
                       aria-label="Sfoglia gatto"
                     >
                       <i className="bi bi-arrow-right"></i>
