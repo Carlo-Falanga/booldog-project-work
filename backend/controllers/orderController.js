@@ -211,12 +211,11 @@ const store = (req, res) => {
             items: itemsList,
           };
 
+          // mail al cliente
           try {
             await sendOrderConfirmation(mailPayload);
-            await delay(10000);
-            await sendAdminOrderConfirmation(mailPayload);
           } catch (mailErr) {
-            console.error("Errore invio mail:", mailErr);
+            console.error("Errore invio mail cliente:", mailErr);
           }
 
           res.status(201).json({
@@ -225,6 +224,16 @@ const store = (req, res) => {
             order_code,
             total: finalTotal,
           });
+
+          // mail admin
+          (async () => {
+            try {
+              await delay(10000);
+              await sendAdminOrderConfirmation(mailPayload);
+            } catch (mailErr) {
+              console.error("Errore invio mail admin:", mailErr);
+            }
+          })();
         });
       });
     }
