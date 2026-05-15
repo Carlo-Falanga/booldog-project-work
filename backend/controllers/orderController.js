@@ -47,6 +47,8 @@ const show = (req, res) => {
   });
 };
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 // store - crea un nuovo ordine partendo dal carrello (localStorage)
 const store = (req, res) => {
   // controlla se la validazione ha trovato errori
@@ -211,6 +213,7 @@ const store = (req, res) => {
 
           try {
             await sendOrderConfirmation(mailPayload);
+            await delay(10000);
             await sendAdminOrderConfirmation(mailPayload);
           } catch (mailErr) {
             console.error("Errore invio mail:", mailErr);
