@@ -190,11 +190,12 @@ const show = (req, res) => {
         // 3. Prodotti correlati
         const relatedSql =
             ` SELECT 
-          p.slug,
-          p.id,
-          p.name,
-          p.price,
-                    p.img_url,
+            p.slug,
+            p.id,
+            p.name,
+            p.price,
+            p.category,
+            p.img_url,
           b.name AS brand_name
         FROM products p
         JOIN brands b ON b.id = p.brand_id
