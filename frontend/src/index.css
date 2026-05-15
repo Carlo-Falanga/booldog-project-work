@@ -349,7 +349,7 @@ main {
 
 .cat-card:hover .cta-circle {
   background-color: var(--bool-accent) !important;
-  
+
 }
 
 /* Product card — hover su immagine + freccia */
@@ -384,7 +384,7 @@ main {
   background-color: var(--bool-ink);
   border-color: var(--bool-ink) !important;
   color: var(--bool-bone);
- 
+
 }
 
 .product-price {
@@ -654,7 +654,12 @@ main {
 
 .hover_footer:hover {
   color: var(--bool-forest);
-  scale: 1.2;
+  scale: 1.05;
   transition: all 0.2s;
 
 }
+
+footer {
+  background-color: var(--bool-paper);
+}
+
