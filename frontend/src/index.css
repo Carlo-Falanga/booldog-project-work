@@ -1,7 +1,6 @@
 @import "bootstrap";
 @import url("bootstrap-icons");
 @import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
-
 /*
    VARIABILI — Bold Modernist Palette */
 
@@ -432,9 +431,38 @@ main {
   width: auto;
 }
 
+.logo_footer {
+  height: 100px;
+  width: auto;
+}
+
 .navbar_icons_hover:hover {
-  scale: 1.2;
+  scale: 1.08;
   transition: all 0.3s;
+}
+
+.cart_badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  background-color: var(--bool-forest);
+  color: #ffffff;
+  font-family: var(--bool-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 2px var(--bool-bone-deep);
+  pointer-events: none;
 }
 
 .my-custom-table td,
@@ -455,6 +483,57 @@ main {
   background: rgba(242, 238, 230, 0.86);
   backdrop-filter: blur(16px) saturate(140%);
   border-bottom: 1px solid white;
+}
+
+.navbar_mobile_menu .nav-link {
+  color: var(--bool-ink);
+  transition: color 0.2s ease;
+}
+
+@media (max-width: 991.98px) {
+  .navbar_mobile_menu {
+    border-top: 1px solid var(--bool-bone-deep);
+    padding-top: 0.5rem;
+  }
+
+  .navbar_mobile_menu .nav-item+.nav-item {
+    border-top: 1px solid var(--bool-bone-deep);
+  }
+
+  .navbar_mobile_menu .nav-link {
+    font-family: var(--bool-font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .navbar_mobile_menu .nav-link:hover,
+  .navbar_mobile_menu .nav-link.active {
+    color: var(--bool-primary-hover);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .navbar_mobile_menu .mobile_eyebrow {
+    font-family: var(--bool-font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bool-muted);
+  }
+
+  .navbar_mobile_menu .form-control {
+    border-color: var(--bool-bone-deep);
+    background-color: var(--bool-bone);
+  }
+
+  .navbar_mobile_menu .form-control:focus {
+    border-color: var(--bool-ink);
+    box-shadow: none;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -558,4 +637,11 @@ main {
 
 .product-card:hover .product-card-img {
   transform: scale(1.05);
+}
+
+.hover_footer:hover {
+  color: var(--bool-forest);
+  scale: 1.2;
+  transition: all 0.2s;
+
 }

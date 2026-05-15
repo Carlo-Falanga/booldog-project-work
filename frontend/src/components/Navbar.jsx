@@ -43,8 +43,31 @@ export default function Navbar() {
     <section className="navbar_custom_bg position-sticky top-0 z-3 px-4 py-2">
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg position-relative d-flex align-items-center ">
+          <Link
+            to="/"
+            className="navbar-brand m-0 d-lg-none"
+          >
+            <img
+              src={booldog_logo}
+              alt="Booldog Logo"
+              style={{ height: "50px", width: "auto", objectFit: "contain" }}
+            />
+          </Link>
+
+          <Link
+            to="/"
+            className="navbar-brand position-absolute start-50 translate-middle-x m-0 d-none d-lg-block"
+            style={{ zIndex: 2 }}
+          >
+            <img
+              src={booldog_logo}
+              alt="Booldog Logo"
+              style={{ height: "50px", width: "auto", objectFit: "contain" }}
+            />
+          </Link>
+
           <button
-            className="navbar-toggler"
+            className="navbar-toggler ms-auto order-lg-1 border-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -55,28 +78,17 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <Link
-            to="/"
-            className="navbar-brand position-absolute start-50 translate-middle-x"
-            style={{ zIndex: 2 }}
-          >
-            <img
-              src={booldog_logo}
-              alt="Booldog Logo"
-              style={{ height: "50px", width: "auto", objectFit: "contain" }}
-            />
-          </Link>
-
-          <div className="d-none d-lg-flex align-items-center ms-auto order-3 gap-2">
+          <div className="d-none d-lg-flex align-items-center ms-auto order-lg-3 gap-2">
             <div
               onClick={() => setAsideCart(true)}
-              className="btn text-white border border-0"
+              className="btn border-0"
+              role="button"
             >
-              <div className="navbar_icons_hover">
-                <span className="text-black">
+              <div className="navbar_icons_hover position-relative">
+                <i className="bi bi-cart text-black fs-5"></i>
+                <span className="cart_badge">
                   {cart.reduce((acc, item) => acc + item.quantity, 0)}
                 </span>
-                <i className="bi bi-cart text-black"></i>
               </div>
             </div>
             <Link to="/wishlist" className="btn text-white border border-0">
@@ -99,54 +111,64 @@ export default function Navbar() {
             </form>
           </div>
 
-          <div className="collapse navbar-collapse order-2" id="navbarNav">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <div className="collapse navbar-collapse order-lg-2 mt-3 mt-lg-0 navbar_mobile_menu" id="navbarNav">
+            <ul className="navbar-nav me-auto mb-0 text-center text-lg-start w-100">
               <li className="nav-item">
-                <NavLink to="/products/animal/cane" className="nav-link text-black">
+                <NavLink to="/products/animal/cane" className="nav-link">
                   Cane
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/products/animal/gatto" className="nav-link text-black">
+                <NavLink to="/products/animal/gatto" className="nav-link">
                   Gatto
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/products" className="nav-link text-black" end>
+                <NavLink to="/products" className="nav-link" end>
                   Catalogo completo
                 </NavLink>
               </li>
             </ul>
 
-            <div className="d-flex d-lg-none align-items-center w-100 mt-2 gap-2">
-              <div className="d-flex align-items-center gap-2">
-                <Link to="/cart" className="btn text-white border border-0">
-                  <div className="navbar_icons_hover">
-                    <span>
-                      {cart.reduce((acc, item) => acc + item.quantity, 0)}
-                    </span>
-                    <i className="bi bi-cart"></i>
-                  </div>
-                </Link>
-                <Link to="/wishlist" className="btn text-white border border-0">
-                  <div className="navbar_icons_hover">
-                    <i className="bi bi-heart"></i>
-                  </div>
-                </Link>
-              </div>
-
+            <div className="d-flex d-lg-none flex-column gap-4 mt-4 pb-3">
               <form onSubmit={handleSubmit} className="d-flex w-100">
                 <input
                   type="text"
-                  className="form-control rounded-pill"
+                  className="form-control rounded-pill me-2"
                   placeholder="Ricerca un prodotto..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <button className="btn btn-dark ms-2 rounded-circle">
+                <button
+                  type="submit"
+                  className="btn btn-dark btn_cart rounded-circle border-0 flex-shrink-0"
+                  aria-label="Cerca"
+                >
                   <i className="bi bi-search text-white"></i>
                 </button>
               </form>
+
+              <div className="d-flex align-items-start justify-content-center gap-5">
+                <Link
+                  to="/cart"
+                  className="text-decoration-none text-black d-flex flex-column align-items-center gap-1"
+                >
+                  <div className="navbar_icons_hover position-relative">
+                    <i className="bi bi-cart fs-4"></i>
+                    <span className="cart_badge">
+                      {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                    </span>
+                  </div>
+                </Link>
+                <Link
+                  to="/wishlist"
+                  className="text-decoration-none text-black d-flex flex-column align-items-center gap-1"
+                >
+                  <div className="navbar_icons_hover">
+                    <i className="bi bi-heart fs-4"></i>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </nav>
