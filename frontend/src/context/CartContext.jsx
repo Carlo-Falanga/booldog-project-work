@@ -17,9 +17,9 @@ export function CartContextProvider({ children }) {
 
   useEffect(() => {
     if (asideCart) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add("overflow-hidden", "aside-cart-open");
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove("overflow-hidden", "aside-cart-open");
     }
   }, [asideCart]);
 

@@ -117,7 +117,7 @@ export default function ProductPage() {
                           stock === 0
                             ? "Esaurito"
                             : remainingStock <= 0
-                              ? "Hai nel carrello tutti i prodotti disponibili"
+                              ? "Hai aggiunto tutti i prodotti disponibili"
                               : "Aggiungi al carrello"
                         }
 
