@@ -41,47 +41,53 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="nav-main position-sticky top-0 z-2 px-lg-3 px-xl-5 py-3 d-flex flex-wrap align-items-center justify-content-between">
-        <div className="d-block d-lg-none">
-          <button onClick={() => setAsideCart(true)} className="btn border-0 p-3">
-            <i className="d-flex bi bi-list fs-2"></i>
+      <nav className="nav-main sticky-lg-top top-0 z-1 px-lg-3 px-xl-5 py-3 d-flex flex-wrap align-items-center justify-content-end">
+
+
+        <div className="d-block d-lg-none col-4">
+          <button onClick={() => setAsideCart(true)} className="btn btn-hamburger border-0 p-3">
+            <i className="d-flex bi bi-list"></i>
           </button>
         </div>
 
-        <Link to="/" className="nav-logo">
-          <img src={booldog_logo} alt="Booldog Logo" />
-        </Link>
-
-
-        {/* nav aside mobile */}
-        <div className="nav-aside me-lg-auto p-3 p-lg-0">
-          <ul className="d-flex flex-wrap list-unstyled mb-0 text-center text-lg-start">
-            <li className="col-12 col-lg-auto p-3">
+        <div className="nav-aside px-3 py-5 p-lg-0 z-3 col-lg-5">
+          <div className="position-absolute end-0 top-0">
+            <button onClick={() => setAsideCart(false)} className="btn border-0 p-3">
+              <i className="d-flex bi bi-x-lg"></i>
+            </button>
+          </div>
+          <ul className="d-flex flex-wrap list-unstyled mb-0">
+            <li className="col-12 col-lg-auto p-2 p-xl-3">
               <NavLink to="/products/animal/cane" className="text-decoration-none text-reset">
                 Cane
               </NavLink>
             </li>
-            <li className="col-12 col-lg-auto p-3">
+            <li className="col-12 col-lg-auto p-2 p-xl-3">
               <NavLink to="/products/animal/gatto" className="text-decoration-none text-reset">
                 Gatto
               </NavLink>
             </li>
-            <li className="col-12 col-lg-auto p-3">
+            <li className="col-12 col-lg-auto p-2 p-xl-3">
               <NavLink to="/products" className="text-decoration-none text-reset">
                 Catalogo completo
               </NavLink>
             </li>
-            <li className="col-12 col-lg-auto p-3">
+            <li className="col-12 col-lg-auto p-2 p-xl-3">
               <NavLink to="/chi-siamo" className="text-decoration-none text-reset">
                 Chi siamo
               </NavLink>
             </li>
           </ul>
         </div>
-        {/* end nav aside mobile */}
 
-        <div className="">
-          <div className="row g-0 align-items-center justify-content-center">
+        <div className="nav-logo col-4 col-lg-2">
+          <Link to="/" className="d-flex justify-content-center">
+            <img src={booldog_logo} alt="Booldog Logo" />
+          </Link>
+        </div>
+
+        <div className="col-4 col-lg-2">
+          <div className="row g-0 align-items-center justify-content-end">
             <div className="col-auto p-3">
               <div onClick={() => setAsideCart(true)} className="d-none d-lg-block position-relative cursor-pointer">
                 <i className="bi bi-cart2 text-black d-flex"></i>

@@ -608,7 +608,7 @@ main {
 }
 
 .nav-main img {
-  width: 128px;
+  max-width: 128px;
 }
 
 /* ASIDE CART */
@@ -627,24 +627,21 @@ main {
   transition: all .5s ease-in-out;
 }
 
-@media (min-width: 992px) {
+.aside-open {
 
-  .nav-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .overlay {
+    visibility: visible;
+    opacity: .5;
   }
+
+}
+
+@media (min-width: 992px) {
 
   .aside-open {
 
     .aside-cart {
       transform: translateX(0);
-    }
-
-    .overlay {
-      visibility: visible;
-      opacity: .5;
     }
 
   }
@@ -659,12 +656,14 @@ main {
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 100;
-    width: calc(100% - 96px);
+    width: calc(100% - 64px);
     transform: translateX(100%);
     transition: all .5s ease-in-out;
-    font-size: 24px;
+    font-size: 20px;
+  }
 
+  .btn-hamburger {
+    font-size: 32px;
   }
 
   .aside-open {
