@@ -51,7 +51,7 @@ export default function Navbar() {
         </div>
 
         <div className="nav-aside px-3 py-5 p-lg-0 z-3 col-lg-5">
-          <div className="position-absolute end-0 top-0">
+          <div className="position-absolute end-0 top-0 d-block d-lg-none">
             <button onClick={() => setAsideCart(false)} className="btn border-0 p-3">
               <i className="d-flex bi bi-x-lg"></i>
             </button>

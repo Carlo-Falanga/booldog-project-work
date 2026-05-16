@@ -16,7 +16,7 @@ export default function SideCart() {
   return (
     <>
       <div>
-        <aside className="aside-cart position-fixed top-0 h-100 bg-white shadow-lg p-3 z-2 sidebar_width overflow-scroll">
+        <aside className="aside-cart position-fixed top-0 h-100 bg-white shadow-lg p-3 z-3 sidebar_width overflow-scroll">
           <div className="mb-5">
 
             <button
