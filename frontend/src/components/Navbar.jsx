@@ -11,7 +11,7 @@ import booldog_logo from "../assets/logo/Booldog_logo.png";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  const { cart, setAsideCart } = useGlobal();
+  const { cart, setAsideCart, setAsideNav } = useGlobal();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,137 +40,248 @@ export default function Navbar() {
   }
 
   return (
-    <section className="navbar_custom_bg position-sticky top-0 z-2 px-4 py-2">
-      <div className="container-fluid">
-        <nav className="navbar navbar-expand-lg position-relative d-flex align-items-center ">
-          <Link
-            to="/"
-            className="navbar-brand m-0 d-lg-none"
-          >
-            <img
-              src={booldog_logo}
-              alt="Booldog Logo"
-              style={{ height: "50px", width: "auto", objectFit: "contain" }}
-            />
-          </Link>
-
-          <Link
-            to="/"
-            className="navbar-brand position-absolute start-50 translate-middle-x m-0 d-none d-lg-block"
-            style={{ zIndex: 2 }}
-          >
-            <img
-              src={booldog_logo}
-              alt="Booldog Logo"
-              style={{ height: "50px", width: "auto", objectFit: "contain" }}
-            />
-          </Link>
-
-          <button
-            className="navbar-toggler ms-auto order-lg-1 border-0"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
+    <>
+      <nav className="nav-main position-sticky top-0 z-2 px-lg-3 px-xl-5 py-3 d-flex flex-wrap align-items-center justify-content-between">
+        <div className="d-block d-lg-none">
+          <button onClick={() => setAsideCart(true)} className="btn border-0 p-3">
+            <i className="d-flex bi bi-list fs-2"></i>
           </button>
+        </div>
 
-          <div className="d-none d-lg-flex align-items-center ms-auto order-lg-3">
+        <Link to="/" className="nav-logo">
+          <img src={booldog_logo} alt="Booldog Logo" />
+        </Link>
 
-            <div onClick={() => setAsideCart(true)} role="button" className="navbar_icons_hover position-relative mx-2">
-              <i className="bi bi-cart2 text-black d-flex"></i>
-              <span className="cart_badge position-absolute top-0 start-100 translate-middle rounded-circle d-block aspect-ratio-1x1 text-white text-center">
-                {cart.reduce((acc, item) => acc + item.quantity, 0)}
-              </span>
+
+        {/* nav aside mobile */}
+        <div className="nav-aside me-lg-auto p-3 p-lg-0">
+          <ul className="d-flex flex-wrap list-unstyled mb-0 text-center text-lg-start">
+            <li className="col-12 col-lg-auto p-3">
+              <NavLink to="/products/animal/cane" className="text-decoration-none text-reset">
+                Cane
+              </NavLink>
+            </li>
+            <li className="col-12 col-lg-auto p-3">
+              <NavLink to="/products/animal/gatto" className="text-decoration-none text-reset">
+                Gatto
+              </NavLink>
+            </li>
+            <li className="col-12 col-lg-auto p-3">
+              <NavLink to="/products" className="text-decoration-none text-reset">
+                Catalogo completo
+              </NavLink>
+            </li>
+            <li className="col-12 col-lg-auto p-3">
+              <NavLink to="/chi-siamo" className="text-decoration-none text-reset">
+                Chi siamo
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+        {/* end nav aside mobile */}
+
+        <div className="">
+          <div className="row g-0 align-items-center justify-content-center">
+            <div className="col-auto p-3">
+              <div onClick={() => setAsideCart(true)} className="d-none d-lg-block position-relative cursor-pointer">
+                <i className="bi bi-cart2 text-black d-flex"></i>
+                <span className="cart_badge position-absolute top-0 start-100 translate-middle rounded-circle d-block aspect-ratio-1x1 text-white text-center">
+                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
+              </div>
+              <Link to="/cart" className="d-lg-none d-block position-relative text-decoration-none">
+                <i className="bi bi-cart2 text-black d-flex"></i>
+                <span className="cart_badge position-absolute top-0 start-100 translate-middle rounded-circle d-block aspect-ratio-1x1 text-white text-center">
+                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
+              </Link>
             </div>
+            <div className="col-auto p-3">
+              <Link to="/wishlist" className="text-decoration-none">
+                <i className="bi bi-heart text-black d-flex"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
 
-            <Link to="/wishlist" className="navbar_icons_hover text-decoration-none mx-2">
-              <i className="bi bi-heart text-black d-flex"></i>
+        {/* search */}
+        <div className="col-12 col-lg-3 p-3">
+          <form onSubmit={handleSubmit} className="d-flex align-items-center">
+            <input
+              type="text"
+              className="form-control me-2 rounded-pill border-0 col"
+              placeholder="Cerca"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className="col-auto">
+              <button className="btn btn-dark border-0 p-2 rounded-circle aspect-ratio-1x1">
+                <i className="d-flex bi bi-search text-white"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+        {/* end search */}
+
+
+      </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {/* <section className="navbar_custom_bg position-sticky top-0 z-2 px-4 py-2">
+        <div className="container-fluid">
+          <nav className="navbar navbar-expand-lg position-relative d-flex align-items-center ">
+            <Link
+              to="/"
+              className="navbar-brand m-0 d-lg-none"
+            >
+              <img
+                src={booldog_logo}
+                alt="Booldog Logo"
+                style={{ height: "50px", width: "auto", objectFit: "contain" }}
+              />
             </Link>
 
-            <form onSubmit={handleSubmit} className="d-flex align-items-center mx-2">
-              <input
-                type="text"
-                className="form-control me-2 rounded-pill border-0"
-                placeholder="Ricerca..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{ width: "220px" }}
+            <Link
+              to="/"
+              className="navbar-brand position-absolute start-50 translate-middle-x m-0 d-none d-lg-block"
+              style={{ zIndex: 2 }}
+            >
+              <img
+                src={booldog_logo}
+                alt="Booldog Logo"
+                style={{ height: "50px", width: "auto", objectFit: "contain" }}
               />
+            </Link>
 
-              <button className="btn btn-dark btn_cart border-0 p-2 rounded-circle aspect-ratio-1x1">
-                <i className="bi bi-search text-white d-flex"></i>
-              </button>
-            </form>
-          </div>
+            <button
+              className="navbar-toggler ms-auto order-lg-1 border-0"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
 
-          <div className="collapse navbar-collapse order-lg-2 mt-3 mt-lg-0 navbar_mobile_menu" id="navbarNav">
-            <ul className="navbar-nav me-auto mb-0 text-center text-lg-start w-100 d-flex align-items-center">
-              <li className="nav-item p-2">
-                <NavLink to="/products/animal/cane" className="nav-link">
-                  Cane
-                </NavLink>
-              </li>
-              <li className="nav-item px-2">
-                <NavLink to="/products/animal/gatto" className="nav-link">
-                  Gatto
-                </NavLink>
-              </li>
-              <li className="nav-item ps-2">
-                <NavLink to="/products" className="nav-link" end>
-                  Catalogo completo
-                </NavLink>
-              </li>
-            </ul>
+            <div className="d-none d-lg-flex align-items-center ms-auto order-lg-3">
 
-            <div className="d-flex d-lg-none flex-column gap-4 mt-4 pb-3">
-              <form onSubmit={handleSubmit} className="d-flex w-100">
+              <div onClick={() => setAsideCart(true)} role="button" className="navbar_icons_hover position-relative mx-2">
+                <i className="bi bi-cart2 text-black d-flex"></i>
+                <span className="cart_badge position-absolute top-0 start-100 translate-middle rounded-circle d-block aspect-ratio-1x1 text-white text-center">
+                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
+              </div>
+
+              <Link to="/wishlist" className="navbar_icons_hover text-decoration-none mx-2">
+                <i className="bi bi-heart text-black d-flex"></i>
+              </Link>
+
+              <form onSubmit={handleSubmit} className="d-flex align-items-center mx-2">
                 <input
                   type="text"
-                  className="form-control rounded-pill me-2"
-                  placeholder="Ricerca un prodotto..."
+                  className="form-control me-2 rounded-pill border-0"
+                  placeholder="Ricerca..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
+                  style={{ width: "220px" }}
                 />
-                <button
-                  type="submit"
-                  className="btn btn-dark btn_cart rounded-circle border-0 flex-shrink-0"
-                  aria-label="Cerca"
-                >
-                  <i className="bi bi-search text-white"></i>
+
+                <button className="btn btn-dark btn_cart border-0 p-2 rounded-circle aspect-ratio-1x1">
+                  <i className="bi bi-search text-white d-flex"></i>
                 </button>
               </form>
+            </div>
 
-              <div className="d-flex align-items-start justify-content-center gap-5">
-                <Link
-                  to="/cart"
-                  className="text-decoration-none text-black"
-                >
+            <div className="collapse navbar-collapse order-lg-2 mt-3 mt-lg-0 navbar_mobile_menu" id="navbarNav">
+              <ul className="navbar-nav me-auto mb-0 text-center text-lg-start w-100 d-flex align-items-center">
+                <li className="nav-item p-2">
+                  <NavLink to="/products/animal/cane" className="nav-link">
+                    Cane
+                  </NavLink>
+                </li>
+                <li className="nav-item px-2">
+                  <NavLink to="/products/animal/gatto" className="nav-link">
+                    Gatto
+                  </NavLink>
+                </li>
+                <li className="nav-item ps-2">
+                  <NavLink to="/products" className="nav-link" end>
+                    Catalogo completo
+                  </NavLink>
+                </li>
+              </ul>
 
-                  <div className="navbar_icons_hover position-relative mx-2">
-                    <i className="bi bi-cart2 text-black d-flex"></i>
-                    <span className="cart_badge position-absolute top-0 start-100 translate-middle rounded-circle d-block aspect-ratio-1x1 text-white text-center">
-                      {cart.reduce((acc, item) => acc + item.quantity, 0)}
-                    </span>
-                  </div>
+              <div className="d-flex d-lg-none flex-column gap-4 mt-4 pb-3">
+                <form onSubmit={handleSubmit} className="d-flex w-100">
+                  <input
+                    type="text"
+                    className="form-control rounded-pill me-2"
+                    placeholder="Ricerca un prodotto..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    className="btn btn-dark btn_cart rounded-circle border-0 flex-shrink-0"
+                    aria-label="Cerca"
+                  >
+                    <i className="bi bi-search text-white"></i>
+                  </button>
+                </form>
 
-                </Link>
+                <div className="d-flex align-items-start justify-content-center gap-5">
+                  <Link
+                    to="/cart"
+                    className="text-decoration-none text-black"
+                  >
 
-                <Link to="/wishlist" className="navbar_icons_hover text-decoration-none mx-2">
-                  <i className="bi bi-heart text-black d-flex"></i>
-                </Link>
+                    <div className="navbar_icons_hover position-relative mx-2">
+                      <i className="bi bi-cart2 text-black d-flex"></i>
+                      <span className="cart_badge position-absolute top-0 start-100 translate-middle rounded-circle d-block aspect-ratio-1x1 text-white text-center">
+                        {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                      </span>
+                    </div>
+
+                  </Link>
+
+                  <Link to="/wishlist" className="navbar_icons_hover text-decoration-none mx-2">
+                    <i className="bi bi-heart text-black d-flex"></i>
+                  </Link>
 
 
 
 
+                </div>
               </div>
             </div>
-          </div>
-        </nav>
-      </div>
-    </section>
+          </nav>
+        </div>
+      </section> */}
+    </>
   );
 }
