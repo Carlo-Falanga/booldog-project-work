@@ -11,17 +11,21 @@ export function CartContextProvider({ children }) {
   // aside cart
   const [asideCart, setAsideCart] = useState(false);
 
+  // aside nav
+  const [asideNav, setAsideNav] = useState(false);
+
   useEffect(() => {
     setAsideCart(false)
+    setAsideNav(false)
   }, [location.pathname])
 
   useEffect(() => {
-    if (asideCart) {
-      document.body.classList.add("overflow-hidden", "aside-cart-open");
+    if (asideCart || asideNav) {
+      document.body.classList.add("overflow-hidden", "aside-open");
     } else {
-      document.body.classList.remove("overflow-hidden", "aside-cart-open");
+      document.body.classList.remove("overflow-hidden", "aside-open");
     }
-  }, [asideCart]);
+  }, [asideCart, asideNav]);
 
   // cart
   const cartArr = [];
