@@ -21,10 +21,11 @@ export default function OrderConfirmedPage() {
     <>
       <div className="container mt-5 mb-5">
         <div className="card rounded-4 p-4 bg-paper">
-          <h3 className="cart-hero mt-3 mb-5 d-flex justify-content-center">
+          <h3 className="cart-hero mt-3 mb-5 d-flex flex-wrap justify-content-center">
             <span className="d-block">
-              Ordine<em className="d-block">Confermato!</em>
+              Ordine
             </span>
+            <em className="d-block">Confermato!</em>
           </h3>
 
           <span className="fw-medium d-flex justify-content-center m-3">

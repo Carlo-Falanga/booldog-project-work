@@ -446,6 +446,14 @@ main {
   height: 100vh;
 }
 
+.navbar-nav{
+  .nav-link:hover {
+    scale: 1.05;
+    color: var(--bool-forest-deep);
+    transition: all 0.2s;
+  }
+}
+
 .navbar_custom_bg {
   background: rgba(242, 238, 230, 0.86);
   backdrop-filter: blur(16px) saturate(140%);
@@ -646,3 +654,4 @@ aside {
 footer {
   background-color: var(--bool-paper);
 }
+

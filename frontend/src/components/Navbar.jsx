@@ -128,6 +128,11 @@ export default function Navbar() {
                   Catalogo completo
                 </NavLink>
               </li>
+              <li className="nav-item ps-2">
+                <NavLink to="/chi-siamo" className="nav-link" end>
+                  Chi siamo
+                </NavLink>
+              </li>
             </ul>
 
             <div className="d-flex d-lg-none flex-column gap-4 mt-4 pb-3">

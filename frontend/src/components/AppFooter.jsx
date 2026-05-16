@@ -147,7 +147,7 @@ export default function AppFooter() {
                 I tuoi prodotti preferiti
               </li>
             </Link>
-            <Link className="text-decoration-none" to="*">
+            <Link className="text-decoration-none" to="/chi-siamo">
               <li className="hover_footer text-black">Chi siamo</li>
             </Link>
           </ul>

@@ -12,6 +12,7 @@ import WishListPage from "./pages/WishListPage";
 import OrderConfirmedPage from "./pages/OrderConfirmedPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ScrollToTop from "./components/ScrollToTop";
+import ChiSiamoPage from "./pages/ChiSiamoPage";
 
 
 
@@ -34,6 +35,7 @@ function App() {
               <Route path="/cart" element={<CartPage />} />
               <Route path="/wishlist" element={<WishListPage />} />
               <Route path="/order-confirmed/:id" element={<OrderConfirmedPage />} />
+              <Route path="/chi-siamo" element={<ChiSiamoPage/>} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
