@@ -76,7 +76,7 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="col-12 col-lg-auto p-2 p-xl-3">
-              <NavLink to="/products" className="text-decoration-none d-flex align-items-center justify-content-between">
+              <NavLink to="/products" className="text-decoration-none d-flex align-items-center justify-content-between" end>
                 <span>Catalogo</span>
                 <i className="d-flex d-lg-none bi bi-chevron-right"></i>
               </NavLink>
