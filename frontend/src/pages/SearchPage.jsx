@@ -85,7 +85,7 @@ export default function SearchPage() {
                             <p className="sp-lede ">
                                 {animalSlug
                                     ? `Prodotti pensati per il tuo ${pageTitle.toLowerCase()}. Marchi europei, spediti da Milano in 24/48h.`
-                                    : "Ogni articolo su Booldog, in un'unica vista. Marchi europei, cibo, accessori e cucce."}
+                                    : "Ogni articolo su Booldog, in un'unica vista. Marchi europei, accessori e cucce."}
                             </p>
 
                         </div>
@@ -128,7 +128,7 @@ export default function SearchPage() {
 
                             {/* select ordina */}
                             <div className="sp-sort-wrap d-flex align-items-center gap-2 border rounded-pill px-3 py-1">
-                                <span className="text-muted eyebrow">Ordina ·</span>
+                                <span className="text-muted eyebrow">Ordina <span className=' d-none d-md-inline'>·</span></span>
                                 <select
                                     className="sp-select border-0 bg-transparent fw-medium"
                                     value={order}
@@ -184,7 +184,7 @@ export default function SearchPage() {
                                         <ProductCardList
                                             product={product}
                                             animalType={endpoint}
-                                            addToCart={() => addToCart(product, 1)}
+
                                         />
                                     </div>
                                 ) : (

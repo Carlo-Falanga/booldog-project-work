@@ -735,3 +735,15 @@ footer {
   margin-left: 2px;
   font-size: 0.9rem;
 }
+
+.already-present-num {
+  font-size: small;
+}
+
+.soldout-btn {
+  color: var(--bool-forest);
+}
+
+.already-present {
+  color: var(--bool-forest);
+}

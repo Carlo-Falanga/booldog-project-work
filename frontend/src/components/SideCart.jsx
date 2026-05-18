@@ -11,8 +11,6 @@ export default function SideCart() {
     addToCart
   } = useGlobal();
 
-  console.log(asideCart)
-
   return (
     <>
       <div>

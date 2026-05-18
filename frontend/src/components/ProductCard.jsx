@@ -1,7 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import WishListButton from "./WishListButton";
+import { useGlobal } from "../context/CartContext";
 
-export default function ProductCard({ product, addToCart, animalType }) {
+export default function ProductCard({ product, animalType }) {
+
+  const { cart, addToCart } = useGlobal();
+
+  // capisco se il prodotto è presente nel carrello e quanti ce n'è sono
+  const cartItem = cart.find((cartProduct) => cartProduct.id === product.id);
+  const productsInCart = cartItem ? cartItem.quantity : 0;
 
   return (
 
@@ -25,16 +32,24 @@ export default function ProductCard({ product, addToCart, animalType }) {
             <div className="font-newsreader h3 mb-0 lh-1 fw-light">
               {product.price} €
             </div>
-            {product.stock === 0 ?
-              <div>Esaurito</div>
-              :
-              <button
-                onClick={addToCart}
-                disabled={product.stock === 0}
-                className="btn bg-black p-2 border-0 rounded-pill text-white">
-                <i class="d-flex p-1 bi bi-cart2"></i>
-              </button>
-            }
+            <div>
+              {product.stock === 0 ?
+                <div>Esaurito</div>
+                :
+                <button
+                  onClick={() => (addToCart(product, 1))}
+                  disabled={product.stock === 0}
+                  className="btn bg-black p-2 border-0 rounded-pill text-white d-flex justify-content-between align-items-center">
+                  {
+                    // verifico se il prodotto è già nel carrello
+                    productsInCart > 0
+                    &&
+                    <span className="already-present-num mx-2 align-self-center">{productsInCart}</span>
+                  }
+                  <i className="d-flex p-1 bi bi-cart2"></i>
+                </button>
+              }
+            </div>
           </div>
         </div>
 
