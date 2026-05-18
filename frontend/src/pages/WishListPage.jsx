@@ -30,11 +30,11 @@ export default function WishListPage() {
           </div>
         }
 
-        <div className="row g-4 g-lg-3">
+        <div className="row g-2 g-lg-3 g-xl-4">
           {wishlist.map((product) => (
             listView ?
               (
-                <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-xl-3">
                   <ProductCard product={product} addToCart={() => addToCart(product, 1)} />
                 </div>
               )
