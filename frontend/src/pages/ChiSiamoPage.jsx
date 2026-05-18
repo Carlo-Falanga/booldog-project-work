@@ -42,7 +42,7 @@ export default function ChiSiamoPage() {
                     <div className="row row-cols-1 row-cols-md-5 mt-5">
                         <div className="col mt-2">
                             <div className="card card_team">
-                                <img src={Carlo} className="card-img-top img_team" alt="Carlo" />
+                                <img src={Carlo} className="card-img-top img_team img_no_hover" alt="Carlo" />
                                 <div className="card-body">
                                     <h5 className="card-title">Carlo Falagna</h5>
                                     <p className="card-text">Team member</p>
@@ -51,7 +51,7 @@ export default function ChiSiamoPage() {
                         </div>
                         <div className="col mt-2">
                             <div className="card card_team">
-                                <img src={Odon} className="card-img-top img_team" alt="Odon" />
+                                <img src={Odon} className="card-img-top img_team img_no_hover" alt="Odon" />
                                 <div className="card-body">
                                     <h5 className="card-title">Odon Airoldi</h5>
                                     <p className="card-text">Team member</p>
@@ -60,7 +60,7 @@ export default function ChiSiamoPage() {
                         </div>
                         <div className="col mt-2">
                             <div className="card card_team">
-                                <img src={Antonio} className="card-img-top img_team" alt="Antonio" />
+                                <img src={Antonio} className="card-img-top img_team img_no_hover" alt="Antonio" />
                                 <div className="card-body">
                                     <h5 className="card-title">Antonio Falletta</h5>
                                     <p className="card-text">Team member</p>
@@ -69,7 +69,7 @@ export default function ChiSiamoPage() {
                         </div>
                         <div className="col mt-2">
                             <div className="card card_team">
-                                <img src={Nabil} className="card-img-top img_team" alt="Nabil" />
+                                <img src={Nabil} className="card-img-top img_team img_no_hover" alt="Nabil" />
                                 <div className="card-body">
                                     <h5 className="card-title">Nabil Hajali</h5>
                                     <p className="card-text">Team member</p>
@@ -78,7 +78,7 @@ export default function ChiSiamoPage() {
                         </div>
                          <div className="col mt-2">
                             <div className="card card_team">
-                                <img src={Pietro} className="card-img-top img_team" alt="Pietro" />
+                                <img src={Pietro} className="card-img-top img_team img_no_hover" alt="Pietro" />
                                 <div className="card-body">
                                     <h5 className="card-title">Pietro Bertino</h5>
                                     <p className="card-text">Team member</p>
