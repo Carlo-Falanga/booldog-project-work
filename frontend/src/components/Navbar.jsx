@@ -92,7 +92,7 @@ export default function Navbar() {
 
         <div className="nav-logo col-4 col-lg-2">
           <Link to="/" className="d-flex justify-content-center">
-            <img src={booldog_logo} alt="Booldog Logo" />
+            <img className="img_no_hover" src={booldog_logo} alt="Booldog Logo" />
           </Link>
         </div>
 
