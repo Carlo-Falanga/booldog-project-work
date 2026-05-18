@@ -291,16 +291,15 @@ export default function CheckoutPage() {
                       id="zipcode"
                       onChange={(e) => {
                         e.target.value = e.target.value
-                          .replace(/[^0-9]/g, "")
-                          .slice(0, 15);
+                          .replace(/[^0-9-]/g, "")
+                          .slice(0, 10);
                         handleChange(e);
                       }}
                       type="text"
                       inputMode="numeric"
                       className="form-control"
                       placeholder="00100"
-                      maxLength="5"
-                      minLength="5"
+                      maxLength="10"
                       required
                     />
                   </div>
