@@ -66,6 +66,7 @@ body {
   cursor: pointer
 }
 
+
 /* TIPOGRAFIA */
 
 h1,
@@ -108,6 +109,12 @@ h6,
   letter-spacing: -0.01em;
   color: var(--bool-ink);
 }
+
+.font-newsreader {
+  --bool-font-display: "Newsreader", "Times New Roman", serif;
+}
+
+
 
 main {
   min-height: 100vh;
@@ -432,7 +439,7 @@ main {
   height: 100vh;
 }
 
-.navbar-nav{
+.navbar-nav {
   .nav-link:hover {
     scale: 1.05;
     color: var(--bool-forest-deep);
