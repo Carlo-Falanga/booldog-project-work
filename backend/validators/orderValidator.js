@@ -120,6 +120,7 @@ const storeOrderValidation = [
   // zipcode: formato + esistenza reale + corrispondenza citta'
   body("zipcode")
     .trim()
+    .customSanitizer((value) => value.replace(/-/g, ""))
     .notEmpty().withMessage("CAP obbligatorio")
     .custom(async (value, { req }) => {
       const country = resolveCountryCode(req.body.country);

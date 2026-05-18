@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import Carlo from "../assets/team/Carlo.png";
 import Odon from "../assets/team/Odon.jpg";
 import Antonio from "../assets/team/Antonio.png";
+import Nabil from "../assets/team/Nabil.png";
+import Pietro from "../assets/team/Pietro.png";
 
 export default function ChiSiamoPage() {
     return (
@@ -65,8 +67,24 @@ export default function ChiSiamoPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col"></div>
-                        <div className="col"></div>
+                        <div className="col mt-2">
+                            <div className="card card_team">
+                                <img src={Nabil} className="card-img-top img_team" alt="Nabil" />
+                                <div className="card-body">
+                                    <h5 className="card-title">Nabil Hajali</h5>
+                                    <p className="card-text">Team member</p>
+                                </div>
+                            </div>
+                        </div>
+                         <div className="col mt-2">
+                            <div className="card card_team">
+                                <img src={Pietro} className="card-img-top img_team" alt="Pietro" />
+                                <div className="card-body">
+                                    <h5 className="card-title">Pietro Bertino</h5>
+                                    <p className="card-text">Team member</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
