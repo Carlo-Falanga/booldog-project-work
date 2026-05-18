@@ -41,7 +41,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="nav-main sticky-lg-top top-0 z-1 px-lg-3 px-xl-5 py-3 d-flex flex-wrap align-items-center justify-content-end">
+      <nav className="nav-main sticky-lg-top top-0 z-2 px-lg-3 px-xl-5 py-3 d-flex flex-wrap align-items-center justify-content-end">
 
 
         <div className="d-block d-lg-none col-4">
