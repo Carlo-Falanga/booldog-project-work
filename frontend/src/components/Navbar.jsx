@@ -126,7 +126,7 @@ export default function Navbar() {
             <input
               type="text"
               className="form-control me-2 rounded-pill border-0 col"
-              placeholder="Cerca"
+              placeholder="Marche, prodotti, animali..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
