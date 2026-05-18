@@ -114,8 +114,6 @@ h6,
   --bool-font-display: "Newsreader", "Times New Roman", serif;
 }
 
-
-
 main {
   min-height: 100vh;
   position: relative;
@@ -620,7 +618,19 @@ main {
 
 .nav-main {
   background: rgba(242, 238, 230, 0.86);
+
+  a,
+  button {
+    color: var(--bool-ink-2);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--bool-accent);
+    }
+  }
 }
+
+
 
 .nav-main img {
   max-width: 128px;
@@ -639,7 +649,11 @@ main {
   min-width: 560px;
   right: 0;
   transform: translateX(100%);
-  transition: all .5s ease-in-out;
+  transition: transform .5s ease-in-out;
+}
+
+.nav-aside {
+  max-width: 480px;
 }
 
 .aside-open {
@@ -661,6 +675,11 @@ main {
 
   }
 
+  .bi-heart,
+  .bi-cart2 {
+    font-size: 20px;
+  }
+
 }
 
 @media (max-width: 991px) {
@@ -669,12 +688,16 @@ main {
     background-color: rgb(255, 255, 255);
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     bottom: 0;
     width: calc(100% - 64px);
-    transform: translateX(100%);
-    transition: all .5s ease-in-out;
-    font-size: 20px;
+    transform: translateX(-100%);
+    transition: transform .5s ease-in-out;
+    opacity: 0;
+
+    span {
+      font-size: 20px;
+    }
   }
 
   .btn-hamburger {
@@ -685,6 +708,7 @@ main {
 
     .nav-aside {
       transform: translateX(0);
+      opacity: 1;
     }
 
   }
