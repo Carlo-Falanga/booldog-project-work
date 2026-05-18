@@ -732,3 +732,9 @@ footer {
   height: 20rem;
   object-fit: cover;
 }
+
+.required-star {
+  color: red;
+  margin-left: 2px;
+  font-size: 0.9rem;
+}
