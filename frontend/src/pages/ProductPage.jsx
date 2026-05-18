@@ -133,7 +133,7 @@ export default function ProductPage() {
                     </div>
                     {productQuantity && cart.length>0 && (
                       <span className=" mt-1 already-present d-block">
-                        {quantityInCart} pezzi nel tuo carrello.
+                        {quantityInCart} articolo/i nel tuo carrello.
                       </span>
                     )}
                   </div>
