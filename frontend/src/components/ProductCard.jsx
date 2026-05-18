@@ -23,7 +23,7 @@ export default function ProductCard({ product, addToCart }) {
 
         <div className="px-3 col-auto">
           <div className="border-top py-3 d-flex align-items-center justify-content-between">
-            <div className="cart-name h4">
+            <div className="font-newsreader h3 mb-0 lh-1 fw-light">
               {product.price} €
             </div>
             {product.stock === 0 ?
