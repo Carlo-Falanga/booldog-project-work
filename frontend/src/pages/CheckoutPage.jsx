@@ -170,7 +170,7 @@ export default function CheckoutPage() {
               <div className="d-flex flex-column gap-4">
                 <div className="">
                   <label htmlFor="inputEmail4" className="form-label cart-meta">
-                    Email
+                    Email <span className="required-star">*</span>
                   </label>
                   <input
                     value={newOrder.email}
@@ -184,7 +184,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="">
                   <label htmlFor="inputTel" className="form-label cart-meta">
-                    Numero di telefono
+                    Numero di telefono <span className="required-star">*</span>
                   </label>
                   <input
                     value={newOrder.phone_number}
@@ -221,7 +221,7 @@ export default function CheckoutPage() {
                     htmlFor="inputFullName"
                     className="form-label cart-meta"
                   >
-                    Nome e Cognome
+                    Nome e Cognome <span className="required-star">*</span>
                   </label>
                   <input
                     value={newOrder.user_full_name}
@@ -238,7 +238,7 @@ export default function CheckoutPage() {
                     htmlFor="inputAddress"
                     className="form-label cart-meta"
                   >
-                    Indirizzo
+                    Indirizzo <span className="required-star">*</span>
                   </label>
                   <input
                     value={newOrder.address}
@@ -253,7 +253,7 @@ export default function CheckoutPage() {
                 <div className="d-flex gap-2 mb-1">
                   <div className="">
                     <label htmlFor="inputCity" className="form-label cart-meta">
-                      Città
+                      Città <span className="required-star">*</span>
                     </label>
                     <input
                       value={newOrder.city}
@@ -270,7 +270,7 @@ export default function CheckoutPage() {
                       htmlFor="inputState"
                       className="form-label cart-meta"
                     >
-                      Paese
+                      Paese <span className="required-star">*</span>
                     </label>
                     <input
                       value={newOrder.country}
@@ -284,7 +284,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="">
                     <label htmlFor="inputZip" className="form-label cart-meta">
-                      Cap
+                      Cap <span className="required-star">*</span>
                     </label>
                     <input
                       value={newOrder.zipcode}
