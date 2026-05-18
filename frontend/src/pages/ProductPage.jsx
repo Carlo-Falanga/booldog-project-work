@@ -130,9 +130,9 @@ export default function ProductPage() {
 
             <div className="py-5">
               <h3>Prodotti correlati</h3>
-              <div className="row row-cols-2 row-cols-md-4 g-2 g-lg-3">
+              <div className="row g-2 g-lg-3 g-xl-4">
                 {dataProduct.related.map((product) => (
-                  <div key={product.slug}>
+                  <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={product.slug}>
                     <ProductCard
                       product={product}
                       addToCart={() => addToCart(product, 1)}
