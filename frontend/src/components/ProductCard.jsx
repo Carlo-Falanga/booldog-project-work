@@ -1,8 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import WishListButton from "./WishListButton";
 
-export default function ProductCard({ product, addToCart }) {
-
+export default function ProductCard({ product, addToCart, animalType }) {
 
   return (
 
@@ -17,7 +16,7 @@ export default function ProductCard({ product, addToCart }) {
         </div>
 
         <div className="col px-3">
-          <div className="cart-meta mb-2">{product.category}</div>
+          <div className="cart-meta mb-2">{animalType ? '' : `${product.animal_name} / `}{product.category}</div>
           <h3 className="cart-name h5 mb-3">{product.name}</h3>
         </div>
 

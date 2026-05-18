@@ -183,6 +183,7 @@ export default function SearchPage() {
                                     <div key={product.slug} className="col-12 border-bottom">
                                         <ProductCardList
                                             product={product}
+                                            animalType={endpoint}
                                             addToCart={() => addToCart(product, 1)}
                                         />
                                     </div>
@@ -190,6 +191,7 @@ export default function SearchPage() {
                                     <div key={product.slug} className="col-12 col-sm-6 col-md-4 col-xl-3">
                                         <ProductCard
                                             product={product}
+                                            animalType={endpoint}
                                             addToCart={() => addToCart(product, 1)}
                                         />
                                     </div>
