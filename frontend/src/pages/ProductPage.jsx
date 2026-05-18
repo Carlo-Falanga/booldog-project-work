@@ -123,6 +123,11 @@ export default function ProductPage() {
 
                       </button>
                     </div>
+                    {productQuantity && cart.length>0 && (
+                      <span className=" mt-1 already-present d-block">
+                        {quantityInCart} quantità nel carrello.
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
