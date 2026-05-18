@@ -45,14 +45,14 @@ export default function Navbar() {
 
 
         <div className="d-block d-lg-none col-4">
-          <button onClick={() => setAsideCart(true)} className="btn btn-hamburger border-0 p-3">
+          <button onClick={() => setAsideNav(true)} className="btn btn-hamburger border-0 p-3">
             <i className="d-flex bi bi-list"></i>
           </button>
         </div>
 
-        <div className="nav-aside px-3 py-3 p-lg-0 z-3 col-lg-5">
+        <div className="aside-nav px-3 py-3 p-lg-0 z-3 col-lg-5">
           <div className="d-block d-lg-none">
-            <button onClick={() => setAsideCart(false)} className="d-block ms-auto mb-3 btn border-0 p-2">
+            <button onClick={() => setAsideNav(false)} className="d-block ms-auto mb-3 btn border-0 p-2">
               <i className="d-flex bi bi-x-lg"></i>
             </button>
           </div>
@@ -99,18 +99,18 @@ export default function Navbar() {
         <div className="col-4 col-lg-2">
           <div className="row g-0 align-items-center justify-content-end">
             <div className="col-auto p-3">
-              <button onClick={() => setAsideCart(true)} className="border-0 p-0 bg-transparent d-none d-lg-block position-relative cursor-pointer">
+              <button onClick={() => setAsideCart(true)} className="border-0 p-0 bg-transparent position-relative cursor-pointer">
                 <i className="bi bi-cart2 d-flex"></i>
                 <span className="cart_badge position-absolute top-0 start-100 translate-middle rounded-circle d-block aspect-ratio-1x1 text-white text-center">
                   {cart.reduce((acc, item) => acc + item.quantity, 0)}
                 </span>
               </button>
-              <Link to="/cart" className="d-lg-none d-block position-relative text-decoration-none">
+              {/* <Link to="/cart" className="d-lg-none d-block position-relative text-decoration-none">
                 <i className="bi bi-cart2 d-flex"></i>
                 <span className="cart_badge position-absolute top-0 start-100 translate-middle rounded-circle d-block aspect-ratio-1x1 text-white text-center">
                   {cart.reduce((acc, item) => acc + item.quantity, 0)}
                 </span>
-              </Link>
+              </Link> */}
             </div>
             <div className="col-auto p-3">
               <Link to="/wishlist" className="text-decoration-none">

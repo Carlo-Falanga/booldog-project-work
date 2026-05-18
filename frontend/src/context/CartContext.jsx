@@ -20,12 +20,20 @@ export function CartContextProvider({ children }) {
   }, [location.pathname])
 
   useEffect(() => {
-    if (asideCart || asideNav) {
-      document.body.classList.add("overflow-hidden", "aside-open");
+    if (asideCart) {
+      document.body.classList.add("overflow-hidden", "aside-cart-open");
     } else {
-      document.body.classList.remove("overflow-hidden", "aside-open");
+      document.body.classList.remove("overflow-hidden", "aside-cart-open");
     }
-  }, [asideCart, asideNav]);
+  }, [asideCart]);
+
+  useEffect(() => {
+    if (asideNav) {
+      document.body.classList.add("overflow-hidden", "aside-nav-open");
+    } else {
+      document.body.classList.remove("overflow-hidden", "aside-nav-open");
+    }
+  }, [asideNav]);
 
   // cart
   const cartArr = [];
@@ -149,6 +157,7 @@ export function CartContextProvider({ children }) {
       removeFromCart,
       asideCart,
       setAsideCart,
+      setAsideNav,
       addToCart,
       increaseQuantity,
       decreaseQuantity,

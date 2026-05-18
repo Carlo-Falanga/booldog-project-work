@@ -650,7 +650,8 @@ main {
   transition: transform .5s ease-in-out;
 }
 
-.aside-open {
+.aside-cart-open,
+.aside-nav-open {
 
   .overlay {
     visibility: visible;
@@ -659,15 +660,16 @@ main {
 
 }
 
+.aside-cart-open {
+
+  .aside-cart {
+    transform: translateX(0);
+  }
+
+}
+
 @media (min-width: 992px) {
 
-  .aside-open {
-
-    .aside-cart {
-      transform: translateX(0);
-    }
-
-  }
 
   .nav-main .bi-heart,
   .nav-main .bi-cart2 {
@@ -678,7 +680,7 @@ main {
 
 @media (max-width: 991px) {
 
-  .nav-aside {
+  .aside-nav {
     background-color: rgb(255, 255, 255);
     position: fixed;
     top: 0;
@@ -695,17 +697,17 @@ main {
     }
   }
 
-  .btn-hamburger {
-    font-size: 32px;
-  }
+  .aside-nav-open {
 
-  .aside-open {
-
-    .nav-aside {
+    .aside-nav {
       transform: translateX(0);
       opacity: 1;
     }
 
+  }
+
+  .btn-hamburger {
+    font-size: 32px;
   }
 
 
