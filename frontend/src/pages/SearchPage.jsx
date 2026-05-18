@@ -180,7 +180,7 @@ export default function SearchPage() {
                         <div className={`row ${listView ? 'g-2 g-lg-3 g-xl-4' : 'g-2 g-lg-3 g-xl-4'}`}>
                             {products.map(product => (
                                 listView ? (
-                                    <div key={product.slug} className="col-12 border-bottom">
+                                    <div key={product.slug} className="col-12">
                                         <ProductCardList
                                             product={product}
                                             animalType={endpoint}
