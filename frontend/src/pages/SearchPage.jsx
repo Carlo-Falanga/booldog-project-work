@@ -54,14 +54,15 @@ export default function SearchPage() {
         ? animalSlug.charAt(0).toUpperCase() + animalSlug.slice(1)
         : 'Catalogo';
 
+    const imageName = animalSlug ? `${animalSlug}` : 'cane-gatto'
+
+
     return (
         <>
 
-            {/* ══════════════════════════════════════
-                TESTATA EDITORIALE
-            ══════════════════════════════════════ */}
-            <section className="border-bottom px-3 px-md-5 pt-5 pb-4 bg-paper">
-                <div className="container-xxl">
+            {/* herospace */}
+            <section className=" px-3 px-md-5 pt-5 pb-4 bg-paper mb-5">
+                <div className="container-fluid">
 
                     {/* breadcrumb */}
                     <nav className="d-flex align-items-center gap-2 mb-4 eyebrow">
@@ -73,54 +74,33 @@ export default function SearchPage() {
                     </nav>
 
                     {/* heading + lede + stats */}
-                    <div className="row align-items-end g-4 g-lg-5">
+                    <div className="row align-items-center g-4 g-lg-5">
 
-                        <div className="col-12 col-lg-7">
-                            <h1 className="sp-hero-title mb-0">
+                        <div className="col-12 col-lg-6">
+                            <h1 className="sp-hero-title mb-2">
                                 {animalSlug
-                                    ? <>{pageTitle}<br /><em>selezionato.</em></>
+                                    ? <>Per il tuo<br /><em>{pageTitle}.</em></>
                                     : <>Tutto il<br /><em>catalogo.</em></>}
                             </h1>
-                        </div>
-
-                        <div className="col-12 col-lg-5">
-                            <p className="sp-lede mb-4">
+                            <p className="sp-lede ">
                                 {animalSlug
                                     ? `Prodotti pensati per il tuo ${pageTitle.toLowerCase()}. Marchi europei, spediti da Milano in 24/48h.`
                                     : "Ogni articolo su Booldog, in un'unica vista. Marchi europei, cibo, accessori e cucce."}
                             </p>
 
-                            {/* stats */}
-                            <div className="row g-0 border-top pt-3">
-                                {[
-                                    { num: products.length || '—', label: 'Articoli', sub: 'tutti in stock' },
-                                    { num: '42', label: 'Marchi', sub: 'europei selezionati' },
-                                    { num: '4.9', label: 'Stelle', sub: 'su 18k recensioni' },
-                                ].map((s, i) => (
-                                    <div
-                                        key={i}
-                                        className={`col-4 ${i < 2 ? 'border-end' : ''}`}
-                                        style={{ paddingLeft: i > 0 ? '1rem' : 0, paddingRight: i < 2 ? '1rem' : 0 }}
-                                    >
-                                        <span className="sp-stats-num d-block">{s.num}</span>
-                                        <strong className="d-block" style={{ fontSize: 13 }}>{s.label}</strong>
-                                        <span className="text-muted" style={{ fontSize: 12 }}>{s.sub}</span>
-                                    </div>
-                                ))}
-                            </div>
+                        </div>
+
+                        <div className="col-12 col-lg-6">
+                            <img src={`/pets/${imageName}-search-page.jpg`} alt={imageName} className='w-100  d-none d-lg-inline-block ' />
+
+
                         </div>
 
                     </div>
                 </div>
-                <div className="d-flex align-items-center justify-content-between mb-3">
-                    <GridListButton setListView={setListView} />
-                    <OrderSelect currentOrder={order} handleFilterChange={handleFilterChange} />
-                </div>
             </section>
 
-            {/* ══════════════════════════════════════
-                TOOLBAR + GRIGLIA
-            ══════════════════════════════════════ */}
+            {/* toolbar e griglia*/}
             <section className="px-3 px-md-5 py-4">
                 <div className="container-xxl">
 
