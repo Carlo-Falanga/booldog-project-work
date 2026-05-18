@@ -196,9 +196,12 @@ const show = (req, res) => {
             p.price,
             p.category,
             p.img_url,
-          b.name AS brand_name
+            b.name AS brand_name,
+            a.id   AS animal_id,
+            a.name AS animal_name
         FROM products p
         JOIN brands b ON b.id = p.brand_id
+        JOIN animal_types a ON a.id = p.animal_type_id
         WHERE p.id != ?
           AND (p.brand_id = ? OR p.category = ?)
         ORDER BY RAND()
