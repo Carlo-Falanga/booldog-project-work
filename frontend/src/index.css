@@ -630,8 +630,6 @@ main {
   }
 }
 
-
-
 .nav-main img {
   max-width: 128px;
 }
@@ -671,8 +669,8 @@ main {
 
   }
 
-  .bi-heart,
-  .bi-cart2 {
+  .nav-main .bi-heart,
+  .nav-main .bi-cart2 {
     font-size: 20px;
   }
 
