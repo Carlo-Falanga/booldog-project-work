@@ -34,7 +34,7 @@ export default function ProductCard({ product, animalType }) {
             </div>
             <div>
               {product.stock === 0 ?
-                <div>Esaurito</div>
+                <div className="soldout-btn">Esaurito</div>
                 :
                 <button
                   onClick={() => (addToCart(product, 1))}

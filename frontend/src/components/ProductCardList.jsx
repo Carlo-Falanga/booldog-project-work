@@ -13,16 +13,16 @@ export default function ProductCardList({ product, animalType }) {
   return (
 
     <div className="border rounded-3 overflow-hidden">
-      <div className="d-flex">
+      <div className="d-flex flex-wrap">
 
-        <div className="col-4 col-lg-3 position-relative">
+        <div className="col-12 col-md-3 position-relative">
           <WishListButton product={product} slug={product.slug} />
           <Link to={`/product/${product.slug}`} className="aspect-ratio-1x1 d-flex align-items-center justify-content-center">
             <img className="w-100 h-100 object-fit-contain p-3" src={`http://localhost:3000/images/products/${product.img_url}`} alt={`${product.name}'s picture`} />
           </Link>
         </div>
 
-        <div className="col-8 col-lg-9 p-3 d-flex align-items-center justify-content-center">
+        <div className="col-12 col-md-9 p-3 d-flex align-items-center justify-content-center">
           <div className="text-center">
             <div className="cart-meta mb-2">{animalType ? '' : `${product.animal_name} / `}{product.category}</div>
             <h3 className="cart-name h4 mb-2">{product.name}</h3>
