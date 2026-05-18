@@ -750,3 +750,7 @@ img:not(.img_no_hover):hover {
   scale: 1.05;
   transition: all 1.0s;
 }
+
+.esaurito_product{
+  color:var(--bool-forest)
+}

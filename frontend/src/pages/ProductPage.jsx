@@ -80,6 +80,14 @@ export default function ProductPage() {
                   <div className="border-top py-4">
                     <p className="h1 mb-0">{dataProduct.price} €</p>
                   </div>
+                  {dataProduct.stock === 0? <div className="border-top py-4">
+                    <p className="cart-meta mb-0 esaurito_product">Esaurito</p>
+                  </div>:(dataProduct=== 1?<div className="border-top py-4">
+                    <p className="cart-meta mb-0">{dataProduct.stock} prodotto disponibile</p>
+                  </div>:<div className="border-top py-4">
+                    <p className="cart-meta mb-0">{dataProduct.stock} prodotti disponibili</p>
+                  </div>)}
+                  
 
                   <div className="row gx-2">
                     <div className="col-auto">
@@ -125,7 +133,7 @@ export default function ProductPage() {
                     </div>
                     {productQuantity && cart.length>0 && (
                       <span className=" mt-1 already-present d-block">
-                        {quantityInCart} quantità nel carrello.
+                        {quantityInCart} pezzi nel tuo carrello.
                       </span>
                     )}
                   </div>
