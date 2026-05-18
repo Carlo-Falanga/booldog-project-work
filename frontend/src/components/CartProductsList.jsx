@@ -30,27 +30,32 @@ export default function CartProductsList() {
             return (
               <li
                 key={item.slug}
-                className="d-flex gap-4 py-4 border-bottom cart-item"
+                className="d-flex flex-wrap gap-4__ py-4 border-bottom cart-item"
               >
                 {/* Immagine */}
-                <div className="cart-thumb position-relative flex-shrink-0 bg-white">
-                  <img
-                    src={`http://localhost:3000/images/products/${item.img_url}`}
-                    alt={item.name}
-                    className="w-100 h-100 object-fit-contain rounded-1"
-                  />
+                <div className="col-3 p-1">
+                  <Link
+                    to={`/product/${item.slug}`}
+                    className="text-decoration-none text-reset aspect-ratio-1x1 d-flex align-items-center justify-content-center"
+                  >
+                    <img
+                      src={`http://localhost:3000/images/products/${item.img_url}`}
+                      alt={item.name}
+                      className="w-100 h-100 object-fit-contain"
+                    />
+                  </Link>
                 </div>
 
                 {/* Info */}
-                <div className="flex-grow-1 d-flex flex-column gap-2 min-w-0">
-                  <Link
+                <div className="col-9 col-md-6 px-3">
+                  {/* <Link
                     to={`/product/${item.slug}`}
                     className="text-decoration-none text-reset"
-                  >
-                    <h3 className="cart-name fs-4 mb-0">{item.name}</h3>
-                  </Link>
+                  > */}
+                  <h3 className="cart-name fs-4 mb-2">{item.name}</h3>
+                  {/* </Link> */}
 
-                  <p className="text-muted small mb-0">
+                  <p className="text-muted small mb-3">
                     {item.size && (
                       <>
                         Taglia{" "}
@@ -66,7 +71,7 @@ export default function CartProductsList() {
                   </p>
 
                   {/* Controlli */}
-                  <div className="d-flex align-items-center gap-3 mt-2 flex-wrap">
+                  <div className="d-flex align-items-center gap-3 flex-wrap">
                     <div className="quantity-controls rounded-pill bg-paper border d-flex">
                       <button
                         type="button"
@@ -100,17 +105,14 @@ export default function CartProductsList() {
                 </div>
 
                 {/* Prezzo */}
-                <div
-                  className="d-flex flex-column align-items-end text-end"
-                  style={{ minWidth: "110px" }}
-                >
+                <div className="col-9 col-md-3 offset-3 offset-md-0 text-md-end px-3 px-md-0">
                   <span className="cart-name fs-4">€ {item.price}</span>
                 </div>
               </li>
             );
           })}
         </ul>
-      </section>
+      </section >
     </>
   );
 }
