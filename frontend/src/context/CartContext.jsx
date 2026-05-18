@@ -100,7 +100,7 @@ export function CartContextProvider({ children }) {
       setCart([...cart, { ...item, quantity: safeQuantity }]);
     }
 
-    setAsideCart(true);
+    /* setAsideCart(true); */
     setProductQuantity(1);
   };
 
