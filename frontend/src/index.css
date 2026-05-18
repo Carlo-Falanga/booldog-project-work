@@ -652,10 +652,6 @@ main {
   transition: transform .5s ease-in-out;
 }
 
-.nav-aside {
-  max-width: 480px;
-}
-
 .aside-open {
 
   .overlay {
@@ -690,6 +686,7 @@ main {
     top: 0;
     left: 0;
     bottom: 0;
+    max-width: 480px;
     width: calc(100% - 64px);
     transform: translateX(-100%);
     transition: transform .5s ease-in-out;
