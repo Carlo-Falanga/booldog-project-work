@@ -21,7 +21,7 @@ export default function AppFooter() {
   return (
     <footer className="py-4 mt-auto container-fluid text-black ">
       <div className="d-flex justify-content-center  mb-5">
-        <img className="logo_footer" src={booldog_logo} alt="BoolDog logo" />
+        <img className="logo_footer img_no_hover" src={booldog_logo} alt="BoolDog logo" />
       </div>
       <div className="row row-cols-1 row-cols-md-3 g-4 d-flex">
 

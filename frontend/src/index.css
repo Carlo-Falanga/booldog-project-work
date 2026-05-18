@@ -733,3 +733,9 @@ footer {
   margin-left: 2px;
   font-size: 0.9rem;
 }
+
+img:not(.img_no_hover):hover {
+  scale: 1.05;
+  transition: all 1.0s;
+}
+
