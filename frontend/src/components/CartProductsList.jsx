@@ -17,7 +17,7 @@ export default function CartProductsList() {
           </span>
         </div>
 
-        {cart.length === 0 && 
+        {cart.length === 0 &&
           <div className="text-center py-5">
             <h2 className="mb-4">Il tuo carrello è vuoto</h2>
             <p className="text-muted mb-4">
@@ -63,17 +63,17 @@ export default function CartProductsList() {
                   <h3 className="cart-name fs-4 mb-2">{item.name}</h3>
                   {/* </Link> */}
 
-                  <p className="text-muted small mb-3">
+                  <p className="small mb-3 cart-meta">
                     {item.size && (
                       <>
                         Taglia{" "}
-                        <strong className="text-dark">{item.size} </strong>
+                        <span className="text-black">{item.size} </span>
                       </>
                     )}
                     {item.color && (
                       <>
                         · Colore{" "}
-                        <strong className="text-dark">{item.color}</strong>
+                        <span className="text-black">{item.color}</span>
                       </>
                     )}
                   </p>
@@ -110,10 +110,13 @@ export default function CartProductsList() {
                       Rimuovi
                     </button>
                   </div>
+                  <div className="pt-3 d-block d-md-none">
+                    <span className="cart-name fs-4">€ {item.price}</span>
+                  </div>
                 </div>
 
                 {/* Prezzo */}
-                <div className="col-9 col-md-3 offset-3 offset-md-0 text-md-end px-3 px-md-0">
+                <div className="col-3 text-end d-none d-md-block">
                   <span className="cart-name fs-4">€ {item.price}</span>
                 </div>
               </li>

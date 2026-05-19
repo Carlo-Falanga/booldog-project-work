@@ -67,27 +67,29 @@ export default function ProductPage() {
               <div className="col-md-7 col-lg-6 d-flex align-items-center justify-content-center">
                 <div className="px-lg-5">
                   <div className="cart-meta mb-3">
-                    {dataProduct.category} {dataProduct.animal_name}
+                    {dataProduct.animal_name} / {dataProduct.category}
                   </div>
                   <h1 className="display-3 lh-1 fw-normal">
                     {dataProduct.name}
                   </h1>
                   <p>{dataProduct.description}</p>
-                  <div className="cart-meta mb-5">
-                    {dataProduct.size} {dataProduct.color}{" "}
-                    {dataProduct.material}
+                  <div className="cart-meta mb-4">
+                    <div className="mb-1">Marca <span className="text-black">{dataProduct.brand_name}</span></div>
+                    <div className="mb-1">Taglia <span className="text-black">{dataProduct.size}</span></div>
+                    <div className="mb-1">Colore <span className="text-black">{dataProduct.color}</span></div>
+                    <div className="mb-1">Materiale <span className="text-black">{dataProduct.material}</span></div>
                   </div>
                   <div className="border-top py-4">
-                    <p className="h1 mb-0">{dataProduct.price} €</p>
+                    <p className="h1 mb-0 lh-1">{dataProduct.price} €</p>
                   </div>
-                  {dataProduct.stock === 0? <div className="border-top py-4">
+                  {dataProduct.stock === 0 ? <div className="border-top py-4">
                     <p className="cart-meta mb-0 esaurito_product">Esaurito</p>
-                  </div>:(dataProduct=== 1?<div className="border-top py-4">
+                  </div> : (dataProduct === 1 ? <div className="border-top py-4">
                     <p className="cart-meta mb-0">{dataProduct.stock} prodotto disponibile</p>
-                  </div>:<div className="border-top py-4">
+                  </div> : <div className="border-top py-4">
                     <p className="cart-meta mb-0">{dataProduct.stock} prodotti disponibili</p>
                   </div>)}
-                  
+
 
                   <div className="row gx-2">
                     <div className="col-auto">
@@ -131,7 +133,7 @@ export default function ProductPage() {
 
                       </button>
                     </div>
-                    {productQuantity && cart.length>0 && (
+                    {productQuantity && cart.length > 0 && (
                       <span className=" mt-1 already-present d-block">
                         {quantityInCart} articolo/i nel tuo carrello.
                       </span>
