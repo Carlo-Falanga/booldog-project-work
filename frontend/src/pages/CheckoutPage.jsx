@@ -250,7 +250,7 @@ export default function CheckoutPage() {
                     required
                   />
                 </div>
-                <div className="d-flex gap-2 mb-1">
+                <div className="d-flex gap-2 mb-3">
                   <div className="">
                     <label htmlFor="inputCity" className="form-label cart-meta">
                       Città <span className="required-star">*</span>
@@ -304,11 +304,6 @@ export default function CheckoutPage() {
                     />
                   </div>
                 </div>
-                {serverError && (
-                  <h4 className="text-danger d-flex justify-content-center mb-4">
-                    {serverError}
-                  </h4>
-                )}
               </div>
             </div>
 
@@ -388,6 +383,7 @@ export default function CheckoutPage() {
                       {couponMessage}
                     </div>
                   )}
+
                 </div>
 
                 <hr />
@@ -408,6 +404,7 @@ export default function CheckoutPage() {
                       <span className="text-danger fw-bold">-{discount}€</span>
                     </div>
                   )}
+                  
                   <div className="d-flex justify-content-between mb-2">
                     <span>Spedizione in tutta Europa</span>
                     <span className="cart-meta text-success">Gratuita</span>
@@ -443,6 +440,11 @@ export default function CheckoutPage() {
                     ordine effettuato a breve verrai reindirizzato nella pagina
                     di conferma!
                   </div>
+                )}
+                 {serverError && (
+                  <h4 className="text-danger d-flex justify-content-center mb-4">
+                    {serverError}
+                  </h4>
                 )}
 
                 <hr />
