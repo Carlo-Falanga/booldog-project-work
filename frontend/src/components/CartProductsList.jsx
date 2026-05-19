@@ -17,6 +17,14 @@ export default function CartProductsList() {
           </span>
         </div>
 
+        {cart.length === 0 && 
+          <div className="text-center py-5">
+            <h2 className="mb-4">Il tuo carrello è vuoto</h2>
+            <p className="text-muted mb-4">
+              Sembra che tu non abbia ancora aggiunto articoli al tuo carrello.
+            </p>
+          </div>}
+
         {/* Lista */}
         <ul className="list-unstyled m-0">
           {cart.map((item) => {
