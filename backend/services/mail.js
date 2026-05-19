@@ -44,7 +44,7 @@ const sendAdminOrderConfirmation = async (order) => {
 
   return transporter.sendMail({
     from: "no-reply@booldog.it",
-    to: "carlofalanga7@gmail.com",
+    to: "booldogservice@gmail.com",
     subject: `Ordine ricevuto ${order_code}`,
     text: `Hai ricevuto un nuovo ordine da ${user_full_name}, Il codice ordine e' ${order_code}. Totale: €${total}`,
     html: `<div style="font-family: Arial, sans-serif; color: #333; padding: 20;">
