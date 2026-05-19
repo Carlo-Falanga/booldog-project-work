@@ -111,7 +111,6 @@ function HomePage() {
             Una sola filosofia.
           </h2>
         </header>
-
         <div className="d-flex flex-column gap-3 gap-md-4 mb-5">
           <article
             id="cane"
@@ -141,7 +140,7 @@ function HomePage() {
                       aria-label="Sfoglia cane"
                     >
                       <i className="bi bi-arrow-right"></i>
-                    </Link>
+                      </Link>
                   </div>
                 </div>
               </div>
@@ -196,11 +195,11 @@ function HomePage() {
               </div>
             </div>
           </article>
-        </div>
-      </section>
+        </div >
+      </section >
 
       {/* ── PRODOTTI IN EVIDENZA ── */}
-      <section id="prodotti" className="container py-5 my-5">
+      <section section id="prodotti" className="container py-5 my-5" >
         <header className="border-bottom pb-3 my-5">
           <h2 className="section-title mb-0">
             Prodotti <em>in evidenza.</em>
@@ -217,10 +216,10 @@ function HomePage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> 
 
       {/* ── MARCHI ── */}
-      <section
+      <section section
         id="marchi"
         className="custom_brand_bg text-light overflow-hidden"
       >
